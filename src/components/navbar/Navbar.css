@@ -1,0 +1,40 @@
+.Navbar
+{
+    background-color: rgb(169, 20, 238);
+    height: 5rem;
+    display: grid;
+    grid-template-columns: 60% 20% 20%;
+    column-gap: 1rem;
+}
+.Logo
+{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+.Select
+{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+.SignUp
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#city
+{
+    width: 20rem;
+    height: 3rem;
+}
+#signin
+{
+    width: 7rem;
+    height: 3rem;
+    border-radius: 6px;
+}
+h5{
+    color: black;
+}

@@ -5,10 +5,10 @@ body{
 
 .form {
 
-    background-color: aqua;
+    background-color:aquamarine;
     display: flex;
     height: 400px;
-    margin-top: 170px;
+    margin-top: 130px;
     margin-left: 550px;
     width: 400px;
     align-items: center;
