@@ -1,81 +1,139 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Signup.css";
+import validate from "./validators";
 
-function Signup() {
+function Signup(props) {
   const initialValues = {
-    firstname: "",
-    lastname: "",
+    name: "",
     username: "",
-    phno: "",
-    email: "",
+    mob_no: "",
+    emailid: "",
     password: "",
   };
+  let navigate = useNavigate();
   const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [successMsg, setSuccessMsg] = useState(null);
+  const [userNameExist, setUserNameExist] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("submit btn");
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
+  };
+
+  useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      // do signup
+
+      const doSignup = async () => {
+        const res = await axios.post(
+          `http://localhost:8080/signup`,
+          formValues
+        );
+        if (res.data === "User with username already Exists") {
+          setUserNameExist("Username already exists");
+        } else if (res.data === "User Signed In Successfully") {
+          setUserNameExist(null);
+          setSuccessMsg("Successfully Signed up...Redirecting to login page");
+          setTimeout(() => {
+            navigate("/login", { replace: true });
+          }, 3000);
+        }
+        console.log(res);
+      };
+
+      doSignup();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formErrors]);
+
   return (
     <div className="signup-com">
       <form onSubmit={handleSubmit}>
         <h2>Signup</h2>
-        <div className="form-row">
+
+        <div className="form-group">
+          <label htmlFor="name">Name</label>
           <input
             type="text"
-            name="firstname"
-            value={formValues.firstname}
+            name="name"
+            value={formValues.name}
             onChange={handleChange}
-            placeholder="First Name"
-            className="col"
+            placeholder="Name"
+            id="name"
+            className="form-control"
           />
-          <input
-            type="text"
-            name="lastname"
-            value={formValues.lastname}
-            onChange={handleChange}
-            placeholder="Last Name"
-            className="col"
-          />
+          <small>{formErrors.name}</small>
         </div>
-        <div className="form-row">
+        <div className="form-group">
+          <label htmlFor="username">User Name</label>
           <input
             type="text"
             name="username"
             value={formValues.username}
             onChange={handleChange}
             placeholder="User Name"
-            className="col"
+            id="username"
+            className="form-control"
           />
+          <small>{formErrors.username}</small>
+          <small>{userNameExist}</small>
+        </div>
+        <div className="form-group">
+          <label htmlFor="mob_no">Phone Number</label>
           <input
             type="text"
-            name="phno"
-            value={formValues.phno}
+            name="mob_no"
+            value={formValues.mob_no}
             onChange={handleChange}
             placeholder="Phone Number"
-            className="col"
+            id="mob_no"
+            className="form-control"
           />
+          <small>{formErrors.mob_no}</small>
         </div>
-        <div className="">
+        <div className="form-group">
+          <label htmlFor="emailid">Email</label>
           <input
             type="email"
-            name="email"
-            value={formValues.email}
+            name="emailid"
+            value={formValues.emailid}
             onChange={handleChange}
             placeholder="Email"
+            id="emailid"
+            className="form-control"
           />
-
+          <small>{formErrors.emailid}</small>
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             name="password"
             value={formValues.password}
             onChange={handleChange}
             placeholder="Password"
+            id="password"
+            className="form-control"
           />
+          <small>{formErrors.password}</small>
         </div>
-        <input type="submit" className="btn-primary" value="Signup" />
+        <button type="submit" className="btn btn-primary signup-btn">
+          Signup
+        </button>
+        <p>
+          <b>{successMsg}</b>
+        </p>
       </form>
     </div>
   );

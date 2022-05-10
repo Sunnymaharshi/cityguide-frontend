@@ -7,20 +7,19 @@
   justify-content: center;
   align-items: center;
 }
+form h2 {
+  text-align: center;
+}
+small {
+  color: red;
+}
 form {
   display: flex;
   background-color: white;
   flex-direction: column;
-  width: 500px;
-  height: 400px;
+  padding: 20px;
   border-radius: 10px;
 }
-form h2 {
-  text-align: center;
-}
-.half-ele input {
-  width: 50%;
-}
-.full-ele input {
-  width: 100%;
+.signup-btn {
+  margin-top: 10px;
 }
