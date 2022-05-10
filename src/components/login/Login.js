@@ -1,60 +1,120 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Login.css";
 
 function Login(props) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  //const [gender, setGender] = useState('');
-  const [allRecords, setAllRecords] = useState([]);
+  const initialValues = {
+    username:"",
+    password:""
+  };
+  let navigate=useNavigate();
+  const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [successMsg, setSuccessMsg] = useState(null);
+  const [userNameExist, setUserNameExist] = useState(null);
 
-  const submitForm = (e) => {
-    e.preventDefault();
-    const newRecord = { email: email, password: password };
-    setAllRecords([...allRecords, newRecord]);
-    props.history.push({
-      pathname: "/temp",
-      state: allRecords,
-    });
+  const validate = (values) => {
+    const errors = {};
+    if (!values.username) {
+      errors.username = "Username is required!";
+    }
+    if (!values.password) {
+      errors.password = "Password is required!";
+    }
+    return errors;
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
+  };
+  
+  useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      // do login
+
+      const login = async () => {
+        await axios
+          .post(`http://localhost:8080/login`, formValues)
+          .then((res) => {
+            //console.log(res);
+            if (res.status === 200) {
+              setUserNameExist(null);
+              setSuccessMsg(
+                "Login Successful...Redirecting to Home"
+              );
+              setTimeout(() => {
+                navigate("/", { replace: true });
+              }, 1500);
+            }
+            // else if(res.status === 401){
+            //   console.log("here");
+            // }
+          })
+    
+      };
+      
+      login();
+      
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formErrors]);
+
   return (
-    <div class="form">
-      <form action="" onSubmit={submitForm}>
+    <div className="form1">
+      <form action="" onSubmit={handleSubmit}>
         <h1>
           <span class="log">LOGIN</span> <br></br> <span class="to">to</span>{" "}
           <br></br>
           <span class="city">CITY GUIDE</span>
         </h1>
 
-        <div class="email">
-          <label htmlFor="email">Email</label>
-          <br></br>
+        <div className="username">
+          <label htmlFor="username">Username</label>
           <input
-            type="email"
-            name="email"
-            id="email"
+            type="text"
+            name="username"
+            id="username"
             autoComplete="off"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formValues.username}
+            placeholder="Enter Username"
+            //onChange={(e) => setUsername(e.target.value)}
+            onChange={handleChange}
           />
+          <small>{formErrors.username}</small>
         </div>
 
-        <div class="pass">
+        <div className="pass">
           <label htmlFor="password">Password</label>
-          <br></br>
           <input
             type="password"
             name="password"
             id="password"
             autoComplete="off"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={formValues.password}
+            placeholder="Enter Password"
+            //onChange={(e) => setPassword(e.target.value)}
+            onChange={handleChange}
           />
+          <small>{formErrors.password}</small>
         </div>
 
         <button class="button" type="submit">
           Login
         </button>
+        <p>
+          <b>{successMsg}</b>
+        </p>
       </form>
     </div>
   );
