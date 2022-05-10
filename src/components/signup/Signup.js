@@ -26,7 +26,7 @@ function Signup(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit btn");
+
     setFormErrors(validate(formValues));
     setIsSubmit(true);
   };
@@ -36,24 +36,31 @@ function Signup(props) {
       // do signup
 
       const doSignup = async () => {
-        const res = await axios.post(
-          `http://localhost:8080/signup`,
-          formValues
-        );
-        if (res.data === "User with username already Exists") {
-          setUserNameExist("Username already exists");
-        } else if (res.data === "User Signed In Successfully") {
-          setUserNameExist(null);
-          setSuccessMsg("Successfully Signed up...Redirecting to login page");
-          setTimeout(() => {
-            navigate("/login", { replace: true });
-          }, 3000);
-        }
-        console.log(res);
+        await axios
+          .post(`http://localhost:8080/signup`, formValues)
+          .then((res) => {
+            console.log(res);
+            if (res.data === "User Signed In Successfully") {
+              setUserNameExist(null);
+              setSuccessMsg(
+                "Successfully Signed up...Redirecting to login page"
+              );
+              setTimeout(() => {
+                navigate("/login", { replace: true });
+              }, 3000);
+            }
+          })
+          .catch((err) => {
+            const res = err.response;
+            if (res.data === "User with username already Exists") {
+              setUserNameExist("Username already exists");
+            }
+          });
       };
 
       doSignup();
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formErrors]);
 
