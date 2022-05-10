@@ -1,0 +1,41 @@
+body{
+    display: flex;
+    
+}
+
+.form {
+
+    background-color:aquamarine;
+    display: flex;
+    height: 400px;
+    margin-top: 130px;
+    margin-left: 550px;
+    width: 400px;
+    align-items: center;
+    padding: 70px;
+
+    border-radius: 12px;
+    line-height: 25px;
+  }
+
+  .email{
+      padding-bottom: 15px;
+  }
+  .log{
+      padding-left: 22%;
+  }
+  .city{
+      padding-left: 10%;
+  }
+  .to{
+      padding-left: 35%;
+  }
+  .pass{
+      padding-bottom: 25px;
+  }
+
+  .button{
+      margin-left: 95px;
+      background-color: black;
+      color: azure;
+  }
