@@ -1,6 +1,6 @@
 import React from "react";
 import { SidebarData } from "./SidebarData";
-import "./sidebar.css"
+import "./sidebar.css";
 
 function Sidebar() {
   return (
@@ -11,12 +11,12 @@ function Sidebar() {
             <li
               key={key}
               className="row"
-              id={window.location.pathname == val.link ? "active" : ""}
+              id={window.location.pathname === val.link ? "active" : ""}
               onClick={() => {
                 window.location.pathname = val.link;
               }}
             >
-               {val.title}
+              {val.title}
             </li>
           );
         })}
