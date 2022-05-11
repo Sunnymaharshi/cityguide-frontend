@@ -12,7 +12,6 @@ function Login() {
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
-  const [successMsg, setSuccessMsg] = useState(null);
 
   const validate = (values) => {
     const errors = {};
@@ -54,12 +53,9 @@ function Login() {
                 })
               );
               
-
-              setSuccessMsg("Login Successful...Redirecting to Dashboard");
-              setTimeout(() => {
-                navigate("/", { replace: true });
-              }, 1500);
-            } else if (res.data === "Username does not exist!") {
+              navigate("/", { replace: true });
+            } 
+            else if (res.data === "Username does not exist!") {
               setFormErrors({ ...formErrors, username: res.data });
             } else if (res.data === "Wrong Password!") {
               setFormErrors({ ...formErrors, password: res.data });
@@ -115,9 +111,6 @@ function Login() {
         <button className="button btn btn-primary" type="submit">
           Login
         </button>
-        <p>
-          <b>{successMsg}</b>
-        </p>
       </form>
     </div>
   );
