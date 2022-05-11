@@ -76,40 +76,6 @@ function Login() {
           });
       };
 
-      // componentDidMount()
-      // {
-      //   this.storeCollector()
-      // }
-      // storeCollector()
-      // {
-      //   let store=JSON.parse(localStorage.getItem('login'));
-      //   if(store && store.login){
-      //     this.setState({login:true, store:store})
-      //   }
-      // }
-
-      // const login= async() => {
-      //   fetch(`http://localhost:8080/login`,{
-      //     method:"POST",
-      //     body:JSON.stringify(formValues)
-      //   }).then((response)=>{
-      //     response.json().then((result)=>{
-      //       console.warn("result",result);
-      //       localStorage.setItem('login',JSON.stringify({
-      //         login:true,
-      //         store:result.token
-      //       }))
-      //       if (response.status === 200) {
-      //                 setSuccessMsg("Login Successful...Redirecting to Dashboard");
-      //                 setTimeout(() => {
-      //                   navigate("/", { replace: true });
-      //                 }, 1500);
-      //               }
-      //      this.storeCollector();
-      //     })
-      //   })
-      // }
-
       login();
     }
 
