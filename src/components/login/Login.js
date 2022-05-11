@@ -45,12 +45,27 @@ function Login() {
         await axios
           .post(`http://localhost:8080/login`, formValues)
           .then((res) => {
-            console.log(res);
-            if (res.status === 200) {
+            if (res.data.token) {
+              localStorage.setItem(
+                "login",
+                JSON.stringify({
+                  login: true,
+                  username: formValues.username,
+                  store: res.data.token,
+                })
+              );
+              console.log(
+                "Login Succesful with username " + formValues.username
+              );
+
               setSuccessMsg("Login Successful...Redirecting to Dashboard");
               setTimeout(() => {
                 navigate("/", { replace: true });
               }, 1500);
+            } else if (res.data === "Username does not exist!") {
+              setFormErrors({ ...formErrors, username: res.data });
+            } else if (res.data === "Wrong Password!") {
+              setFormErrors({ ...formErrors, password: res.data });
             }
           });
       };
