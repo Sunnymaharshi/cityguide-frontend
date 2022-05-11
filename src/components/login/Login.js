@@ -45,7 +45,7 @@ function Login() {
         await axios
           .post(`http://localhost:8080/login`, formValues)
           .then((res) => {
-            //console.log(res);
+            console.log(res);
             if (res.status === 200) {
               setSuccessMsg("Login Successful...Redirecting to Dashboard");
               setTimeout(() => {
@@ -65,12 +65,12 @@ function Login() {
     <div className="form1">
       <form action="" onSubmit={handleSubmit}>
         <h1>
-          <span class="log">LOGIN</span> <br></br> <span class="to">to</span>{" "}
-          <br></br>
-          <span class="city">CITY GUIDE</span>
+          <span className="log">LOGIN</span> <br></br>{" "}
+          <span className="to">to</span> <br></br>
+          <span className="city">CITY GUIDE</span>
         </h1>
 
-        <div className="username">
+        <div className="username form-group">
           <label htmlFor="username">Username</label>
           <input
             type="text"
@@ -80,11 +80,12 @@ function Login() {
             value={formValues.username}
             placeholder="Enter Username"
             onChange={handleChange}
+            className="form-control"
           />
           <small>{formErrors.username}</small>
         </div>
 
-        <div className="pass">
+        <div className="pass form-group">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -94,11 +95,12 @@ function Login() {
             value={formValues.password}
             placeholder="Enter Password"
             onChange={handleChange}
+            className="form-control"
           />
           <small>{formErrors.password}</small>
         </div>
 
-        <button class="button" type="submit">
+        <button className="button btn btn-primary" type="submit">
           Login
         </button>
         <p>
