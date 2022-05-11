@@ -53,9 +53,7 @@ function Login() {
                   token: res.data.token,
                 })
               );
-              console.log(
-                "Login Succesful with username " + formValues.username
-              );
+              
 
               setSuccessMsg("Login Successful...Redirecting to Dashboard");
               setTimeout(() => {

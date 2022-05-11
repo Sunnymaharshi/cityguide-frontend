@@ -6,6 +6,8 @@ import Login from "./components/login/Login";
 import Dashboard from "./components/dashboard/dashboard";
 
 function App() {
+  
+
   return (
     <>
       <Router>
@@ -19,5 +21,7 @@ function App() {
     </>
   );
 }
+
+
 
 export default App;
