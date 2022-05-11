@@ -4,7 +4,7 @@ import axios from "axios";
 import "./Signup.css";
 import validate from "./validators";
 
-function Signup(props) {
+function Signup() {
   const initialValues = {
     name: "",
     username: "",

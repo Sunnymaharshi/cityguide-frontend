@@ -1,19 +1,18 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
 
-function Login(props) {
+function Login() {
   const initialValues = {
-    username:"",
-    password:""
+    username: "",
+    password: "",
   };
-  let navigate=useNavigate();
+  let navigate = useNavigate();
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
   const [successMsg, setSuccessMsg] = useState(null);
-  const [userNameExist, setUserNameExist] = useState(null);
 
   const validate = (values) => {
     const errors = {};
@@ -37,7 +36,7 @@ function Login(props) {
     setFormErrors(validate(formValues));
     setIsSubmit(true);
   };
-  
+
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       // do login
@@ -48,23 +47,15 @@ function Login(props) {
           .then((res) => {
             //console.log(res);
             if (res.status === 200) {
-              setUserNameExist(null);
-              setSuccessMsg(
-                "Login Successful...Redirecting to Home"
-              );
+              setSuccessMsg("Login Successful...Redirecting to Dashboard");
               setTimeout(() => {
                 navigate("/", { replace: true });
               }, 1500);
             }
-            // else if(res.status === 401){
-            //   console.log("here");
-            // }
-          })
-    
+          });
       };
-      
+
       login();
-      
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -88,7 +79,6 @@ function Login(props) {
             autoComplete="off"
             value={formValues.username}
             placeholder="Enter Username"
-            //onChange={(e) => setUsername(e.target.value)}
             onChange={handleChange}
           />
           <small>{formErrors.username}</small>
@@ -103,7 +93,6 @@ function Login(props) {
             autoComplete="off"
             value={formValues.password}
             placeholder="Enter Password"
-            //onChange={(e) => setPassword(e.target.value)}
             onChange={handleChange}
           />
           <small>{formErrors.password}</small>
