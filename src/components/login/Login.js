@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
 
+
 function Login() {
   const initialValues = {
     username: "",
@@ -46,14 +47,68 @@ function Login() {
           .post(`http://localhost:8080/login`, formValues)
           .then((res) => {
             //console.log(res);
-            if (res.status === 200) {
+
+            if (res.data.token) {
+                localStorage.setItem('login',JSON.stringify({
+                login:true,
+                store:res.data.token
+                }))
+                console.log("Login Succesful with "+res.data.token);
+
               setSuccessMsg("Login Successful...Redirecting to Dashboard");
               setTimeout(() => {
                 navigate("/", { replace: true });
               }, 1500);
             }
+            else if (res.data === "Username does not exist!") {
+              
+            setSuccessMsg(res.data);
+            console.log("Login failed");
+
+            }
+            else if (res.data === "Wrong Password!") {
+              
+            setSuccessMsg(res.data);
+            console.log("Login failed");
+
+            
+          }
           });
       };
+
+      // componentDidMount()
+      // {
+      //   this.storeCollector()
+      // }
+      // storeCollector()
+      // {
+      //   let store=JSON.parse(localStorage.getItem('login'));
+      //   if(store && store.login){
+      //     this.setState({login:true, store:store})
+      //   }
+      // }
+
+      // const login= async() => {
+      //   fetch(`http://localhost:8080/login`,{
+      //     method:"POST",
+      //     body:JSON.stringify(formValues)
+      //   }).then((response)=>{
+      //     response.json().then((result)=>{
+      //       console.warn("result",result);
+      //       localStorage.setItem('login',JSON.stringify({
+      //         login:true,
+      //         store:result.token
+      //       }))
+      //       if (response.status === 200) {
+      //                 setSuccessMsg("Login Successful...Redirecting to Dashboard");
+      //                 setTimeout(() => {
+      //                   navigate("/", { replace: true });
+      //                 }, 1500);
+      //               }
+      //      this.storeCollector();
+      //     })
+      //   })
+      // }
 
       login();
     }
