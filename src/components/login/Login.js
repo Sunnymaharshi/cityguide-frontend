@@ -47,13 +47,13 @@ function Login() {
           .post(`http://localhost:8080/login`, formValues)
           .then((res) => {
             //console.log(res);
-
             if (res.data.token) {
                 localStorage.setItem('login',JSON.stringify({
                 login:true,
+                username: formValues.username,
                 store:res.data.token
                 }))
-                console.log("Login Succesful with "+res.data.token);
+                console.log("Login Succesful with username "+formValues.username);
 
               setSuccessMsg("Login Successful...Redirecting to Dashboard");
               setTimeout(() => {
