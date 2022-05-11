@@ -47,11 +47,10 @@ function Login() {
           .then((res) => {
             if (res.data.token) {
               localStorage.setItem(
-                "login",
+                "user",
                 JSON.stringify({
-                  login: true,
                   username: formValues.username,
-                  store: res.data.token,
+                  token: res.data.token,
                 })
               );
               console.log(
