@@ -2,7 +2,7 @@
     margin-top: 1px;
     height: 100vh;
     width: 250px;
-    background-color: rgb(105, 5, 151);
+    background-color: #465362;
   }
   
   .SidebarList {
@@ -26,10 +26,10 @@
   
   .SidebarList .row:hover {
     cursor: pointer;
-    background-color: #3f0e46;
+    background-color: #011936;
   }
   .SidebarList #active {
-    background-color: #3f0e46;
+    background-color: #011936;
   
   }
   /* .row #icon {

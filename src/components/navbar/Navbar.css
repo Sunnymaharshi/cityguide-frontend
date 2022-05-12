@@ -1,45 +1,4 @@
-.Navbar
-{
-    background-color: rgb(105, 5, 151);
-    height: 5rem;
-    width: 100vw;
-    display: grid;
-    grid-template-columns: 60% 20% 20%;
-    column-gap: 1rem;
-}
-.Logo
-{
-    padding-left: 2rem;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-}
-.Select
-{
-    display: flex;
-    justify-content: right;
-    align-items: center;
-}
-.SignUp
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#city
-{
-    width: 20rem;
-    height: 3rem;
-}
-#signin
-{
-    width: 7rem;
-    height: 3rem;
-    border-radius: 6px;
-}
-h5{
-    color: black;
-}
-h1{
-    color: white;
-}
+@import url("../../index.css");
+
+
+
