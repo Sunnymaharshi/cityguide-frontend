@@ -39,7 +39,6 @@ function Signup() {
         await axios
           .post(`http://localhost:8080/signup`, formValues)
           .then((res) => {
-            console.log(res);
             if (res.data === "User Signed In Successfully") {
               setUserNameExist(null);
               setSuccessMsg(

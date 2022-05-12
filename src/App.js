@@ -6,13 +6,11 @@ import Login from "./components/login/Login";
 import Dashboard from "./components/dashboard/dashboard";
 
 function App() {
-  
-
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="*" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
@@ -21,7 +19,5 @@ function App() {
     </>
   );
 }
-
-
 
 export default App;

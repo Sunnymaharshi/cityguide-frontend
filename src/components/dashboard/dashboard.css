@@ -1,6 +1,10 @@
 @import url("../../index.css");
 
-body{
-    width: 100%;
-    background-color: whitesmoke;
+body {
+  width: 100%;
+  background-color: whitesmoke;
+}
+.main {
+  display: flex;
+  flex-direction: row;
 }

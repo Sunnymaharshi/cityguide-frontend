@@ -40,3 +40,28 @@ select {
 .nav-link:hover {
   color: gold;
 }
+
+.username {
+  margin-right: 30px;
+  position: relative;
+  display: inline-block;
+}
+
+.logout-content {
+  display: none;
+  position: absolute;
+  background-color: #c0e0de;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.username:hover .logout-content {
+  display: block;
+}
+.logout-btn {
+  color: black;
+  padding: 5px;
+  background-color: #c0e0de;
+  border-radius: 5px;
+}
