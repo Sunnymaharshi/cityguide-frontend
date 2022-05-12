@@ -1,46 +1,56 @@
+@import url("../../index.css");
 
-.form1 {
-    display: flex;
-    margin-top: 300px;
-    max-height: 40%;
-    margin: auto;
-    margin-top: 9%;
-    width: 400px;
-    align-items: center;
-    justify-content: center;
-    padding: 50px;
-    border-radius: 12px;
-    line-height: 25px;
-    background-color:aquamarine;
-  }
-  small {
-    color: red;
-  }
-  form{
-      padding-top: 30px;
-      background-color: aquamarine;
-      display: flex;
-      flex-direction: column;
-      
-  }
+.login-comp {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+form {
+  color: white;
+  background-color: #465362;
+  width: 400px;
+}
+form small {
+  color: red;
+}
+h1,
+p {
+  text-align: center;
+}
+.form-group {
+  margin: 30px;
+}
+.login-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button {
+  background-color: var(--accent);
+  color: white;
+  width: 40%;
+  font-size: large;
+  padding: 5px 10px 5px 10px;
+  border: 0;
+  font-size: large;
+  border-radius: 10px;
+}
+button:hover {
+  transform: scale(0.95);
+}
+p {
+  margin-top: 15px;
+}
+.signup-link {
+  color: white;
 
-  .username{
-      padding-bottom: 15px;
-  }
-  .log{
-      padding-left: 22%;
-  }
-  .city{
-    padding-left: 9%;
-  }
-  .to{
-      padding-left: 38%;
-  }
-
-  .button{
-      margin-top: 20px;
-      margin-left: 30%;
-      width: 40%;
-      background-color: black;
-      color: azure;
-  }
+  text-decoration: none;
+}
+.signup-link:hover {
+  color: gold;
+  text-decoration: underline;
+}

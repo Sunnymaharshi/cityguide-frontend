@@ -1,4 +1,42 @@
 @import url("../../index.css");
 
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  color: white;
+  background-color: var(--accent);
+}
+.logo-drop {
+  display: flex;
+  align-items: center;
+}
+.logo {
+  font-size: xx-large;
+  margin-left: 30px;
+  margin-right: 10px;
+}
 
+select {
+  height: 30px;
+  border-radius: 20px;
+  background-color: whitesmoke;
+  width: 160px;
+  margin-left: 10px;
+  border: 0px;
+  outline: 0px;
+}
 
+.links {
+  display: flex;
+  align-items: center;
+  font-size: larger;
+}
+
+.nav-link {
+  color: white;
+}
+.nav-link:hover {
+  color: gold;
+}

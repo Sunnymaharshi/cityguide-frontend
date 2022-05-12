@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
 
@@ -52,10 +52,9 @@ function Login() {
                   token: res.data.token,
                 })
               );
-              
+
               navigate("/", { replace: true });
-            } 
-            else if (res.data === "Username does not exist!") {
+            } else if (res.data === "Username does not exist!") {
               setFormErrors({ ...formErrors, username: res.data });
             } else if (res.data === "Wrong Password!") {
               setFormErrors({ ...formErrors, password: res.data });
@@ -70,47 +69,45 @@ function Login() {
   }, [formErrors]);
 
   return (
-    <div className="form1">
-      <form action="" onSubmit={handleSubmit}>
-        <h1>
-          <span className="log">LOGIN</span> <br></br>{" "}
-          <span className="to">to</span> <br></br>
-          <span className="city">CITY GUIDE</span>
-        </h1>
+    <div className="login-comp">
+      <form onSubmit={handleSubmit}>
+        <h1>City Guide</h1>
 
-        <div className="username form-group">
+        <div className="form-group">
           <label htmlFor="username">Username</label>
           <input
             type="text"
             name="username"
             id="username"
-            autoComplete="off"
             value={formValues.username}
-            placeholder="Enter Username"
+            placeholder="Username"
             onChange={handleChange}
             className="form-control"
           />
           <small>{formErrors.username}</small>
         </div>
 
-        <div className="pass form-group">
+        <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
             type="password"
             name="password"
             id="password"
-            autoComplete="off"
             value={formValues.password}
-            placeholder="Enter Password"
+            placeholder="Password"
             onChange={handleChange}
             className="form-control"
           />
           <small>{formErrors.password}</small>
         </div>
-
-        <button className="button btn btn-primary" type="submit">
-          Login
-        </button>
+        <div className="login-btn">
+          <button type="submit">Login</button>
+        </div>
+        <p>
+          <Link to="/signup" className="signup-link">
+            <b>Create Account</b>
+          </Link>
+        </p>
       </form>
     </div>
   );

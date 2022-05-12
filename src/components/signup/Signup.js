@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./Signup.css";
 import validate from "./validators";
@@ -67,7 +67,7 @@ function Signup() {
   return (
     <div className="signup-com">
       <form onSubmit={handleSubmit}>
-        <h2>Signup</h2>
+        <h1>City Guide</h1>
 
         <div className="form-group">
           <label htmlFor="name">Name</label>
@@ -82,6 +82,7 @@ function Signup() {
           />
           <small>{formErrors.name}</small>
         </div>
+
         <div className="form-group">
           <label htmlFor="username">User Name</label>
           <input
@@ -109,6 +110,7 @@ function Signup() {
           />
           <small>{formErrors.mob_no}</small>
         </div>
+
         <div className="form-group">
           <label htmlFor="emailid">Email</label>
           <input
@@ -135,11 +137,17 @@ function Signup() {
           />
           <small>{formErrors.password}</small>
         </div>
-        <button type="submit" className="btn btn-primary signup-btn">
-          Signup
-        </button>
+        <div className="signup-btn">
+          <button type="submit">Signup</button>
+        </div>
         <p>
           <b>{successMsg}</b>
+        </p>
+        <p>
+          Already registered?{" "}
+          <Link to="/login" className="login-link">
+            <b>Login</b>
+          </Link>
         </p>
       </form>
     </div>

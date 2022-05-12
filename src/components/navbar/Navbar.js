@@ -21,26 +21,28 @@ function Navbar() {
         });
     }
   }, []);
-  
-
 
   return (
-    <nav>
-      <div className="logo">
-        <h1>CityGuide</h1>
+    <nav className="nav-bar">
+      <div className="logo-drop">
+        <div className="logo">CityGuide</div>
+
+        <div className="drop-down">
+          <select name="cities" id="city">
+            <option value="volvo">City1</option>
+            <option value="saab">City2</option>
+          </select>
+        </div>
       </div>
-      <div className="select">
-        <select name="cities" className="form-select" id="city">
-          <option value="volvo">City1</option>
-          <option value="saab">City2</option>
-        </select>
-      </div>
+
       {!username && (
         <div className="links">
           <Link to="/login" className="nav-link">
             Login
           </Link>
-          <Link className="nav-link"  to="/signup">Signup</Link>
+          <Link className="nav-link" to="/signup">
+            Signup
+          </Link>
         </div>
       )}
       {username && (

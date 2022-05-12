@@ -1,24 +1,51 @@
 .signup-com {
   width: 100vw;
   height: 100vh;
-  background-color: rgb(227, 244, 244);
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-form h2 {
+h1,
+p {
   text-align: center;
 }
 small {
   color: red;
 }
 form {
-  background-color: white;
-
-  padding: 20px;
+  background-color: #465362;
   border-radius: 10px;
+  padding-top: 30px;
+  padding-bottom: 15px;
+}
+
+.form-grp {
+  margin: 0;
 }
 .signup-btn {
-  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button {
+  background-color: var(--accent);
+  color: white;
+  width: 40%;
+  font-size: large;
+  padding: 5px 10px 5px 10px;
+  border: 0;
+  font-size: large;
+  border-radius: 10px;
+}
+button:hover {
+  transform: scale(0.95);
+}
+
+.login-link {
+  color: white;
+}
+.login-link:hover {
+  color: gold;
 }
