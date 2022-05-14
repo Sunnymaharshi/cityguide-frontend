@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
 import Sidebar from "../sidenav/Sidebar";
 import About from "../about/about";
+import UserContext from "../../context/user/user.context";
 import "./dashboard.css";
 
 function Dashboard() {
@@ -10,6 +11,11 @@ function Dashboard() {
   const handleCity = (city) => {
     setCity(city);
   };
+  const { checkUserLogin } = useContext(UserContext);
+
+  useEffect(() => {
+    checkUserLogin();
+  }, []);
   return (
     <>
       <Navbar handleCity={handleCity} />

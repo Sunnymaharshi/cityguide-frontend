@@ -1,19 +1,14 @@
 import { useState, useEffect } from "react";
-import "./Navbar.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { auth, logout } from "../../services/auth/auth.service";
+import { logout } from "../../services/auth/auth.service";
+import "./Navbar.css";
+import { useContext } from "react";
+import UserContext from "../../context/user/user.context";
 
 function Navbar({ handleCity }) {
-  const [username, setUsername] = useState(null);
-  const [cities, setCities] = useState([
-    {
-      city_name: "City 1",
-    },
-    {
-      city_name: "City 2",
-    },
-  ]);
+  const { user } = useContext(UserContext);
+  const [cities, setCities] = useState(["City 1", " City 2"]);
 
   const handleDropdown = (e) => {
     handleCity(e.target.value);
@@ -24,26 +19,13 @@ function Navbar({ handleCity }) {
     window.location.reload();
   };
   useEffect(() => {
-    if (localStorage.getItem("user")) {
-      const userDetails = JSON.parse(localStorage.getItem("user"));
-      auth()
-        .then((res) => {
-          if (res.data !== userDetails.username) {
-            localStorage.removeItem("user");
-          } else {
-            setUsername(userDetails.username);
-          }
-        })
-        .catch((err) => {
-          localStorage.removeItem("user");
-          console.log("Token has Expired!");
-        });
-    }
     axios
-      .get("http://localhost:8080/getallcities")
+      .get("http://localhost:8080/getcitynames")
       .then((res) => {
-        setCities(res.data);
-        handleCity(res.data[0].city_name);
+        if (res.data.length > 0) {
+          setCities(res.data);
+          handleCity(res.data[0]);
+        }
       })
       .catch((err) => {
         console.log("error", err);
@@ -59,8 +41,8 @@ function Navbar({ handleCity }) {
           <select name="cities" id="city" onClick={handleDropdown}>
             {cities.map((val, key) => {
               return (
-                <option key={key} value={val.city_name}>
-                  {val.city_name}
+                <option key={key} value={val}>
+                  {val}
                 </option>
               );
             })}
@@ -68,7 +50,7 @@ function Navbar({ handleCity }) {
         </div>
       </div>
 
-      {!username && (
+      {!user.username && (
         <div className="links">
           <Link to="/login" className="nav-link">
             Login
@@ -78,9 +60,9 @@ function Navbar({ handleCity }) {
           </Link>
         </div>
       )}
-      {username && (
+      {user.username && (
         <div className="username">
-          <h4>{username}</h4>
+          <h4>{user.username}</h4>
           <div className="logout-content">
             <div className="logout-btn" onClick={handleLogout}>
               Logout

@@ -64,4 +64,5 @@ select {
   padding: 5px;
   background-color: #c0e0de;
   border-radius: 5px;
+  cursor: pointer;
 }
