@@ -1,0 +1,38 @@
+.card{
+    border: 1px solid black;
+    box-shadow: 0 0 5px black;
+    width: 300px;
+    margin: 20px;
+}
+.card:hover{
+    transform: scale(0.95);
+}
+
+.card-image img{
+    width: 299px;
+    height: 299px;
+}
+
+.card-title, description{
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+}
+
+.card-title{
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.description{
+    font-size: 12px;
+}
+
+.home-cards{
+    width:80%;
+    text-align: center;
+}
+
+.home-cards > .card{
+    display: inline-block;
+}

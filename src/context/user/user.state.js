@@ -1,6 +1,8 @@
 import { useState } from "react";
 import UserContext from "./user.context";
 import { auth } from "../../services/auth/auth.service";
+import { USER_DATA } from "../../common/data";
+
 const UserState = (props) => {
   const userInitials = {
     username: null,
@@ -10,12 +12,12 @@ const UserState = (props) => {
   const [user, setUser] = useState(userInitials);
 
   const checkUserLogin = () => {
-    if (localStorage.getItem("user")) {
-      const userDetails = JSON.parse(localStorage.getItem("user"));
+    if (localStorage.getItem(USER_DATA)) {
+      const userDetails = JSON.parse(localStorage.getItem(USER_DATA));
       auth()
         .then((res) => {
           if (res.data.username !== userDetails.username) {
-            localStorage.removeItem("user");
+            localStorage.removeItem(USER_DATA);
             setUser(userInitials);
           } else {
             setUser({
@@ -26,7 +28,7 @@ const UserState = (props) => {
           }
         })
         .catch((err) => {
-          localStorage.removeItem("user");
+          localStorage.removeItem(USER_DATA);
           setUser(userInitials);
           if (err.response.status === 401) {
             console.log("Token has Expired!");

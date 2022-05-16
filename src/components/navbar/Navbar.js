@@ -1,14 +1,13 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { logout } from "../../services/auth/auth.service";
 import "./Navbar.css";
-import { useContext } from "react";
 import UserContext from "../../context/user/user.context";
+import { getCities } from "../../services/dashboard/dashboard.service";
 
 function Navbar({ handleCity }) {
   const { user } = useContext(UserContext);
-  const [cities, setCities] = useState(["City 1", " City 2"]);
+  const [cities, setCities] = useState(["City 1", "City 2"]);
 
   const handleDropdown = (e) => {
     handleCity(e.target.value);
@@ -19,8 +18,7 @@ function Navbar({ handleCity }) {
     window.location.reload();
   };
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/getcitynames")
+    getCities()
       .then((res) => {
         if (res.data.length > 0) {
           setCities(res.data);
@@ -28,7 +26,7 @@ function Navbar({ handleCity }) {
         }
       })
       .catch((err) => {
-        console.log("error", err);
+        console.log("city names error", err);
       }); // eslint-disable-next-line
   }, []);
 

@@ -1,4 +1,4 @@
-const validate = (values) => {
+const validateSignup = (values) => {
   const errors = {};
   const email_regex = /\S+@\S+\.\S+/;
   const num_regex = /^\d+$/;
@@ -26,4 +26,4 @@ const validate = (values) => {
   return errors;
 };
 
-export default validate;
+export default validateSignup;
