@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import axios from "axios";
 import "./Signup.css";
-import validate from "./validators";
+import { signup } from "../../services/user/user.service";
+import validateSignup from "./signup-validator";
+import {
+  LOGIN_REDIRECT_MSG,
+  SIGNUP_SUCCESS_RES,
+  USERNAME_TAKEN_MSG,
+  USERNAME_TAKEN_RES,
+} from "../../common/data";
 
 function Signup() {
   const initialValues = {
@@ -27,7 +33,7 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setFormErrors(validate(formValues));
+    setFormErrors(validateSignup(formValues));
     setIsSubmit(true);
   };
 
@@ -35,32 +41,25 @@ function Signup() {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       // do signup
 
-      const doSignup = async () => {
-        await axios
-          .post(`http://localhost:8080/signup`, formValues)
-          .then((res) => {
-            if (res.data === "User Signed In Successfully") {
-              setUserNameExist(null);
-              setSuccessMsg(
-                "Successfully Signed up...Redirecting to login page"
-              );
-              setTimeout(() => {
-                navigate("/login", { replace: true });
-              }, 3000);
-            }
-          })
-          .catch((err) => {
-            const res = err.response;
-            if (res.data === "User with username already Exists") {
-              setUserNameExist("Username already exists");
-            }
-          });
-      };
-
-      doSignup();
+      signup(formValues)
+        .then((res) => {
+          if (res.data === SIGNUP_SUCCESS_RES) {
+            setUserNameExist(null);
+            setSuccessMsg(LOGIN_REDIRECT_MSG);
+            setTimeout(() => {
+              navigate("/login", { replace: true });
+            }, 3000);
+          }
+        })
+        .catch((err) => {
+          const res = err.response;
+          if (res.data === USERNAME_TAKEN_RES) {
+            setUserNameExist(USERNAME_TAKEN_MSG);
+          }
+        });
     }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, [formErrors]);
 
   return (
