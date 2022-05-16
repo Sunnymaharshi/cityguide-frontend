@@ -5,6 +5,9 @@ import Sidebar from "../sidenav/Sidebar";
 import About from "../about/about";
 import UserContext from "../../context/user/user.context";
 import "./dashboard.css";
+import Attraction from "../attraction/attraction";
+import Restaurant from "../restaurant/restaurant";
+
 
 function Dashboard() {
   const [city, setCity] = useState("City 1");
@@ -15,6 +18,7 @@ function Dashboard() {
 
   useEffect(() => {
     checkUserLogin();
+    // eslint-disable-next-line
   }, []);
   return (
     <>
@@ -23,6 +27,9 @@ function Dashboard() {
         <Sidebar />
         <Routes>
           <Route path="/" element={<About city={city} />} />
+          <Route path="/attractions" element={<Attraction city={city} />} />
+          <Route path="/restaurants" element={<Restaurant city={city} />} />
+
         </Routes>
       </div>
     </>
