@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Navbar from "../navbar/Navbar";
 import Sidebar from "../sidenav/Sidebar";
 import About from "../about/about";
@@ -18,7 +18,8 @@ function Dashboard() {
 
   useEffect(() => {
     checkUserLogin();
-    // eslint-disable-next-line
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>
@@ -26,7 +27,8 @@ function Dashboard() {
       <div className="main">
         <Sidebar />
         <Routes>
-          <Route path="/" element={<About city={city} />} />
+          <Route path="/" element={<Navigate replace to="dashboard" />} />
+          <Route path="dashboard" element={<About city={city} />} />          
           <Route path="/attractions" element={<Attraction city={city} />} />
           <Route path="/restaurants" element={<Restaurant city={city} />} />
 
