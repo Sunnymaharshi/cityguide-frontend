@@ -1,0 +1,45 @@
+name: Build and Deploy to Cloud Run
+
+on:
+    push:
+        branches:
+            - main
+
+# Environment variables available to all jobs and steps in this workflow
+env:
+    PROJECT_ID: us-gcp-ame-con-116-npd-1
+    SERVICE_NAME: hu-may-prod-city-guide-frontend
+
+jobs:
+    setup-build-deploy:
+        name: Setup, Build, and Deploy
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v1
+
+            # Setup gcloud CLI
+            - id: 'auth'
+              uses: 'google-github-actions/auth@v0'
+              with:
+                credentials_json: '${{ secrets.GCP_SA_KEY }}'
+            # Configure gcloud CLI
+            - name: gcloud Set up
+              run: |
+                  gcloud config set project us-gcp-ame-con-116-npd-1
+      
+            - name: Image
+              run: |-
+                docker build -t asia.gcr.io/us-gcp-ame-con-116-npd-1/$SERVICE_NAME:$GITHUB_SHA .
+                
+            #Configure docker to use the gcloud command-line tool as a credential helper
+            - run: |
+                  gcloud auth configure-docker -q
+              # Push image to Google Container Registry
+            - name: Build
+              run: |-
+                  docker push asia.gcr.io/us-gcp-ame-con-116-npd-1/$SERVICE_NAME:$GITHUB_SHA
+            - name: Deploy
+              run: |
+                  gcloud run deploy $SERVICE_NAME --region us-west2 --image asia.gcr.io/us-gcp-ame-con-116-npd-1/$SERVICE_NAME:$GITHUB_SHA --allow-unauthenticated
