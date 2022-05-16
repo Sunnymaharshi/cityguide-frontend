@@ -16,7 +16,6 @@ const UserState = (props) => {
       const userDetails = JSON.parse(localStorage.getItem(USER_DATA));
       auth()
         .then((res) => {
-          console.log(res);
           if (res.data.username !== userDetails.username) {
             localStorage.removeItem(USER_DATA);
             setUser(userInitials);

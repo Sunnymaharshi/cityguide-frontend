@@ -7,7 +7,7 @@ import { getCities } from "../../services/dashboard/dashboard.service";
 
 function Navbar({ handleCity }) {
   const { user } = useContext(UserContext);
-  const [cities, setCities] = useState(["Cities"]);
+  const [cities, setCities] = useState(["City 1", "City 2"]);
 
   const handleDropdown = (e) => {
     handleCity(e.target.value);
@@ -18,7 +18,7 @@ function Navbar({ handleCity }) {
     window.location.reload();
   };
   useEffect(() => {
-    getCities
+    getCities()
       .then((res) => {
         if (res.data.length > 0) {
           setCities(res.data);
