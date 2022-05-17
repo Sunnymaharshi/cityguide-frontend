@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import axios from "axios";
 import "./City.css";
 
@@ -26,11 +26,10 @@ function City() {
         }
       )
       .then(function (response) {
-        if(response.data.city_name==city_name)
-        setSuccessMsg("Successfully Added!")
+        if (response.data.city_name === city_name)
+          setSuccessMsg("Successfully Added!");
         setCityName("");
         setDesc("");
-       
 
         console.log(response);
       })
@@ -56,8 +55,8 @@ function City() {
         }
       )
       .then(function (response) {
-        if(response.data.city_name==city_name)
-        setSuccessMsg("Successfully Updated!")
+        if (response.data.city_name === city_name)
+          setSuccessMsg("Successfully Updated!");
         setCityName("");
         setDesc("");
         console.log(response);
@@ -79,8 +78,8 @@ function City() {
       .then(function (response) {
         if (response.data === "Deleted!")
           setSuccessMsg("Successfully Deleted!");
-          setCityName("");
-          setDesc("");
+        setCityName("");
+        setDesc("");
         console.log(response.data);
       })
       .catch(function (error) {

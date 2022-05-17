@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import "./sidebar.css";
 
@@ -9,14 +9,14 @@ function Sidebar() {
       <ul className="SidebarList">
         {SidebarData.map((val, key) => {
           return (
-            <Link
+            <NavLink
               key={key}
               className="row"
               id={window.location.pathname === val.link ? "active" : ""}
               to={val.link}
             >
               {val.title}
-            </Link>
+            </NavLink>
           );
         })}
       </ul>
