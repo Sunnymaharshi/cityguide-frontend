@@ -27,7 +27,11 @@ function City() {
         }
       )
       .then(function (response) {
+        if(response.data.city_name==city_name)
+        setSuccessMsg("Successfully Added!")
         setCityName("");
+        setDesc("");
+       
 
         console.log(response);
       })
@@ -53,6 +57,10 @@ function City() {
         }
       )
       .then(function (response) {
+        if(response.data.city_name==city_name)
+        setSuccessMsg("Successfully Updated!")
+        setCityName("");
+        setDesc("");
         console.log(response);
       })
       .catch(function (error) {
@@ -72,6 +80,8 @@ function City() {
       .then(function (response) {
         if (response.data === "Deleted!")
           setSuccessMsg("Successfully Deleted!");
+          setCityName("");
+          setDesc("");
         console.log(response.data);
       })
       .catch(function (error) {
@@ -104,6 +114,7 @@ function City() {
             name="citydesc"
             placeholder="City Description"
             id="citydesc"
+            value={city_desc}
             className="form-control"
           />
         </div>
