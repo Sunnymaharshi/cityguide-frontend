@@ -1,0 +1,10 @@
+.question {
+  display: block;
+  color: black;
+  font-size: x-large;
+  text-decoration: none;
+}
+
+.questions-comp {
+  margin: 20px;
+}
