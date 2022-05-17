@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./City.css";
 
@@ -22,6 +21,11 @@ function City() {
               Authorization: "Bearer " + userDetails.token,
             }
           }).then(function (response) {
+            if(response.data.city_name===city_name)
+            setSuccessMsg(
+                "Successfully Added!"
+              );
+
             console.log(response);
           })
           .catch(function (error) {
@@ -40,6 +44,10 @@ function City() {
               Authorization: "Bearer " + userDetails.token,
             }
           }).then(function (response) {
+              if(response.data.city_name===city_name)
+            setSuccessMsg(
+                "Successfully Updated!"
+              );
             console.log(response);
           })
           .catch(function (error) {
