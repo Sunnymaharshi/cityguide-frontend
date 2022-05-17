@@ -7,7 +7,7 @@ import { getCities } from "../../services/dashboard/dashboard.service";
 
 function Navbar({ handleCity }) {
   const { user } = useContext(UserContext);
-  const [cities, setCities] = useState(["City 1", "City 2"]);
+  const [cities, setCities] = useState([]);
 
   const handleDropdown = (e) => {
     handleCity(e.target.value);
