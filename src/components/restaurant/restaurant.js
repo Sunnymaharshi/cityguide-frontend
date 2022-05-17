@@ -25,7 +25,7 @@ export default function Restaurant({ city }) {
         <p>Hello from {city} city!!</p>
         {Restaurants.map(p => {
               return (
-                <Card details={p} place_name="Restaurant"/>
+                <Card details={p}/>
               );
             })}
     </div>
