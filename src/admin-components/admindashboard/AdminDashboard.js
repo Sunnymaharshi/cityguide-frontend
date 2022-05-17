@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import City from "../CRUDcity/City";
 import UserContext from "../../context/user/user.context";
 import "./AdminDashboard.css";
+import Restaurant from "../CRUDrestaurants/Restaurant";
 function AdminDashboard() {
   const { user, checkUserLogin } = useContext(UserContext);
 
@@ -12,7 +13,12 @@ function AdminDashboard() {
     <div className="admin-comp">
       {user.role === "Admin" && (
         <div className="admin-content">
+          <div className="city-comp">
           <City />
+          </div>
+          <div className="rest-comp">
+          <Restaurant/>
+          </div>
         </div>
       )}
       {user.role !== "Admin" && (

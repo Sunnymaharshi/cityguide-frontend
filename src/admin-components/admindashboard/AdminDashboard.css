@@ -1,8 +1,16 @@
 .admin-comp {
-  width: 100%;
+ 
   display: flex;
   justify-content: center;
 }
 .admin-content {
   margin-top: 2rem;
+  margin-left: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.rest-comp{
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
