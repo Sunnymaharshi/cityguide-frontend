@@ -1,0 +1,8 @@
+.admin-comp {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.admin-content {
+  margin-top: 2rem;
+}

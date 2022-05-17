@@ -25,7 +25,7 @@ export default function Attraction({ city }) {
         <p>Hello from {city} city!!</p>
         {Attractions.map(p => {
               return (
-                <Card details={p} place_name="Attraction"/>
+                <Card details={p}/>
               );
             })}
     </div>
