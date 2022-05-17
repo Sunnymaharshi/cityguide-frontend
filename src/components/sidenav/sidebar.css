@@ -22,25 +22,12 @@
   color: white;
   justify-content: center;
   align-items: center;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-}
-
-.SidebarList .row:hover {
   cursor: pointer;
+  text-decoration: none;
+}
+.row:hover {
+  transform: scale(0.9);
+}
+.active {
   background-color: var(--accent);
 }
-.SidebarList #active {
-  background-color: var(--accent);
-}
-/* .row #icon {
-    flex: 30%;
-    display: grid;
-    place-items: center;
-  } */
-
-/* .row #title {
-    flex: 100%;
-    place-items: center;
-    
-  } */

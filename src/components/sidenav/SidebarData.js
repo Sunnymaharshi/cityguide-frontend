@@ -23,4 +23,8 @@ export const SidebarData = [
     title: "Your Questions",
     link: "/questions",
   },
+  {
+    title: "Admin",
+    link: "/admindashboard",
+  },
 ];
