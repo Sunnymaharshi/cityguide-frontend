@@ -25,6 +25,6 @@ export const SidebarData = [
   },
   {
     title: "Admin",
-    link: "/admindashboard",
+    link: "/admin",
   },
 ];

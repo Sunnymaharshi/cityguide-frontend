@@ -1,36 +1,42 @@
-import React, { useState} from "react";
-import axios from "axios";
+import React, { useState, useEffect} from "react";
 import "./City.css";
+import { deleteCity, getCity, postCity, updateCity } from "../../services/admin/city.service";
 
 function City() {
   const [city_name, setCityName] = useState("");
   const [city_desc, setDesc] = useState("");
   const [successMsg, setSuccessMsg] = useState(null);
+  const [city, setCity]=useState([]);
   console.log(city_name);
   console.log(city_desc);
+  
+  useEffect(() => {
+    getAllCities();
+     
+}, []);
+
+const getAllCities = async (event) =>{
+    getCity()
+      .then((res) => {
+          setCity(res.data);
+          console.log(city);
+        }
+      )
+      .catch((err) => {
+        console.log("Error", err);
+      });
+}
 
   const sendDataToAPI = async (event) => {
     event.preventDefault();
     const userDetails = JSON.parse(localStorage.getItem("user"));
-    await axios
-      .post(
-        "http://localhost:8080/addcity",
-        {
-          city_name,
-          city_desc,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + userDetails.token,
-          },
-        }
-      )
+    postCity(city_name,city_desc)
       .then(function (response) {
         if (response.data.city_name === city_name)
           setSuccessMsg("Successfully Added!");
         setCityName("");
         setDesc("");
-
+        getAllCities();
         console.log(response);
       })
       .catch(function (error) {
@@ -41,24 +47,13 @@ function City() {
   const updateDataToAPI = async (event) => {
     event.preventDefault();
     const userDetails = JSON.parse(localStorage.getItem("user"));
-    await axios
-      .put(
-        "http://localhost:8080/updatecity",
-        {
-          city_name,
-          city_desc,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + userDetails.token,
-          },
-        }
-      )
+    updateCity(city_name,city_desc)
       .then(function (response) {
         if (response.data.city_name === city_name)
           setSuccessMsg("Successfully Updated!");
         setCityName("");
         setDesc("");
+        getAllCities();
         console.log(response);
       })
       .catch(function (error) {
@@ -69,17 +64,13 @@ function City() {
   const onDelete = async (event) => {
     event.preventDefault();
     const userDetails = JSON.parse(localStorage.getItem("user"));
-    await axios
-      .delete(`http://localhost:8080/deletecity/${city_name}`, {
-        headers: {
-          Authorization: "Bearer " + userDetails.token,
-        },
-      })
+    deleteCity(city_name)
       .then(function (response) {
         if (response.data === "Deleted!")
           setSuccessMsg("Successfully Deleted!");
         setCityName("");
         setDesc("");
+        getAllCities();
         console.log(response.data);
       })
       .catch(function (error) {
@@ -88,9 +79,11 @@ function City() {
   };
 
   return (
+    <div className="city-div">
     <div className="city-form">
+      
       <form>
-        <h1>City Operations</h1>
+        <h1 className="city-op">City Operations</h1>
 
         <div className="form-group">
           <label htmlFor="cityname">City Name</label>
@@ -118,10 +111,11 @@ function City() {
         </div>
 
         <div className="btn-main">
-          <div className="add-btn">
+          <div className="add-button">
             <button
               type="submit"
               className="delete-btn"
+              disabled={!city_name || !city_desc}
               onClick={sendDataToAPI}
             >
               Add
@@ -131,13 +125,17 @@ function City() {
             <button
               type="submit"
               className="delete-btn"
+              disabled={!city_name || !city_desc}
               onClick={updateDataToAPI}
             >
               Update
             </button>
           </div>
           <div className="">
-            <button type="submit" className="delete-btn" onClick={onDelete}>
+            <button type="submit"
+             className="delete-btn"
+             disabled={!city_name}
+              onClick={onDelete}>
               Delete
             </button>
           </div>
@@ -147,6 +145,27 @@ function City() {
         </p>
       </form>
     </div>
+    <div className='city-table'>
+    <h2 className='city-det'>City Details</h2>
+<table id="citytable">
+  <tbody>
+      <tr>
+          <th>Name</th>
+          <th>Description</th>
+      </tr>
+  {city.map((c) => {
+return(
+  <tr>
+      <td>{c.city_name}</td>
+      <td>{c.city_desc}</td>
+  </tr>
+)
+})}
+</tbody>
+</table>
+
+</div>
+</div>
   );
 }
 
