@@ -1,0 +1,28 @@
+.answers-comp {
+  margin: 10px;
+  background-color: whitesmoke;
+}
+.ques {
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  padding: 30px;
+}
+.add-btn {
+  margin-top: 10px;
+  background-color: var(--accent);
+  color: white;
+  width: 40%;
+  font-size: large;
+  padding: 5px 10px 5px 10px;
+  border: 0;
+  font-size: large;
+  border-radius: 10px;
+}
+.add-btn:hover {
+  transform: scale(0.95);
+}

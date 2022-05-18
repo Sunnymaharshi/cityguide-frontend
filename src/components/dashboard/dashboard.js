@@ -8,7 +8,7 @@ import Attraction from "../attraction/attraction";
 import Restaurant from "../restaurant/restaurant";
 import AdminDashboard from "../../admin-components/admindashboard/AdminDashboard";
 import Questions from "../Q-A/questions/Questions";
-import QuestionDetail from "../Q-A/questiondetail/QuestionDetail";
+import Answers from "../Q-A/answers/Answers";
 import "./dashboard.css";
 
 function Dashboard() {
@@ -30,15 +30,17 @@ function Dashboard() {
       <Navbar handleCity={handleCity} />
       <div className="main">
         <Sidebar />
-        <Routes>
-          <Route path="/" element={<Navigate replace to="dashboard" />} />
-          <Route path="dashboard" element={<About city={city} />} />
-          <Route path="attractions" element={<Attraction city={city} />} />
-          <Route path="restaurants" element={<Restaurant city={city} />} />
-          <Route path="admindashboard" element={<AdminDashboard />} />
-          <Route path="faq" element={<Questions city={city} />} />
-          <Route path="question/:id" element={<QuestionDetail />} />
-        </Routes>
+        <div className="main-content">
+          <Routes>
+            <Route path="/" element={<Navigate replace to="dashboard" />} />
+            <Route path="dashboard" element={<About city={city} />} />
+            <Route path="attractions" element={<Attraction city={city} />} />
+            <Route path="restaurants" element={<Restaurant city={city} />} />
+            <Route path="admindashboard" element={<AdminDashboard />} />
+            <Route path="faq" element={<Questions city={city} />} />
+            <Route path="answers/:id" element={<Answers />} />
+          </Routes>
+        </div>
       </div>
     </>
   );

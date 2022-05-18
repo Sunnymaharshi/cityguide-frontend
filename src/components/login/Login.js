@@ -92,8 +92,10 @@ function Login() {
           />
           <small>{formErrors.password}</small>
         </div>
-        <div className="login-btn">
-          <button type="submit">Login</button>
+        <div className="login-div">
+          <button type="submit" className="login-btn">
+            Login
+          </button>
         </div>
         <p>
           <Link to="/signup" className="signup-link">

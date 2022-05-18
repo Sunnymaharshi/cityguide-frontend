@@ -24,12 +24,12 @@ p {
 .form-group {
   margin: 30px;
 }
-.login-btn {
+.login-div {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-button {
+.login-btn {
   background-color: var(--accent);
   color: white;
   width: 40%;
@@ -39,7 +39,7 @@ button {
   font-size: large;
   border-radius: 10px;
 }
-button:hover {
+.login-btn:hover {
   transform: scale(0.95);
 }
 p {

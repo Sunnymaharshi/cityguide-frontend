@@ -135,8 +135,10 @@ function Signup() {
           />
           <small>{formErrors.password}</small>
         </div>
-        <div className="signup-btn">
-          <button type="submit">Signup</button>
+        <div className="signup-div">
+          <button type="submit" className="signup-btn">
+            Signup
+          </button>
         </div>
         <p>
           <b>{successMsg}</b>

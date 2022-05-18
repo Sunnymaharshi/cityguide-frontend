@@ -1,16 +1,30 @@
 import React from "react";
 import "./Answer.css";
-function Answer({ ans }) {
+import Comments from "../comments/Comments";
+function Answer({ ans, ind }) {
   return (
-    <>
-      <h5>{ans.description}</h5>
-      <div className="answers">
-        <p>Comments</p>
-        {ans.commentList.map((com) => (
-          <p>{com.description}</p>
-        ))}
+    <div className="answer-comp">
+      <h5>
+        {ind + 1}: {ans.description}
+      </h5>
+      <div className="icons">
+        <div className="i-count">
+          <div className="material-symbols-rounded icon">thumb_up</div>
+          {ans.upvotes}
+        </div>
+        <div className="i-count">
+          <div className="material-symbols-rounded icon">thumb_down</div>
+          {ans.downvotes}
+        </div>
+        <div className="i-count">
+          <div className="material-symbols-rounded icon">comment</div>
+          {ans.commentList.length}
+        </div>
       </div>
-    </>
+      <div className="show-comments">
+        <Comments comments={ans.commentList} />
+      </div>
+    </div>
   );
 }
 

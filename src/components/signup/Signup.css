@@ -24,12 +24,12 @@ form {
 .form-grp {
   margin: 0;
 }
-.signup-btn {
+.signup-div {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-button {
+.signup-btn {
   background-color: var(--accent);
   color: white;
   width: 40%;
@@ -39,7 +39,7 @@ button {
   font-size: large;
   border-radius: 10px;
 }
-button:hover {
+.signup-btn:hover {
   transform: scale(0.95);
 }
 

@@ -1,10 +1,42 @@
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search-bar {
+  width: 60%;
+  height: 3rem;
+  font-size: large;
+  border: 2px solid black;
+  border-radius: 15px;
+  padding: 10px;
+  outline: none;
+}
+.search-btn {
+  width: 150px;
+  background-color: var(--accent);
+  color: white;
+  padding: 5px 10px 5px 10px;
+  border: 0;
+  height: 3rem;
+  margin-left: 10px;
+  font-size: large;
+  border-radius: 15px;
+}
+
+.questions-comp {
+  margin: 20px;
+}
+.questions {
+  padding: 20px;
+}
 .question {
   display: block;
   color: black;
   font-size: x-large;
   text-decoration: none;
 }
-
-.questions-comp {
-  margin: 20px;
+.question:hover {
+  color: black;
+  transform: scale(1.01);
 }

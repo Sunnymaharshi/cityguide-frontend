@@ -15,21 +15,35 @@ function Questions({ city }) {
     // eslint-disable-next-line
   }, [city]);
 
+  const handleSearch = (e) => {};
+
   return (
     <div className="questions-comp">
-      <h1>Questions</h1>
+      <div className="search">
+        <input
+          type="search"
+          className="search-bar"
+          placeholder="Search Questions"
+        />
+        <div>
+          <button onClick={handleSearch} className="search-btn">
+            Search
+          </button>
+        </div>
+      </div>
+      <div className="questions">
+        <h5>Questions</h5>
 
-      {questions.map((q) => (
-        <Link
-          to={`/question/${q.ques_id}`}
-          className="question"
-          key={q.ques_id}
-        >
-          {q.description}
-        </Link>
-      ))}
-
-      {questions?.map((ques) => JSON.stringify(ques))}
+        {questions.map((q, ind) => (
+          <Link
+            to={`/answers/${q.ques_id}`}
+            className="question"
+            key={q.ques_id}
+          >
+            {ind + 1}: {q.description}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

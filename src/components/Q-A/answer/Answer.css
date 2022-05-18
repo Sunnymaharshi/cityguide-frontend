@@ -1,2 +1,22 @@
-.answers {
+.answer-comp {
+  background-color: white;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 500px;
+}
+.i-count {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.show-comments {
+  display: none;
+}
+.icons {
+  display: flex;
+  justify-content: space-evenly;
+}
+.icon:hover {
+  cursor: pointer;
 }
