@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import axios from "axios";
+import { deleteRestaurant, getRestaurants, postRestaurant, updateRestaurant } from '../../services/admin/restaurant.service';
 import "./Restaurant.css";
 
 function Restaurant() {
@@ -14,92 +14,49 @@ function Restaurant() {
   console.log(res_location);
   console.log(city_name);
   console.log(res_id);
-  let rest=[];
+
   
-
-
   useEffect(() => {
-   
-    axios.get("http://localhost:8080/getallcities")
-      .then((res) => {
-         rest=[];
-        if (res.data.length > 0) {
-        console.log(res.data);
-          
-          for(let i=0; i<res.data.length; i++){
-          console.log(res.data[i].restaurantList);
-          if(res.data[i].restaurantList.length!=0)
-          rest=rest.concat(res.data[i].restaurantList);
-          }
-          setRestaurants(rest);
-          console.log(rest);
-          console.log(rest[0].res_id);
-          console.log(restaurant);
+    getAllRestaurants();
      
+}, []);
+
+const getAllRestaurants = async (event) =>{
+    getRestaurants()
+      .then((res) => {
+          setRestaurants(res.data);
+          console.log(restaurant);
         }
-      })
+      )
       .catch((err) => {
         console.log("Error", err);
       });
-     
-}, []);
+}
   
   
 
   const sendDataToAPI = async (event) => {
     event.preventDefault();
-    const userDetails = JSON.parse(localStorage.getItem("user"));
-    await axios
-      .post(
-        "http://localhost:8080/addrest",
-        {
-          res_name,
-          res_location,
-          city_name
-
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + userDetails.token,
-          },
-        }
-      )
+    postRestaurant(res_name,res_location,city_name)
       .then(function (response) {
         if(response.data.res_name==res_name)
         setSuccessMsg("Successfully Added!")
         setResName("");
         setResLoc("");
         setCityName("");
-       
-        
-       
-
         console.log(response);
+        getAllRestaurants();
       })
       .catch(function (error) {
         console.log(error);
       });
   };
 
+
   const updateDataToAPI = async (event) => {
     event.preventDefault();
     const userDetails = JSON.parse(localStorage.getItem("user"));
-    await axios
-      .put(
-        "http://localhost:8080/updaterest",
-        {
-          res_id,
-          res_name,
-          res_location,
-          city_name
-
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + userDetails.token,
-          },
-        }
-      )
+    updateRestaurant(res_id,res_name,res_location,city_name)
       .then(function (response) {
         if(response.data.res_name==res_name)
         setSuccessMsg("Successfully Updated!")
@@ -107,8 +64,8 @@ function Restaurant() {
         setResLoc("");
         setCityName("");
         setResId("");
-
         console.log(response);
+        getAllRestaurants();
       })
       .catch(function (error) {
         console.log(error);
@@ -117,18 +74,13 @@ function Restaurant() {
 
   const onDelete = async (event) => {
     event.preventDefault();
-    const userDetails = JSON.parse(localStorage.getItem("user"));
-    await axios
-      .delete(`http://localhost:8080/deleterest/${res_id}`, {
-        headers: {
-          Authorization: "Bearer " + userDetails.token,
-        },
-      })
+    deleteRestaurant(res_id)
       .then(function (response) {
         if (response.data === "Deleted!")
           setSuccessMsg("Successfully Deleted!");
           setResId("");
         console.log(response.data);
+        getAllRestaurants();
       })
       .catch(function (error) {
         console.log(error);
