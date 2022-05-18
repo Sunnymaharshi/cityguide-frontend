@@ -90,30 +90,10 @@ const getAllRestaurants = async (event) =>{
 
 
   return (<>
-  <table id="resttable">
-      <tbody>
-          <tr>
-              <th>Id</th>
-              <th>Name</th>
-              <th>Location</th>
-              <th>City</th>
-          </tr>
-      {restaurant.map((rest) => {
-  return(
-      <tr>
-          <td>{rest.res_id}</td>
-          <td>{rest.res_name}</td>
-          <td>{rest.res_location}</td>
-          <td>{rest.city_name}</td>
-      </tr>
-  )
-  })}
-  </tbody>
-  </table>
-
+  <div className='rest-div'>
     <div className="res-form">
       <form>
-        <h1>Restaurant Operations</h1>
+        <h2 className='rest-op'>Restaurant Operations</h2>
 
         <div className="form-group">
           <label htmlFor="resname">Restaurant Name</label>
@@ -154,7 +134,7 @@ const getAllRestaurants = async (event) =>{
         </div>
 
         <div className="btn-main">
-          <div className="add-btn">
+          <div className="add-button">
             <button
               type="submit"
               className="delete-btn"
@@ -202,6 +182,30 @@ const getAllRestaurants = async (event) =>{
           <b>{successMsg}</b>
         </p>
       </form>
+    </div>
+    <div className='res-table'>
+        <h2 className='rest-det'>Restaurant Details</h2>
+  <table id="resttable">
+      <tbody>
+          <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Location</th>
+              <th>City</th>
+          </tr>
+      {restaurant.map((rest) => {
+  return(
+      <tr>
+          <td>{rest.res_id}</td>
+          <td>{rest.res_name}</td>
+          <td>{rest.res_location}</td>
+          <td>{rest.city_name}</td>
+      </tr>
+  )
+  })}
+  </tbody>
+  </table>
+  </div>
     </div>
     </> )
 }

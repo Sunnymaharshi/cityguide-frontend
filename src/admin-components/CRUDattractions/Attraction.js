@@ -91,30 +91,11 @@ function Attraction() {
   
   
     return (<>
-    <table id="attrtable">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Location</th>
-                <th>City</th>
-            </tr>
-        {attraction.map((attr) => {
-    return(
-        <tr>
-            <td>{attr.attr_id}</td>
-            <td>{attr.attr_name}</td>
-            <td>{attr.attr_loc}</td>
-            <td>{attr.city_name}</td>
-        </tr>
-    )
-    })}
-    </tbody>
-    </table>
-  
+    <div className='attr-div'>
+    
       <div className="attr-form">
         <form>
-          <h1>Attraction Operations</h1>
+          <h2 className='attr-op'>Attraction Operations</h2>
   
           <div className="form-group">
             <label htmlFor="attrname">Attraction Name</label>
@@ -155,7 +136,7 @@ function Attraction() {
           </div>
   
           <div className="btn-main">
-            <div className="add-btn">
+            <div className="add-button">
               <button
                 type="submit"
                 className="delete-btn"
@@ -203,6 +184,30 @@ function Attraction() {
             <b>{successMsg}</b>
           </p>
         </form>
+      </div>
+      <div className='attr-table'>
+          <h2 className='attr-det'>Attraction Details</h2>
+    <table id="attrtable">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Location</th>
+                <th>City</th>
+            </tr>
+        {attraction.map((attr) => {
+    return(
+        <tr>
+            <td>{attr.attr_id}</td>
+            <td>{attr.attr_name}</td>
+            <td>{attr.attr_loc}</td>
+            <td>{attr.city_name}</td>
+        </tr>
+    )
+    })}
+    </tbody>
+    </table>
+    </div>
       </div>
       </> )
   }

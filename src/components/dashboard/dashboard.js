@@ -36,7 +36,7 @@ function Dashboard() {
             <Route path="dashboard" element={<About city={city} />} />
             <Route path="attractions" element={<Attraction city={city} />} />
             <Route path="restaurants" element={<Restaurant city={city} />} />
-            <Route path="admindashboard" element={<AdminDashboard />} />
+            <Route path="admin/*" element={<AdminDashboard />} />
             <Route path="faq" element={<Questions city={city} />} />
             <Route path="answers/:id" element={<Answers />} />
           </Routes>
