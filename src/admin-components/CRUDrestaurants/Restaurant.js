@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import axios from "axios";
 import { deleteRestaurant, getRestaurants, postRestaurant, updateRestaurant } from '../../services/admin/restaurant.service';
 import "./Restaurant.css";
 
@@ -15,7 +14,7 @@ function Restaurant() {
   console.log(res_location);
   console.log(city_name);
   console.log(res_id);
-  let rest=[];
+
   
   useEffect(() => {
     getAllRestaurants();
@@ -25,22 +24,10 @@ function Restaurant() {
 const getAllRestaurants = async (event) =>{
     getRestaurants()
       .then((res) => {
-         rest=[];
-        if (res.data.length > 0) {
-        console.log(res.data);
-          
-          for(let i=0; i<res.data.length; i++){
-          console.log(res.data[i].restaurantList);
-          if(res.data[i].restaurantList.length!=0)
-          rest=rest.concat(res.data[i].restaurantList);
-          }
-          setRestaurants(rest);
-          console.log(rest);
-          console.log(rest[0].res_id);
+          setRestaurants(res.data);
           console.log(restaurant);
-     
         }
-      })
+      )
       .catch((err) => {
         console.log("Error", err);
       });

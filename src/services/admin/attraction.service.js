@@ -1,18 +1,18 @@
 import axios from "axios";
 import { BASE_URL } from "../../common/data";
 
-  export const getRestaurants = async (event) =>{
-    return await axios.get(BASE_URL+"/getrest");    
+  export const getAttractions = async (event) =>{
+    return await axios.get(BASE_URL+"/getattr");    
 }  
 
-export const postRestaurant = async (res_name,res_location,city_name)=>{
+export const postAtrraction = async (attr_name,attr_loc,city_name)=>{
     const userDetails = JSON.parse(localStorage.getItem("user"));
     return await axios
       .post(
-        BASE_URL+"/addrest",
+        BASE_URL+"/addattr",
         {
-          res_name,
-          res_location,
+          attr_name,
+          attr_loc,
           city_name
 
         },
@@ -24,15 +24,15 @@ export const postRestaurant = async (res_name,res_location,city_name)=>{
       )
 }
 
-export const updateRestaurant= async(res_id,res_name,res_location,city_name)=>{
+export const updateAttraction= async(attr_id,attr_name,attr_loc,city_name)=>{
     const userDetails = JSON.parse(localStorage.getItem("user"));
     return await axios
       .put(
-        BASE_URL+"/updaterest",
+        BASE_URL+"/updateattr",
         {
-          res_id,
-          res_name,
-          res_location,
+          attr_id,
+          attr_name,
+          attr_loc,
           city_name
 
         },
@@ -44,10 +44,10 @@ export const updateRestaurant= async(res_id,res_name,res_location,city_name)=>{
       )
 }
 
-export const deleteRestaurant = async(res_id)=>{
+export const deleteAttraction = async(attr_id)=>{
     const userDetails = JSON.parse(localStorage.getItem("user"));
     return await axios
-      .delete(BASE_URL+`/deleterest/${res_id}`, {
+      .delete(BASE_URL+`/deleteattr/${attr_id}`, {
         headers: {
           Authorization: "Bearer " + userDetails.token,
         },
