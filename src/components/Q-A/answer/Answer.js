@@ -1,13 +1,15 @@
 import React from "react";
-
-function Answer({ ans, comments }) {
+import "./Answer.css";
+function Answer({ ans }) {
   return (
     <>
-      <h3>{ans}</h3>
-      <p>Comments</p>
-      {comments.map((com) => (
-        <p>{com.description}</p>
-      ))}
+      <h5>{ans.description}</h5>
+      <div className="answers">
+        <p>Comments</p>
+        {ans.commentList.map((com) => (
+          <p>{com.description}</p>
+        ))}
+      </div>
     </>
   );
 }
