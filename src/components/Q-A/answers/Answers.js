@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Answer from "../answer/Answer";
 import { getQuestion } from "../../../services/questions/questions.service";
@@ -7,10 +7,14 @@ function Answers() {
   const { id } = useParams(); // eslint-disable-next-line
   const [question, setQuestion] = useState(null);
   const [answers, setAnswers] = useState([]);
+
+  const updateAnswers = (new_answers) => {
+    setAnswers(new_answers);
+  };
   useEffect(() => {
     getQuestion(id).then((res) => {
       setQuestion(res.data.description);
-      setAnswers(res.data.answerList);
+      updateAnswers(res.data.answerList);
     });
 
     // eslint-disable-next-line
@@ -21,9 +25,8 @@ function Answers() {
       <h2 className="ques">{question}</h2>
       <div className="content">
         <div className="answers">
-          {answers?.map((ans, ind) => (
-            <Answer ans={ans} ind={ind} key={ans.ans_id} />
-          ))}
+          {answers.length > 0 &&
+            answers.map((ans, ind) => <Answer ans={ans} ind={ind} key={ind} />)}
         </div>
         <div className="add-ans">
           <h5>Add Your Answer</h5>

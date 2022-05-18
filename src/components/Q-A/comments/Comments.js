@@ -1,19 +1,48 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import UserContext from "../../../context/user/user.context";
+import { postComment } from "../../../services/questions/questions.service";
+import "./Comments.css";
+function Comments({ commentList, handleCommentsUpdate, ans_id }) {
+  const [comments, setComments] = useState(commentList);
+  const [comment, setComment] = useState("");
+  const { user } = useContext(UserContext);
+  const addComment = () => {
+    if (comment.length > 0) {
+      postComment({ description: comment, ans_id }).then((res) => {
+        const new_comments = [...comments, res.data];
 
-function Comments({ comments }) {
+        setComments(new_comments);
+
+        handleCommentsUpdate(new_comments);
+      });
+    }
+  };
   return (
     <div className="comments-comp">
-      <div className="add-comment">
-        <input className="add-comm" type="text" placeholder="Add Comment" />
-        <button className="comment-btn">Comment</button>
-      </div>
+      {user.username && (
+        <div className="add-comment">
+          <input
+            className="add-comm"
+            type="text"
+            placeholder="Add Comment"
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <button className="comment-btn" onClick={addComment}>
+            Comment
+          </button>
+        </div>
+      )}
       <div className="comments">
+        <div style={{ color: "blue" }}>Comments</div>
         {comments?.map((com) => (
           <div className="comment" key={com.comm_id}>
             <div>
-              <b>{com.username}</b>
+              {com.description}
+              <span className="comm-username">
+                ~<b>{com.username}</b>
+              </span>
             </div>
-            <div>{com.description}</div>
           </div>
         ))}
       </div>
