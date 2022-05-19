@@ -5,6 +5,10 @@ export const getCities = () => {
   return axios.get(BASE_URL + "/getcitynames");
 };
 
+export const getCityAbout = (city) => {
+  return axios.get(BASE_URL + "/city/" + city);
+}
+
 export const getAttractions = (city) => {
   return axios.get(BASE_URL + "/getattr/" + city);
 };

@@ -1,0 +1,14 @@
+.img_tag{
+    width: 850px;
+    height: 350px;
+    display: block;
+    margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 25px;
+}
+
+.city_tagline{
+    color: chocolate ;
+    margin-top: 10px;
+}
