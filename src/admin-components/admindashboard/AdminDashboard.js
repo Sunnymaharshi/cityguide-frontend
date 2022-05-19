@@ -5,6 +5,7 @@ import UserContext from "../../context/user/user.context";
 import "./AdminDashboard.css";
 import Restaurant from "../CRUDrestaurants/Restaurant";
 import Attraction from "../CRUDattractions/Attraction";
+import { ADMIN } from "../../common/data";
 function AdminDashboard() {
   const { user, checkUserLogin } = useContext(UserContext);
 
@@ -14,7 +15,7 @@ function AdminDashboard() {
   }, []);
   return (
     <div className="admin-comp">
-      {user.role === "Admin" && (
+      {user.role === ADMIN && (
         <div className="admin-content">
           <div className="admin-bar">
             <div className="admin-btns">
@@ -38,7 +39,7 @@ function AdminDashboard() {
           </Routes>
         </div>
       )}
-      {user.role !== "Admin" && (
+      {user.role !== ADMIN && (
         <div className="unauthorised">Only admin can access this content!</div>
       )}
     </div>

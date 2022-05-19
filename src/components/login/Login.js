@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "./Login.css";
 import { login } from "../../services/user/user.service";
+import { toast } from "react-toastify";
 import {
   USER_DATA,
   INVALID_USERNAME_RES,
   INVALID_PASSWORD_RES,
 } from "../../common/data";
 import { validateLogin } from "./login-validator";
+import "./Login.css";
 
 function Login() {
   const initialValues = {
@@ -45,6 +46,7 @@ function Login() {
                 token: res.data.token,
               })
             );
+            toast.success("Loggedin Successfully");
             navigate("/", { replace: true });
           } else if (res.data === INVALID_USERNAME_RES) {
             setFormErrors({ ...formErrors, username: res.data });

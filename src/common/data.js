@@ -3,6 +3,8 @@ export const USER_DATA = "user";
 export const BASE_URL =
   "https://hu-may-prod-city-guide-backend-urtjok3rza-wl.a.run.app";
 
+// Role
+export const ADMIN = "Admin";
 // Response Messages
 export const INVALID_USERNAME_RES = "Username does not exist!";
 export const INVALID_PASSWORD_RES = "Wrong Password!";
