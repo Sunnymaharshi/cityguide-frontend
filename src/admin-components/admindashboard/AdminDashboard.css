@@ -13,11 +13,18 @@
 .active {
   background-color: var(--accent);
 }
-.admin-btns {
+.admin-bar {
   display: flex;
   justify-content: center;
+  margin-top: 10px;
+}
+.admin-btns {
+  display: flex;
+  align-items: center;
+  width: fit-content;
   background-color: #465362;
   margin-bottom: 20px;
+  border-radius: 15px;
 }
 .admin-btn {
   margin: 10px;
@@ -25,7 +32,7 @@
   font-size: large;
   padding: 5px 10px 5px 10px;
   border: 0;
-  border-radius: 10px;
+  border-radius: 5px;
   text-decoration: none;
 }
 .admin-btn:hover {

@@ -36,7 +36,7 @@ function Navbar({ handleCity }) {
         <div className="logo">CityGuide</div>
 
         <div className="drop-down">
-          <select name="cities" id="city" onClick={handleDropdown}>
+          <select name="cities" id="city" title="City" onClick={handleDropdown}>
             {cities.map((val, key) => {
               return (
                 <option key={key} value={val}>

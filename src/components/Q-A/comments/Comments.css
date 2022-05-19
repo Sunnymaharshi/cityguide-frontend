@@ -1,3 +1,20 @@
+.comments-comp {
+  margin-top: 15px;
+}
+
 .comm-username {
-  margin-left: 15px;
+  margin: 15px;
+}
+.comment-btn {
+  margin-top: 10px;
+  background-color: var(--accent);
+  color: white;
+  font-size: large;
+  padding: 3px 5px;
+  border: 0;
+  font-size: large;
+  border-radius: 5px;
+}
+.comment-btn:hover {
+  transform: scale(0.95);
 }

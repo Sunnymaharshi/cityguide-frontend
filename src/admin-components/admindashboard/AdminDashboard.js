@@ -16,17 +16,20 @@ function AdminDashboard() {
     <div className="admin-comp">
       {user.role === "Admin" && (
         <div className="admin-content">
-          <div className="admin-btns">
-            <NavLink to="/admin/city" className="admin-btn">
-              Cities
-            </NavLink>
-            <NavLink to="/admin/restaurant" className="admin-btn">
-              Restaurants
-            </NavLink>
-            <NavLink to="/admin/attraction" className="admin-btn">
-              Attractions
-            </NavLink>
+          <div className="admin-bar">
+            <div className="admin-btns">
+              <NavLink to="/admin/city" className="admin-btn">
+                Cities
+              </NavLink>
+              <NavLink to="/admin/restaurant" className="admin-btn">
+                Restaurants
+              </NavLink>
+              <NavLink to="/admin/attraction" className="admin-btn">
+                Attractions
+              </NavLink>
+            </div>
           </div>
+
           <Routes>
             <Route path="/" element={<Navigate replace to="city" />} />
             <Route path="city" element={<City />} />

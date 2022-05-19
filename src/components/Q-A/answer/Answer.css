@@ -21,6 +21,7 @@
 .icons {
   display: flex;
   justify-content: space-evenly;
+  margin-top: 10px;
 }
 .icon {
   height: 25px;
@@ -28,4 +29,7 @@
 }
 .icon:hover {
   cursor: pointer;
+}
+.answer-text {
+  word-wrap: break-word;
 }
