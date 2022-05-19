@@ -56,10 +56,9 @@ function Attraction() {
   
     const updateDataToAPI = async (event) => {
       event.preventDefault();
-      const userDetails = JSON.parse(localStorage.getItem("user"));
       updateAttraction(attr_id,attr_name,attr_loc,city_name)
         .then(function (response) {
-          if(response.data.attr_name==attr_name)
+          if(response.data.attr_name==attr_name){
           setSuccessMsg("Successfully Updated!")
           setAttrName("");
           setAttrLoc("");
@@ -67,6 +66,7 @@ function Attraction() {
           setAttrId("");
           console.log(response);
           getAllAttractions();
+          }
         })
         .catch(function (error) {
           console.log(error);
@@ -77,11 +77,12 @@ function Attraction() {
       event.preventDefault();
       deleteAttraction(attr_id)
         .then(function (response) {
-          if (response.data === "Deleted!")
+          if (response.data === "Deleted!"){
             setSuccessMsg("Successfully Deleted!");
             setAttrId("");
           console.log(response.data);
           getAllAttractions();
+          }
         })
         .catch(function (error) {
           console.log(error);

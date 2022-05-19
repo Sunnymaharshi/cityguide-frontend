@@ -29,15 +29,15 @@ const getAllCities = async (event) =>{
 
   const sendDataToAPI = async (event) => {
     event.preventDefault();
-    const userDetails = JSON.parse(localStorage.getItem("user"));
     postCity(city_name,city_desc)
       .then(function (response) {
-        if (response.data.city_name === city_name)
-          setSuccessMsg("Successfully Added!");
+        if (response.data.city_name === city_name){
+        setSuccessMsg("Successfully Added!");
         setCityName("");
         setDesc("");
         getAllCities();
         console.log(response);
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -46,15 +46,15 @@ const getAllCities = async (event) =>{
 
   const updateDataToAPI = async (event) => {
     event.preventDefault();
-    const userDetails = JSON.parse(localStorage.getItem("user"));
     updateCity(city_name,city_desc)
       .then(function (response) {
-        if (response.data.city_name === city_name)
-          setSuccessMsg("Successfully Updated!");
+        if (response.data.city_name === city_name){
+        setSuccessMsg("Successfully Updated!");
         setCityName("");
         setDesc("");
         getAllCities();
         console.log(response);
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -63,15 +63,15 @@ const getAllCities = async (event) =>{
 
   const onDelete = async (event) => {
     event.preventDefault();
-    const userDetails = JSON.parse(localStorage.getItem("user"));
     deleteCity(city_name)
       .then(function (response) {
-        if (response.data === "Deleted!")
-          setSuccessMsg("Successfully Deleted!");
+        if (response.data === "Deleted!"){
+        setSuccessMsg("Successfully Deleted!");
         setCityName("");
         setDesc("");
         getAllCities();
         console.log(response.data);
+        }
       })
       .catch(function (error) {
         console.log(error);
