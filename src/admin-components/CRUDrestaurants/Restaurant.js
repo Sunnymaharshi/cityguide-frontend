@@ -39,13 +39,14 @@ const getAllRestaurants = async (event) =>{
     event.preventDefault();
     postRestaurant(res_name,res_location,city_name)
       .then(function (response) {
-        if(response.data.res_name==res_name)
+        if(response.data.res_name==res_name){
         setSuccessMsg("Successfully Added!")
         setResName("");
         setResLoc("");
         setCityName("");
         console.log(response);
         getAllRestaurants();
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -55,10 +56,9 @@ const getAllRestaurants = async (event) =>{
 
   const updateDataToAPI = async (event) => {
     event.preventDefault();
-    const userDetails = JSON.parse(localStorage.getItem("user"));
     updateRestaurant(res_id,res_name,res_location,city_name)
       .then(function (response) {
-        if(response.data.res_name==res_name)
+        if(response.data.res_name==res_name){
         setSuccessMsg("Successfully Updated!")
         setResName("");
         setResLoc("");
@@ -66,6 +66,7 @@ const getAllRestaurants = async (event) =>{
         setResId("");
         console.log(response);
         getAllRestaurants();
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -76,11 +77,12 @@ const getAllRestaurants = async (event) =>{
     event.preventDefault();
     deleteRestaurant(res_id)
       .then(function (response) {
-        if (response.data === "Deleted!")
+        if (response.data === "Deleted!"){
           setSuccessMsg("Successfully Deleted!");
           setResId("");
         console.log(response.data);
         getAllRestaurants();
+        }
       })
       .catch(function (error) {
         console.log(error);
