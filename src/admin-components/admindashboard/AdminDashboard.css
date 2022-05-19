@@ -4,13 +4,31 @@
   justify-content: center;
 } */
 .admin-content {
-  margin-top: 2rem;
-  margin-left: 2rem;
   width: 100%;
-  justify-content: center;
-  
 }
-.rest-comp{
+.rest-comp {
   margin-left: 2rem;
   margin-right: 2rem;
+}
+.active {
+  background-color: var(--accent);
+}
+.admin-btns {
+  display: flex;
+  justify-content: center;
+  background-color: #465362;
+  margin-bottom: 20px;
+}
+.admin-btn {
+  margin: 10px;
+  color: white;
+  font-size: large;
+  padding: 5px 10px 5px 10px;
+  border: 0;
+  border-radius: 10px;
+  text-decoration: none;
+}
+.admin-btn:hover {
+  color: white;
+  transform: scale(0.95);
 }
