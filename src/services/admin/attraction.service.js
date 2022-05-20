@@ -5,7 +5,7 @@ import { BASE_URL } from "../../common/data";
     return await axios.get(BASE_URL+"/getattr");    
 }  
 
-export const postAtrraction = async (attr_name,attr_loc,city_name)=>{
+export const postAtrraction = async (attr_name,attr_loc,city_name, attr_img)=>{
     const userDetails = JSON.parse(localStorage.getItem("user"));
     return await axios
       .post(
@@ -13,7 +13,9 @@ export const postAtrraction = async (attr_name,attr_loc,city_name)=>{
         {
           attr_name,
           attr_loc,
+          attr_img,
           city_name
+          
 
         },
         {
@@ -24,7 +26,7 @@ export const postAtrraction = async (attr_name,attr_loc,city_name)=>{
       )
 }
 
-export const updateAttraction= async(attr_id,attr_name,attr_loc,city_name)=>{
+export const updateAttraction= async(attr_id,attr_name,attr_loc,city_name,attr_img)=>{
     const userDetails = JSON.parse(localStorage.getItem("user"));
     return await axios
       .put(
@@ -33,6 +35,7 @@ export const updateAttraction= async(attr_id,attr_name,attr_loc,city_name)=>{
           attr_id,
           attr_name,
           attr_loc,
+          attr_img,
           city_name
 
         },
