@@ -28,6 +28,10 @@ export default function About({ city }) {
           src="https://storage.googleapis.com/download/storage/v1/b/may-cityguide/o/kitten.png?generation=1653037016118901&alt=media"
           alt="cat"
         />
+        <img
+          src="https://storage.cloud.google.com/may-cityguide/kitten.png"
+          alt="cat_authurl"
+        />
       </div>
     </>
   );
