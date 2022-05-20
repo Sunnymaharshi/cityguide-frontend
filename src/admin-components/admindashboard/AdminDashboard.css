@@ -10,9 +10,7 @@
   margin-left: 2rem;
   margin-right: 2rem;
 }
-.active {
-  background-color: var(--accent);
-}
+
 .admin-bar {
   display: flex;
   justify-content: center;
