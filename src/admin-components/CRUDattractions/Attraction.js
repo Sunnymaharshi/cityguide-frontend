@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 
 function Attraction() {
   const [attr_name, setAttrName] = useState("");
+  const [description, setDesc] = useState("");
   const [attr_loc, setAttrLoc] = useState("");
   const [attr_img, setAttrImg] = useState("");
   const [city_name, setCityName] = useState("");
@@ -32,11 +33,12 @@ function Attraction() {
 
   const sendDataToAPI = async (event) => {
     event.preventDefault();
-    postAtrraction(attr_name, attr_loc, city_name, attr_img)
+    postAtrraction(attr_name, description, attr_loc, city_name, attr_img)
       .then(function (response) {
         if (response.data.attr_name == attr_name)
         toast.success("Successfully Added!");
         setAttrName("");
+        setDesc("");
         setAttrLoc("");
         setAttrImg("");
         setCityName("");
@@ -49,11 +51,12 @@ function Attraction() {
 
   const updateDataToAPI = async (event) => {
     event.preventDefault();
-    updateAttraction(attr_id, attr_name, attr_loc, city_name, attr_img)
+    updateAttraction(attr_id, attr_name,description, attr_loc, city_name, attr_img)
       .then(function (response) {
         if (response.data.attr_name == attr_name) {
           toast.success("Successfully Updated!");
           setAttrName("");
+          setDesc("");
           setAttrLoc("");
           setAttrImg("");
           setCityName("");
@@ -101,6 +104,18 @@ function Attraction() {
               />
             </div>
             <div className="form-group">
+              <label htmlFor="attrdesc">Attraction Description</label>
+              <input
+                onChange={(e) => setDesc(e.target.value)}
+                type="text"
+                name="attrdesc"
+                placeholder="Attraction Description"
+                id="attrdesc"
+                value={description}
+                className="form-control"
+              />
+            </div>
+            <div className="form-group">
               <label htmlFor="attrloc">Attraction Location</label>
               <input
                 onChange={(e) => setAttrLoc(e.target.value)}
@@ -143,7 +158,7 @@ function Attraction() {
                 <button
                   type="submit"
                   className="delete-btn"
-                  disabled={!attr_name || !attr_loc || !city_name }
+                  disabled={!attr_name || !attr_loc || !city_name ||!description}
                   onClick={sendDataToAPI}
                 >
                   Add
@@ -168,7 +183,8 @@ function Attraction() {
                   <button
                     type="submit"
                     className="delete-btn"
-                    disabled={!attr_name || !attr_loc || !city_name || !attr_id}
+                    disabled={!attr_name || !attr_loc || !city_name || !attr_id 
+                    || !description}
                     onClick={updateDataToAPI}
                   >
                     Update
@@ -196,6 +212,7 @@ function Attraction() {
                 <th>Id</th>
                 <th>Name</th>
                 <th>Location</th>
+                <th>Description</th>
                 <th>City</th>
               </tr>
               {attraction.map((attr) => {
@@ -204,6 +221,7 @@ function Attraction() {
                     <td>{attr.attr_id}</td>
                     <td>{attr.attr_name}</td>
                     <td>{attr.attr_loc}</td>
+                    <td>{attr.description}</td>
                     <td>{attr.city_name}</td>
                   </tr>
                 );

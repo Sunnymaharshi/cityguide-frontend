@@ -5,13 +5,14 @@ import { BASE_URL } from "../../common/data";
     return await axios.get(BASE_URL+"/getrest");    
 }  
 
-export const postRestaurant = async (res_name,res_location,city_name,res_image)=>{
+export const postRestaurant = async (res_name,description,res_location,city_name,res_image)=>{
     const userDetails = JSON.parse(localStorage.getItem("user"));
     return await axios
       .post(
         BASE_URL+"/addrest",
         {
           res_name,
+          description,
           res_location,
           res_image,
           city_name
@@ -25,7 +26,7 @@ export const postRestaurant = async (res_name,res_location,city_name,res_image)=
       )
 }
 
-export const updateRestaurant= async(res_id,res_name,res_location,city_name,res_image)=>{
+export const updateRestaurant= async(res_id,res_name,description,res_location,city_name,res_image)=>{
     const userDetails = JSON.parse(localStorage.getItem("user"));
     return await axios
       .put(
@@ -33,6 +34,7 @@ export const updateRestaurant= async(res_id,res_name,res_location,city_name,res_
         {
           res_id,
           res_name,
+          description,
           res_location,
           res_image,
           city_name

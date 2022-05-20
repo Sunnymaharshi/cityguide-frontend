@@ -10,7 +10,9 @@ import { toast } from "react-toastify";
 
 function City() {
   const [city_name, setCityName] = useState("");
+  const [city_tagline, setCityTagline] = useState("");
   const [city_desc, setDesc] = useState("");
+  const [city_image, setCityImg]=useState("");
   const [city, setCity] = useState([]);
 
   useEffect(() => {
@@ -29,13 +31,15 @@ function City() {
 
   const sendDataToAPI = async (event) => {
     event.preventDefault();
-    postCity(city_name, city_desc)
+    postCity(city_name,city_tagline, city_desc, city_image)
       .then(function (response) {
         if (response.data.city_name === city_name) {
           // setSuccessMsg("Successfully Added!");
           toast.success("Successfully Added");
           setCityName("");
+          setCityTagline("");
           setDesc("");
+          setCityImg("");
           getAllCities();
         }
       })
@@ -46,12 +50,14 @@ function City() {
 
   const updateDataToAPI = async (event) => {
     event.preventDefault();
-    updateCity(city_name, city_desc)
+    updateCity(city_name,city_tagline, city_desc, city_image)
       .then(function (response) {
         if (response.data.city_name === city_name) {
           toast.success("Successfully Updated!");
           setCityName("");
+          setCityTagline("");
           setDesc("");
+          setCityImg("");
           getAllCities();
         }
       })
@@ -95,6 +101,18 @@ function City() {
             />
           </div>
           <div className="form-group">
+            <label htmlFor="citytag">City Tagline</label>
+            <input
+              onChange={(e) => setCityTagline(e.target.value)}
+              type="text"
+              name="citytag"
+              placeholder="City Tagline"
+              id="citytag"
+              value={city_tagline}
+              className="form-control"
+            />
+          </div>
+          <div className="form-group">
             <label htmlFor="citydesc">City Description</label>
             <input
               onChange={(e) => setDesc(e.target.value)}
@@ -106,13 +124,25 @@ function City() {
               className="form-control"
             />
           </div>
+          <div className="form-group">
+            <label htmlFor="cityimage">City Image</label>
+            <input
+              onChange={(e) => setCityImg(e.target.value)}
+              type="text"
+              name="cityimage"
+              placeholder="City Image"
+              id="cityname"
+              value={city_image}
+              className="form-control"
+            />
+          </div>
 
           <div className="btn-main">
             <div className="add-button">
               <button
                 type="submit"
                 className="delete-btn"
-                disabled={!city_name || !city_desc}
+                disabled={!city_name || !city_desc || !city_tagline }
                 onClick={sendDataToAPI}
               >
                 Add
@@ -122,7 +152,7 @@ function City() {
               <button
                 type="submit"
                 className="delete-btn"
-                disabled={!city_name || !city_desc}
+                disabled={!city_name || !city_desc || !city_tagline}
                 onClick={updateDataToAPI}
               >
                 Update
@@ -147,12 +177,14 @@ function City() {
           <tbody>
             <tr>
               <th>Name</th>
+              <th>Tagline</th>
               <th>Description</th>
             </tr>
             {city.map((c) => {
               return (
                 <tr key={c.city_name}>
                   <td>{c.city_name}</td>
+                  <td>{c.city_tagline}</td>
                   <td>{c.city_desc}</td>
                 </tr>
               );
