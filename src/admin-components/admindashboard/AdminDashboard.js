@@ -6,6 +6,7 @@ import "./AdminDashboard.css";
 import Restaurant from "../CRUDrestaurants/Restaurant";
 import Attraction from "../CRUDattractions/Attraction";
 import Bus from "../CRUDbus/Bus";
+import Metro from "../CRUDmetro/Metro";
 import { ADMIN } from "../../common/data";
 
 function AdminDashboard() {
@@ -33,6 +34,9 @@ function AdminDashboard() {
               <NavLink to="/admin/bus" className="admin-btn">
               Bus
             </NavLink>
+            <NavLink to="/admin/metro" className="admin-btn">
+              Metro
+            </NavLink>
             </div>
           </div>
 
@@ -42,6 +46,7 @@ function AdminDashboard() {
             <Route path="restaurant" element={<Restaurant />} />
             <Route path="attraction" element={<Attraction />} />
             <Route path="bus" element={<Bus />} />
+            <Route path="metro" element={<Metro />}/>
           </Routes>
         </div>
       )}

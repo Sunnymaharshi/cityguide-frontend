@@ -1,17 +1,17 @@
 import React,{useState} from 'react'
 import {FileUploader} from '../FileUploader/FileUploader';
 import { toast } from "react-toastify";
-import "./Bus.css"
+import "./Metro.css"
 
-function Bus() {
+function Metro() {
     const [city_name, setCityName]=useState("");
     const [successMsg, setSuccessMsg]=useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
   return (
-    <div className="bus-form">
+    <div className="metro-form">
       
     <form>
-      <h1 className="bus-op">Bus Operations</h1>
+      <h1 className="metro-op">Metro Operations</h1>
 
       <div className="form-group">
         <label htmlFor="cityname">City Name</label>
@@ -69,4 +69,4 @@ function Bus() {
   )
 }
 
-export default Bus
+export default Metro

@@ -6,13 +6,13 @@ import {
   updateAttraction,
 } from "../../services/admin/attraction.service";
 import "./Attraction.css";
+import { toast } from "react-toastify";
 
 function Attraction() {
   const [attr_name, setAttrName] = useState("");
   const [attr_loc, setAttrLoc] = useState("");
   const [city_name, setCityName] = useState("");
   const [attr_id, setAttrId] = useState("");
-  const [successMsg, setSuccessMsg] = useState(null);
   const [attraction, setAttractions] = useState([]);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function Attraction() {
     postAtrraction(attr_name, attr_loc, city_name)
       .then(function (response) {
         if (response.data.attr_name == attr_name)
-          setSuccessMsg("Successfully Added!");
+        toast.success("Successfully Added!");
         setAttrName("");
         setAttrLoc("");
         setCityName("");
@@ -50,7 +50,7 @@ function Attraction() {
     updateAttraction(attr_id, attr_name, attr_loc, city_name)
       .then(function (response) {
         if (response.data.attr_name == attr_name) {
-          setSuccessMsg("Successfully Updated!");
+          toast.success("Successfully Updated!");
           setAttrName("");
           setAttrLoc("");
           setCityName("");
@@ -68,7 +68,7 @@ function Attraction() {
     deleteAttraction(attr_id)
       .then(function (response) {
         if (response.data === "Deleted!") {
-          setSuccessMsg("Successfully Deleted!");
+          toast.success("Successfully Deleted!");
           setAttrId("");
           getAllAttractions();
         }
@@ -170,9 +170,6 @@ function Attraction() {
                 </button>
               </div>
             </div>
-            <p>
-              <b>{successMsg}</b>
-            </p>
           </form>
         </div>
         <div className="attr-table">

@@ -6,13 +6,13 @@ import {
   updateRestaurant,
 } from "../../services/admin/restaurant.service";
 import "./Restaurant.css";
+import { toast } from "react-toastify";
 
 function Restaurant() {
   const [res_name, setResName] = useState("");
   const [res_location, setResLoc] = useState("");
   const [city_name, setCityName] = useState("");
   const [res_id, setResId] = useState("");
-  const [successMsg, setSuccessMsg] = useState(null);
   const [restaurant, setRestaurants] = useState([]);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function Restaurant() {
     postRestaurant(res_name, res_location, city_name)
       .then(function (response) {
         if (response.data.res_name == res_name) {
-          setSuccessMsg("Successfully Added!");
+          toast.success("Successfully Added!");
           setResName("");
           setResLoc("");
           setCityName("");
@@ -51,7 +51,7 @@ function Restaurant() {
     updateRestaurant(res_id, res_name, res_location, city_name)
       .then(function (response) {
         if (response.data.res_name == res_name) {
-          setSuccessMsg("Successfully Updated!");
+          toast.success("Successfully Updated!");
           setResName("");
           setResLoc("");
           setCityName("");
@@ -69,7 +69,7 @@ function Restaurant() {
     deleteRestaurant(res_id)
       .then(function (response) {
         if (response.data === "Deleted!") {
-          setSuccessMsg("Successfully Deleted!");
+          toast.success("Successfully Deleted!");
           setResId("");
           getAllRestaurants();
         }
@@ -173,9 +173,6 @@ function Restaurant() {
                 </button>
               </div>
             </div>
-            <p>
-              <b>{successMsg}</b>
-            </p>
           </form>
         </div>
         <div className="res-table">

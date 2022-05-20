@@ -6,11 +6,11 @@ import {
   postCity,
   updateCity,
 } from "../../services/admin/city.service";
+import { toast } from "react-toastify";
 
 function City() {
   const [city_name, setCityName] = useState("");
   const [city_desc, setDesc] = useState("");
-  const [successMsg, setSuccessMsg] = useState(null);
   const [city, setCity] = useState([]);
 
   useEffect(() => {
@@ -32,7 +32,8 @@ function City() {
     postCity(city_name, city_desc)
       .then(function (response) {
         if (response.data.city_name === city_name) {
-          setSuccessMsg("Successfully Added!");
+          // setSuccessMsg("Successfully Added!");
+          toast.success("Successfully Added");
           setCityName("");
           setDesc("");
           getAllCities();
@@ -48,7 +49,7 @@ function City() {
     updateCity(city_name, city_desc)
       .then(function (response) {
         if (response.data.city_name === city_name) {
-          setSuccessMsg("Successfully Updated!");
+          toast.success("Successfully Updated!");
           setCityName("");
           setDesc("");
           getAllCities();
@@ -64,7 +65,7 @@ function City() {
     deleteCity(city_name)
       .then(function (response) {
         if (response.data === "Deleted!") {
-          setSuccessMsg("Successfully Deleted!");
+          toast.success("Successfully Deleted!");
           setCityName("");
           setDesc("");
           getAllCities();
@@ -138,9 +139,6 @@ function City() {
               </button>
             </div>
           </div>
-          <p>
-            <b>{successMsg}</b>
-          </p>
         </form>
       </div>
       <div className="city-table">
