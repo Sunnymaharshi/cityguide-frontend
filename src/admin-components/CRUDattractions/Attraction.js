@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 function Attraction() {
   const [attr_name, setAttrName] = useState("");
   const [attr_loc, setAttrLoc] = useState("");
+  const [attr_img, setAttrImg] = useState("");
   const [city_name, setCityName] = useState("");
   const [attr_id, setAttrId] = useState("");
   const [attraction, setAttractions] = useState([]);
@@ -31,12 +32,13 @@ function Attraction() {
 
   const sendDataToAPI = async (event) => {
     event.preventDefault();
-    postAtrraction(attr_name, attr_loc, city_name)
+    postAtrraction(attr_name, attr_loc, city_name, attr_img)
       .then(function (response) {
         if (response.data.attr_name == attr_name)
         toast.success("Successfully Added!");
         setAttrName("");
         setAttrLoc("");
+        setAttrImg("");
         setCityName("");
         getAllAttractions();
       })
@@ -47,12 +49,13 @@ function Attraction() {
 
   const updateDataToAPI = async (event) => {
     event.preventDefault();
-    updateAttraction(attr_id, attr_name, attr_loc, city_name)
+    updateAttraction(attr_id, attr_name, attr_loc, city_name, attr_img)
       .then(function (response) {
         if (response.data.attr_name == attr_name) {
           toast.success("Successfully Updated!");
           setAttrName("");
           setAttrLoc("");
+          setAttrImg("");
           setCityName("");
           setAttrId("");
           getAllAttractions();
@@ -110,6 +113,19 @@ function Attraction() {
               />
             </div>
             <div className="form-group">
+              <label htmlFor="attrimg">Attraction Image</label>
+              <input
+                onChange={(e) => setAttrImg(e.target.value)}
+                type="text"
+                name="attrimg"
+                placeholder="Attraction Image"
+                id="attrimg"
+                value={attr_img}
+                className="form-control"
+              />
+            </div>
+            
+            <div className="form-group">
               <label htmlFor="cityname">City Name</label>
               <input
                 onChange={(e) => setCityName(e.target.value)}
@@ -127,7 +143,7 @@ function Attraction() {
                 <button
                   type="submit"
                   className="delete-btn"
-                  disabled={!attr_name || !attr_loc || !city_name}
+                  disabled={!attr_name || !attr_loc || !city_name }
                   onClick={sendDataToAPI}
                 >
                   Add
