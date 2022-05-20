@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { getCityAbout } from "../../services/dashboard/dashboard.service";
-import "./about.css"
+import "./about.css";
 
 export default function About({ city }) {
-
   const [About, setAbout] = useState([]);
   useEffect(() => {
     getCityAbout(city)
@@ -17,13 +16,23 @@ export default function About({ city }) {
   }, [city]);
   return (
     <>
-    <div>
-    <div className="city_img">
-      <img className="img_tag" src="https://www.karnatakatourism.org/wp-content/uploads/2020/05/p25-gallery.jpg" />
-    </div>
-      <h1 className="city_tagline">{About.city_desc}</h1>
-      <p></p>
-    </div>
+      <div>
+        <div className="city_img">
+          <img
+            className="img_tag"
+            src="https://www.karnatakatourism.org/wp-content/uploads/2020/05/p25-gallery.jpg"
+          />
+        </div>
+        <h1 className="city_tagline">{About.city_desc}</h1>
+        <img
+          src="https://storage.googleapis.com/download/storage/v1/b/may-cityguide/o/kitten.png?generation=1653037016118901&alt=media"
+          alt="cat"
+        />
+        <img
+          src="https://storage.cloud.google.com/may-cityguide/kitten.png"
+          alt="cat_authurl"
+        />
+      </div>
     </>
-    );
+  );
 }

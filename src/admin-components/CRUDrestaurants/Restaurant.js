@@ -25,6 +25,7 @@ function Restaurant() {
     getRestaurants()
       .then((res) => {
         setRestaurants(res.data);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log("Error", err);
