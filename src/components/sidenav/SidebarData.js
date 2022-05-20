@@ -1,5 +1,9 @@
 export const SidebarData = [
   {
+    title: "Home",
+    link: "/dashboard",
+  },
+  {
     title: "Bus Data",
     link: "/busdata",
   },

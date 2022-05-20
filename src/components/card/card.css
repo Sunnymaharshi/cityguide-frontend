@@ -1,27 +1,41 @@
 .card{
-    border: 1px solid black;
-    box-shadow: 0 0 5px black;
     width: 300px;
-    margin: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 10px; 
+    transition: transform 100ms;
+
 }
 .card:hover{
-    transform: scale(0.95);
+    box-shadow: 0 0 3px black;
+    box-shadow: 20px 20px 20px 3px rgb(0 0 0 / 3%);
+  -webkit-transform: translateY(-4px);
+  transform: translateY(-8px);
+
 }
 
 .card-image img{
     width: 299px;
-    height: 299px;
+    height: 149px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transition: all 0.35s ease-in-out;
 }
 
 .card-title, description{
-    text-align: center;
+    text-align: left;
     margin: 0;
+
+    margin-left: 8px;
     padding: 10px;
 }
 
 .card-title{
     font-weight: bold;
     font-size: 14px;
+    color: blue;
 }
 
 .description{
@@ -29,10 +43,18 @@
 }
 
 .home-cards{
-    width:80%;
+    width:100%;
     text-align: center;
 }
 
 .home-cards > .card{
     display: inline-block;
+    
+}
+
+.attr-heading, .attr-tagline{
+    margin-top: 15px;
+}
+.attr-tagline{
+    color: brown;
 }
