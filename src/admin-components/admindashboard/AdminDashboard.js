@@ -5,6 +5,7 @@ import UserContext from "../../context/user/user.context";
 import "./AdminDashboard.css";
 import Restaurant from "../CRUDrestaurants/Restaurant";
 import Attraction from "../CRUDattractions/Attraction";
+import Bus from "../CRUDbus/Bus";
 function AdminDashboard() {
   const { user, checkUserLogin } = useContext(UserContext);
 
@@ -26,12 +27,16 @@ function AdminDashboard() {
             <NavLink to="/admin/attraction" className="admin-btn">
               Attractions
             </NavLink>
+            <NavLink to="/admin/bus" className="admin-btn">
+              Bus
+            </NavLink>
           </div>
           <Routes>
             <Route path="/" element={<Navigate replace to="city" />} />
             <Route path="city" element={<City />} />
             <Route path="restaurant" element={<Restaurant />} />
             <Route path="attraction" element={<Attraction />} />
+            <Route path="bus" element={<Bus />} />
           </Routes>
         </div>
       )}
