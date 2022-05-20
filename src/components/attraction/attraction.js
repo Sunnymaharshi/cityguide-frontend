@@ -19,7 +19,7 @@ export default function Attraction({ city }) {
       <p>Hello from {city} city!!</p>
       {Attractions.length === 0 && <p>No Attractions Found</p>}
       {Attractions.map((p) => {
-        return <Card details={p} />;
+        return <Card details={p} key={p.attr_id} />;
       })}
     </div>
   );

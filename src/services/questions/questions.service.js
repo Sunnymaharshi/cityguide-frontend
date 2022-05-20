@@ -4,6 +4,9 @@ import { authHeader } from "../../common/functions";
 export const getAllQuestions = (city) => {
   return axios.get(BASE_URL + "/getAllQues/" + city);
 };
+export const getSimilarQuestions = (city, query) => {
+  return axios.get(BASE_URL + `/getsimques/${city}/${query}`);
+};
 export const getQuestion = (id) => {
   return axios.get(BASE_URL + "/getQues/" + id);
 };

@@ -3,15 +3,17 @@ import { Link } from "react-router-dom";
 import "./questions.css";
 import {
   getAllQuestions,
+  getSimilarQuestions,
   postQuestion,
 } from "../../../services/questions/questions.service";
 import { isUserLoggedin } from "../../../common/functions";
+import { toast } from "react-toastify";
 function Questions({ city }) {
   const [questions, setQuestions] = useState([]);
   const [newQuestion, setNewQuestion] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
-
+  const [query, setQuery] = useState("");
   const loadQuestions = () => {
     getAllQuestions(city).then((res) => {
       setQuestions(res.data);
@@ -43,7 +45,19 @@ function Questions({ city }) {
     // eslint-disable-next-line
   }, [city]);
 
-  const handleSearch = (e) => {};
+  const handleSearch = () => {
+    if (query.length < 3) {
+      toast.error("Query must be atleast 3 characters");
+    } else {
+      getSimilarQuestions(city, query).then((res) => {
+        if (res.data.length > 0) {
+          setQuestions(res.data);
+        } else {
+          toast.info("Cannot find question you are looking for");
+        }
+      });
+    }
+  };
 
   return (
     <div className="questions-comp">
@@ -52,6 +66,9 @@ function Questions({ city }) {
           type="search"
           className="search-bar"
           placeholder="Search Questions"
+          onChange={(e) => {
+            setQuery(e.target.value);
+          }}
         />
 
         <button onClick={handleSearch} className="search-btn">
