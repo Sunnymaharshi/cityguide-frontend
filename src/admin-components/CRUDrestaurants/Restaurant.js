@@ -24,6 +24,7 @@ function Restaurant() {
     getRestaurants()
       .then((res) => {
         setRestaurants(res.data);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log("Error", err);
@@ -32,7 +33,7 @@ function Restaurant() {
 
   const sendDataToAPI = async (event) => {
     event.preventDefault();
-    postRestaurant(res_name, res_location, city_name,res_image)
+    postRestaurant(res_name, res_location, city_name, res_image)
       .then(function (response) {
         if (response.data.res_name == res_name) {
           toast.success("Successfully Added!");
