@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 function Restaurant() {
   const [res_name, setResName] = useState("");
   const [res_location, setResLoc] = useState("");
+  const [res_image, setResImage] = useState("");
   const [city_name, setCityName] = useState("");
   const [res_id, setResId] = useState("");
   const [restaurant, setRestaurants] = useState([]);
@@ -31,13 +32,14 @@ function Restaurant() {
 
   const sendDataToAPI = async (event) => {
     event.preventDefault();
-    postRestaurant(res_name, res_location, city_name)
+    postRestaurant(res_name, res_location, city_name,res_image)
       .then(function (response) {
         if (response.data.res_name == res_name) {
           toast.success("Successfully Added!");
           setResName("");
           setResLoc("");
           setCityName("");
+          setResImage("");
           getAllRestaurants();
         }
       })
@@ -48,7 +50,7 @@ function Restaurant() {
 
   const updateDataToAPI = async (event) => {
     event.preventDefault();
-    updateRestaurant(res_id, res_name, res_location, city_name)
+    updateRestaurant(res_id, res_name, res_location, city_name, res_image)
       .then(function (response) {
         if (response.data.res_name == res_name) {
           toast.success("Successfully Updated!");
@@ -56,6 +58,7 @@ function Restaurant() {
           setResLoc("");
           setCityName("");
           setResId("");
+          setResImage("");
           getAllRestaurants();
         }
       })
@@ -107,6 +110,18 @@ function Restaurant() {
                 placeholder="Restaurant Location"
                 id="resloc"
                 value={res_location}
+                className="form-control"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="resimg">Restaurant Image</label>
+              <input
+                onChange={(e) => setResImage(e.target.value)}
+                type="text"
+                name="resimg"
+                placeholder="Restaurant Image"
+                id="resimg"
+                value={res_image}
                 className="form-control"
               />
             </div>
