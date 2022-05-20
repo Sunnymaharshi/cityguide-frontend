@@ -9,6 +9,7 @@ import {
   USERNAME_TAKEN_MSG,
   USERNAME_TAKEN_RES,
 } from "../../common/data";
+import { toast } from "react-toastify";
 
 function Signup() {
   const initialValues = {
@@ -22,8 +23,6 @@ function Signup() {
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
-  const [successMsg, setSuccessMsg] = useState(null);
-  const [userNameExist, setUserNameExist] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,8 +43,7 @@ function Signup() {
       signup(formValues)
         .then((res) => {
           if (res.data === SIGNUP_SUCCESS_RES) {
-            setUserNameExist(null);
-            setSuccessMsg(LOGIN_REDIRECT_MSG);
+            toast.success(LOGIN_REDIRECT_MSG);
             setTimeout(() => {
               navigate("/login", { replace: true });
             }, 3000);
@@ -54,7 +52,7 @@ function Signup() {
         .catch((err) => {
           const res = err.response;
           if (res.data === USERNAME_TAKEN_RES) {
-            setUserNameExist(USERNAME_TAKEN_MSG);
+            toast.warn(USERNAME_TAKEN_MSG);
           }
         });
     }
@@ -93,7 +91,6 @@ function Signup() {
             className="form-control"
           />
           <small>{formErrors.username}</small>
-          <small>{userNameExist}</small>
         </div>
         <div className="form-group">
           <label htmlFor="mob_no">Phone Number</label>
@@ -140,9 +137,7 @@ function Signup() {
             Signup
           </button>
         </div>
-        <p>
-          <b>{successMsg}</b>
-        </p>
+
         <p>
           Already registered?{" "}
           <Link to="/login" className="login-link">

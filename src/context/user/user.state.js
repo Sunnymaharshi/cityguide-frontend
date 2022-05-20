@@ -2,6 +2,7 @@ import { useState } from "react";
 import UserContext from "./user.context";
 import { auth } from "../../services/auth/auth.service";
 import { USER_DATA } from "../../common/data";
+import { isUserLoggedin } from "../../common/functions";
 
 const UserState = (props) => {
   const userInitials = {
@@ -12,7 +13,7 @@ const UserState = (props) => {
   const [user, setUser] = useState(userInitials);
 
   const checkUserLogin = () => {
-    if (localStorage.getItem(USER_DATA)) {
+    if (isUserLoggedin()) {
       const userDetails = JSON.parse(localStorage.getItem(USER_DATA));
       auth()
         .then((res) => {

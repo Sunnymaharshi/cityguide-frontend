@@ -2,10 +2,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 2rem;
 }
 .search-bar {
   width: 60%;
   height: 3rem;
+  text-align: center;
   font-size: large;
   border: 2px solid black;
   border-radius: 15px;
@@ -39,4 +41,11 @@
 .question:hover {
   color: black;
   transform: scale(1.01);
+}
+.questions-content {
+  display: flex;
+  justify-content: space-around;
+}
+.add-ques {
+  padding: 20px;
 }

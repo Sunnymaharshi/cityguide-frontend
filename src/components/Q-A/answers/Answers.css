@@ -26,3 +26,8 @@
 .add-btn:hover {
   transform: scale(0.95);
 }
+.answers {
+  height: 78vh;
+  scroll-behavior: smooth;
+  overflow: scroll;
+}

@@ -9,11 +9,11 @@ function Comments({ commentList, handleCommentsUpdate, ans_id }) {
   const addComment = () => {
     if (comment.length > 0) {
       postComment({ description: comment, ans_id }).then((res) => {
-        const new_comments = [...comments, res.data];
+        const new_comments = [res.data, ...comments];
 
         setComments(new_comments);
-
         handleCommentsUpdate(new_comments);
+        setComment("");
       });
     }
   };
@@ -22,9 +22,9 @@ function Comments({ commentList, handleCommentsUpdate, ans_id }) {
       {user.username && (
         <div className="add-comment">
           <input
-            className="add-comm"
+            className="add-comm form-control"
             type="text"
-            placeholder="Add Comment"
+            placeholder="Your Comment"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           />
@@ -33,6 +33,7 @@ function Comments({ commentList, handleCommentsUpdate, ans_id }) {
           </button>
         </div>
       )}
+
       <div className="comments">
         <div style={{ color: "blue" }}>Comments</div>
         {comments?.map((com) => (

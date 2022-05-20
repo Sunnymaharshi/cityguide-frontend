@@ -1,5 +1,9 @@
 export const SidebarData = [
   {
+    title: "Home",
+    link: "/dashboard",
+  },
+  {
     title: "Bus Data",
     link: "/busdata",
   },
@@ -22,9 +26,5 @@ export const SidebarData = [
   {
     title: "Your Questions",
     link: "/questions",
-  },
-  {
-    title: "Admin",
-    link: "/admin",
   },
 ];

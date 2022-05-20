@@ -6,6 +6,8 @@ import "./AdminDashboard.css";
 import Restaurant from "../CRUDrestaurants/Restaurant";
 import Attraction from "../CRUDattractions/Attraction";
 import Bus from "../CRUDbus/Bus";
+import { ADMIN } from "../../common/data";
+
 function AdminDashboard() {
   const { user, checkUserLogin } = useContext(UserContext);
 
@@ -15,22 +17,25 @@ function AdminDashboard() {
   }, []);
   return (
     <div className="admin-comp">
-      {user.role === "Admin" && (
+      {user.role === ADMIN && (
         <div className="admin-content">
-          <div className="admin-btns">
-            <NavLink to="/admin/city" className="admin-btn">
-              Cities
-            </NavLink>
-            <NavLink to="/admin/restaurant" className="admin-btn">
-              Restaurants
-            </NavLink>
-            <NavLink to="/admin/attraction" className="admin-btn">
-              Attractions
-            </NavLink>
-            <NavLink to="/admin/bus" className="admin-btn">
+          <div className="admin-bar">
+            <div className="admin-btns">
+              <NavLink to="/admin/city" className="admin-btn">
+                Cities
+              </NavLink>
+              <NavLink to="/admin/restaurant" className="admin-btn">
+                Restaurants
+              </NavLink>
+              <NavLink to="/admin/attraction" className="admin-btn">
+                Attractions
+              </NavLink>
+              <NavLink to="/admin/bus" className="admin-btn">
               Bus
             </NavLink>
+            </div>
           </div>
+
           <Routes>
             <Route path="/" element={<Navigate replace to="city" />} />
             <Route path="city" element={<City />} />
@@ -40,7 +45,7 @@ function AdminDashboard() {
           </Routes>
         </div>
       )}
-      {user.role !== "Admin" && (
+      {user.role !== ADMIN && (
         <div className="unauthorised">Only admin can access this content!</div>
       )}
     </div>
