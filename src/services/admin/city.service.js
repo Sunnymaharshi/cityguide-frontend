@@ -5,14 +5,16 @@ export const getCity = async (event) =>{
     return await axios.get(BASE_URL+"/getallcities");    
 }
 
-export const postCity = async (city_name,city_desc)=>{
+export const postCity = async (city_name,city_tagline, city_desc, city_image)=>{
     const userDetails = JSON.parse(localStorage.getItem("user"));
     return await axios
       .post(
         BASE_URL+"/addcity",
         {
           city_name,
-          city_desc
+          city_tagline,
+          city_desc,
+          city_image
 
         },
         {
@@ -23,14 +25,16 @@ export const postCity = async (city_name,city_desc)=>{
       )
 }
 
-export const updateCity= async(city_name,city_desc)=>{
+export const updateCity= async(city_name,city_tagline, city_desc, city_image)=>{
     const userDetails = JSON.parse(localStorage.getItem("user"));
     return await axios
       .put(
         BASE_URL+"/updatecity",
         {
             city_name,
-            city_desc
+            city_tagline,
+            city_desc,
+            city_image
         },
         {
           headers: {

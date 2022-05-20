@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 
 function Restaurant() {
   const [res_name, setResName] = useState("");
+  const [description, setDesc] = useState("");
   const [res_location, setResLoc] = useState("");
   const [res_image, setResImage] = useState("");
   const [city_name, setCityName] = useState("");
@@ -32,11 +33,12 @@ function Restaurant() {
 
   const sendDataToAPI = async (event) => {
     event.preventDefault();
-    postRestaurant(res_name, res_location, city_name,res_image)
+    postRestaurant(res_name,description, res_location, city_name,res_image)
       .then(function (response) {
         if (response.data.res_name == res_name) {
           toast.success("Successfully Added!");
           setResName("");
+          setDesc("");
           setResLoc("");
           setCityName("");
           setResImage("");
@@ -50,11 +52,12 @@ function Restaurant() {
 
   const updateDataToAPI = async (event) => {
     event.preventDefault();
-    updateRestaurant(res_id, res_name, res_location, city_name, res_image)
+    updateRestaurant(res_id, description, res_location, city_name,res_image)
       .then(function (response) {
         if (response.data.res_name == res_name) {
           toast.success("Successfully Updated!");
           setResName("");
+          setDesc("");
           setResLoc("");
           setCityName("");
           setResId("");
@@ -102,6 +105,18 @@ function Restaurant() {
               />
             </div>
             <div className="form-group">
+              <label htmlFor="resdesc">Restaurant Description</label>
+              <input
+                onChange={(e) => setDesc(e.target.value)}
+                type="text"
+                name="resdesc"
+                placeholder="Restaurant Description"
+                id="resdesc"
+                value={description}
+                className="form-control"
+              />
+            </div>
+            <div className="form-group">
               <label htmlFor="resloc">Restaurant Location</label>
               <input
                 onChange={(e) => setResLoc(e.target.value)}
@@ -143,7 +158,7 @@ function Restaurant() {
                 <button
                   type="submit"
                   className="delete-btn"
-                  disabled={!res_name || !res_location || !city_name}
+                  disabled={!res_name || !res_location || !city_name ||!description}
                   onClick={sendDataToAPI}
                 >
                   Add
@@ -169,7 +184,7 @@ function Restaurant() {
                     type="submit"
                     className="delete-btn"
                     disabled={
-                      !res_name || !res_location || !city_name || !res_id
+                      !res_name || !res_location || !city_name || !res_id || !description
                     }
                     onClick={updateDataToAPI}
                   >
@@ -198,6 +213,7 @@ function Restaurant() {
                 <th>Id</th>
                 <th>Name</th>
                 <th>Location</th>
+                <th>Description</th>
                 <th>City</th>
               </tr>
               {restaurant.map((rest) => {
@@ -206,6 +222,7 @@ function Restaurant() {
                     <td>{rest.res_id}</td>
                     <td>{rest.res_name}</td>
                     <td>{rest.res_location}</td>
+                    <td>{rest.description}</td>
                     <td>{rest.city_name}</td>
                   </tr>
                 );
