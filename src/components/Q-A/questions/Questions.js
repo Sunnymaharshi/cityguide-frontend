@@ -11,8 +11,6 @@ import { toast } from "react-toastify";
 function Questions({ city }) {
   const [questions, setQuestions] = useState([]);
   const [newQuestion, setNewQuestion] = useState("");
-  const [errMsg, setErrMsg] = useState("");
-  const [successMsg, setSuccessMsg] = useState("");
   const [query, setQuery] = useState("");
   const loadQuestions = () => {
     getAllQuestions(city).then((res) => {
@@ -24,16 +22,15 @@ function Questions({ city }) {
       if (newQuestion.trim().length > 0) {
         const ques = { description: newQuestion, city_name: city };
         postQuestion(ques).then((res) => {
-          setQuestions([...questions, res.data]);
-          setSuccessMsg("Question posted Successfully");
+          setQuestions([res.data, ...questions]);
+          toast.success("Question posted Successfully");
           setNewQuestion("");
-          setErrMsg("");
         });
       } else {
-        setErrMsg("Question can't be empty");
+        toast.warn("Question can't be empty");
       }
     } else {
-      setErrMsg("Login to post Question...");
+      toast("Login to post Question...");
     }
   };
   useEffect(() => {
@@ -102,10 +99,6 @@ function Questions({ city }) {
             rows="10"
             className="add-ans-inp form-control"
           />
-          <div>
-            <div>{successMsg}</div>
-            <small>{errMsg}</small>
-          </div>
           <button className="add-btn" onClick={addQuestion}>
             Post
           </button>

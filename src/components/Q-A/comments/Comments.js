@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { toast } from "react-toastify";
 import UserContext from "../../../context/user/user.context";
 import { postComment } from "../../../services/questions/questions.service";
 import "./Comments.css";
@@ -7,7 +8,7 @@ function Comments({ commentList, handleCommentsUpdate, ans_id }) {
   const [comment, setComment] = useState("");
   const { user } = useContext(UserContext);
   const addComment = () => {
-    if (comment.length > 0) {
+    if (comment.trim().length > 0) {
       postComment({ description: comment, ans_id }).then((res) => {
         const new_comments = [res.data, ...comments];
 
@@ -15,6 +16,8 @@ function Comments({ commentList, handleCommentsUpdate, ans_id }) {
         handleCommentsUpdate(new_comments);
         setComment("");
       });
+    } else {
+      toast.error("Comment can't be empty");
     }
   };
   return (

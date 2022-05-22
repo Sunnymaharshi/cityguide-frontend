@@ -7,7 +7,6 @@ export default function About({ city }) {
   useEffect(() => {
     getCityAbout(city)
       .then((res) => {
-        console.log(res.data)
         setAbout(res.data);
       })
       .catch((err) => {
