@@ -14,18 +14,15 @@ function Answers() {
   const [question, setQuestion] = useState(null);
   const [answers, setAnswers] = useState([]);
   const [newAnswer, setNewAnswer] = useState("");
-  const updateAnswers = (new_answers) => {
-    setAnswers(new_answers);
-  };
 
   const addAnswer = () => {
     if (isUserLoggedin()) {
       if (newAnswer.trim().length > 0) {
         const ans = { description: newAnswer, ques_id: id };
         postAnswer(ans).then((res) => {
-          setAnswers([res.data, ...answers]);
-          toast.success(POST_ANSWER_SUCCESS_MSG);
           setNewAnswer("");
+          setAnswers((prev) => [...prev, res.data]);
+          toast.success(POST_ANSWER_SUCCESS_MSG);
         });
       } else {
         toast.error("Answer can't be empty");
@@ -37,7 +34,7 @@ function Answers() {
   useEffect(() => {
     getQuestion(id).then((res) => {
       setQuestion(res.data.description);
-      updateAnswers(res.data.answerList);
+      setAnswers(res.data.answerList);
     });
 
     // eslint-disable-next-line
@@ -49,7 +46,9 @@ function Answers() {
       <div className="content">
         <div className="answers">
           {answers.length > 0 &&
-            answers.map((ans, ind) => <Answer ans={ans} ind={ind} key={ind} />)}
+            answers.map((ans, ind) => (
+              <Answer ans={ans} ind={ind} key={ans.ans_id} />
+            ))}
         </div>
         <div className="add-ans">
           <h5>Add Your Answer</h5>

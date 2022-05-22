@@ -1,38 +1,21 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./questions.css";
+import { toast } from "react-toastify";
 import {
+  deleteQuestion,
   getAllQuestions,
   getSimilarQuestions,
   postQuestion,
 } from "../../../services/questions/questions.service";
 import { isUserLoggedin } from "../../../common/functions";
-import { toast } from "react-toastify";
+import { QUES_DELETED_RES, QUES_DELETE_UNAUTH } from "../../../common/data";
+import dots from "../../../assets/icons/dots.svg";
+import "./questions.css";
 function Questions({ city }) {
   const [questions, setQuestions] = useState([]);
   const [newQuestion, setNewQuestion] = useState("");
   const [query, setQuery] = useState("");
-  const loadQuestions = () => {
-    getAllQuestions(city).then((res) => {
-      setQuestions(res.data);
-    });
-  };
-  const addQuestion = () => {
-    if (isUserLoggedin()) {
-      if (newQuestion.trim().length > 0) {
-        const ques = { description: newQuestion, city_name: city };
-        postQuestion(ques).then((res) => {
-          setQuestions([res.data, ...questions]);
-          toast.success("Question posted Successfully");
-          setNewQuestion("");
-        });
-      } else {
-        toast.warn("Question can't be empty");
-      }
-    } else {
-      toast("Login to post Question...");
-    }
-  };
+
   useEffect(() => {
     loadQuestions(city);
     // eslint-disable-next-line
@@ -55,7 +38,42 @@ function Questions({ city }) {
       });
     }
   };
-
+  const loadQuestions = () => {
+    getAllQuestions(city).then((res) => {
+      setQuestions(res.data);
+    });
+  };
+  const addQuestion = () => {
+    if (isUserLoggedin()) {
+      if (newQuestion.trim().length > 0) {
+        const ques = { description: newQuestion, city_name: city };
+        postQuestion(ques).then((res) => {
+          setQuestions([res.data, ...questions]);
+          toast.success("Question posted Successfully");
+          setNewQuestion("");
+        });
+      } else {
+        toast.error("Question can't be empty");
+      }
+    } else {
+      toast.error("Login to post Question...");
+    }
+  };
+  const handleDeleteQues = (ques_id) => {
+    deleteQuestion(ques_id)
+      .then((res) => {
+        if (res.data === QUES_DELETED_RES) {
+          setQuestions(questions.filter((q) => q.ques_id !== ques_id));
+          toast.success("Question Deleted Successfully");
+        }
+      })
+      .catch((err) => {
+        if (err.response.data === QUES_DELETE_UNAUTH) {
+          toast.error("Unauthorised!");
+        } else toast.error("Unknown error!");
+      });
+  };
+  const handleReportQues = (ques_id) => {};
   return (
     <div className="questions-comp">
       <div className="search">
@@ -77,13 +95,50 @@ function Questions({ city }) {
           <h5>Questions</h5>
 
           {questions.map((q, ind) => (
-            <Link
-              to={`/answers/${q.ques_id}`}
-              className="question"
-              key={q.ques_id}
-            >
-              {ind + 1}: {q.description}
-            </Link>
+            <div key={q.ques_id} className="question">
+              <Link to={`/answers/${q.ques_id}`} className="question-link">
+                {ind + 1}: {q.description}
+              </Link>
+              <div className="dropdown">
+                <img
+                  className="dropdown-toggle option-icon"
+                  type="button"
+                  alt="options"
+                  src={dots}
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                />
+
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton1"
+                >
+                  {
+                    <li>
+                      <div
+                        className="dropdown-item"
+                        onClick={() => {
+                          handleDeleteQues(q.ques_id);
+                        }}
+                      >
+                        Delete
+                      </div>
+                    </li>
+                  }
+                  <li>
+                    <div
+                      className="dropdown-item"
+                      onClick={() => {
+                        handleReportQues(q.ques_id);
+                      }}
+                    >
+                      Report
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
           ))}
         </div>
         <div className="add-ques">

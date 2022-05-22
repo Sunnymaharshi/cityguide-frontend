@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
+import { isUserLoggedin } from "../../../common/functions";
 import UserContext from "../../../context/user/user.context";
 import { postComment } from "../../../services/questions/questions.service";
 import "./Comments.css";
@@ -8,16 +9,20 @@ function Comments({ commentList, handleCommentsUpdate, ans_id }) {
   const [comment, setComment] = useState("");
   const { user } = useContext(UserContext);
   const addComment = () => {
-    if (comment.trim().length > 0) {
-      postComment({ description: comment, ans_id }).then((res) => {
-        const new_comments = [res.data, ...comments];
+    if (isUserLoggedin()) {
+      if (comment.trim().length > 0) {
+        postComment({ description: comment, ans_id }).then((res) => {
+          const new_comments = [res.data, ...comments];
 
-        setComments(new_comments);
-        handleCommentsUpdate(new_comments);
-        setComment("");
-      });
+          setComments(new_comments);
+          handleCommentsUpdate(new_comments);
+          setComment("");
+        });
+      } else {
+        toast.error("Comment can't be empty");
+      }
     } else {
-      toast.error("Comment can't be empty");
+      toast.error("Login to comment...");
     }
   };
   return (

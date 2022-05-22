@@ -13,6 +13,9 @@ export const getQuestion = (id) => {
 export const postQuestion = (ques) => {
   return axios.post(BASE_URL + "/postques", ques, authHeader());
 };
+export const deleteQuestion = (ques_id) => {
+  return axios.delete(BASE_URL + "/delques/" + ques_id, authHeader());
+};
 
 export const getAnswers = (id) => {
   return axios.get(BASE_URL + "/getanswers/" + id);

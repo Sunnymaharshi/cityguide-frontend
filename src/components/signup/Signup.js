@@ -52,7 +52,7 @@ function Signup() {
         .catch((err) => {
           const res = err.response;
           if (res.data === USERNAME_TAKEN_RES) {
-            toast.warn(USERNAME_TAKEN_MSG);
+            toast.error(USERNAME_TAKEN_MSG);
           }
         });
     }

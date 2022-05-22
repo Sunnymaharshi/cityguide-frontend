@@ -33,18 +33,29 @@
   padding: 20px;
 }
 .question {
+  display: flex;
+}
+.question-link {
   display: block;
   color: black;
   font-size: x-large;
   text-decoration: none;
 }
-.question:hover {
+.question-link:hover {
   color: black;
   transform: scale(1.01);
 }
 .questions-content {
   display: flex;
   justify-content: space-around;
+}
+
+.option-icon {
+  width: 30px;
+  height: 30px;
+}
+.dropdown-item {
+  cursor: pointer;
 }
 .add-ques {
   padding: 20px;
