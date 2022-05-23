@@ -9,6 +9,7 @@ import Restaurant from "../restaurant/restaurant";
 import AdminDashboard from "../../admin-components/admindashboard/AdminDashboard";
 import Questions from "../Q-A/questions/Questions";
 import Answers from "../Q-A/answers/Answers";
+import Contributions from "../contributions/contributions"
 import "./dashboard.css";
 
 function Dashboard() {
@@ -39,6 +40,7 @@ function Dashboard() {
             <Route path="admin/*" element={<AdminDashboard />} />
             <Route path="faq" element={<Questions city={city} />} />
             <Route path="answers/:id" element={<Answers />} />
+            <Route path="contributions/*" element={<Contributions />} />
           </Routes>
         </div>
       </div>

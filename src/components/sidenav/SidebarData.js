@@ -24,7 +24,7 @@ export const SidebarData = [
     link: "/faq",
   },
   {
-    title: "Your Questions",
-    link: "/questions",
+    title: "Your Contributions",
+    link: "/contributions",
   },
 ];
