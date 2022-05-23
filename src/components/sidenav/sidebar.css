@@ -4,9 +4,7 @@
   height: 100vh;
   width: 250px;
   /* background-color: #465362; */
-  background-color: #DAF1DE;
-  
-
+  background-color: #daf1de;
 }
 
 .SidebarList {
@@ -24,7 +22,6 @@
   flex-direction: row;
   color: black;
   font-weight: 500;
-  font-style: oblique;
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -34,6 +31,6 @@
   transform: scale(0.9);
 }
 .active {
-  background-color: #8EB69B;
+  background-color: #8eb69b;
   font-size: large;
 }

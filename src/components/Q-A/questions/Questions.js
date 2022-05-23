@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
@@ -8,14 +8,19 @@ import {
   postQuestion,
 } from "../../../services/questions/questions.service";
 import { isUserLoggedin } from "../../../common/functions";
-import { QUES_DELETED_RES, QUES_DELETE_UNAUTH } from "../../../common/data";
+import {
+  ADMIN,
+  QUES_DELETED_RES,
+  QUES_DELETE_UNAUTH,
+} from "../../../common/data";
 import dots from "../../../assets/icons/dots.svg";
 import "./questions.css";
+import UserContext from "../../../context/user/user.context";
 function Questions({ city }) {
   const [questions, setQuestions] = useState([]);
   const [newQuestion, setNewQuestion] = useState("");
   const [query, setQuery] = useState("");
-
+  const { user } = useContext(UserContext);
   useEffect(() => {
     loadQuestions(city);
     // eslint-disable-next-line
@@ -99,7 +104,7 @@ function Questions({ city }) {
               <Link to={`/answers/${q.ques_id}`} className="question-link">
                 {ind + 1}: {q.description}
               </Link>
-              <div className="dropdown">
+              <div className="dropend">
                 <img
                   className="dropdown-toggle option-icon"
                   type="button"
@@ -107,14 +112,14 @@ function Questions({ city }) {
                   src={dots}
                   id="dropdownMenuButton1"
                   data-bs-toggle="dropdown"
-                  aria-expanded="false"
+                  // aria-expanded="false"
                 />
 
                 <ul
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuButton1"
                 >
-                  {
+                  {(user.username === q.username || user.role === ADMIN) && (
                     <li>
                       <div
                         className="dropdown-item"
@@ -125,7 +130,7 @@ function Questions({ city }) {
                         Delete
                       </div>
                     </li>
-                  }
+                  )}
                   <li>
                     <div
                       className="dropdown-item"
