@@ -6,14 +6,14 @@ export const FileUploader = ({onFileSelect}) => {
     
         const handleFileInput = (e) => {
             // handle validations
-            onFileSelect(e.target.files[0])
+            onFileSelect(e.target.files[0]);
         }
     
         return (
         
             <div className="file-uploader">
                 <input type="file" onChange={handleFileInput}></input>
-                {/* <button onClick={e => fileInput.current && fileInput.current.click()} className="btn btn-primary">S</button> */}
+                {/* <button onClick={e => fileInput.current && fileInput.current.click()} className="btn btn-primary"></button> */}
             </div>
             
         )

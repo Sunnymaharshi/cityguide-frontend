@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
+import {FileUploader} from '../FileUploader/FileUploader';
+import { BASE_URL } from "../../common/data";
 import "./City.css";
 import {
   deleteCity,
   getCity,
   postCity,
   updateCity,
+  uploadFile,
+  getimgurl
 } from "../../services/admin/city.service";
 import { toast } from "react-toastify";
 
@@ -13,6 +17,8 @@ function City() {
   const [city_tagline, setCityTagline] = useState("");
   const [city_desc, setDesc] = useState("");
   const [city_image, setCityImg]=useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [filename, setFileName]=useState(null);
   const [city, setCity] = useState([]);
 
   useEffect(() => {
@@ -50,7 +56,7 @@ function City() {
 
   const updateDataToAPI = async (event) => {
     event.preventDefault();
-    updateCity(city_name,city_tagline, city_desc, city_image)
+    updateCity(city_name,city_tagline,filename, city_desc, city_image)
       .then(function (response) {
         if (response.data.city_name === city_name) {
           toast.success("Successfully Updated!");
@@ -81,6 +87,32 @@ function City() {
         console.log(error);
       });
   };
+
+  const submitForm = (e) => {
+
+  e.preventDefault();
+  console.log(selectedFile);
+  uploadFile(city_name,selectedFile)
+      .then((res) => {
+        // alert("File Upload success");
+        console.log("Uploaded");
+        console.log(res.data);
+        
+      })
+      .catch((err) => console.log("error"));
+  };
+
+  const geturl =(e)=>{
+    e.preventDefault();
+     getimgurl(city_name,selectedFile)
+    .then((res)=>{
+      setCityImg(res.data);
+      setFileName(selectedFile.name);
+      console.log(res);
+    })
+    .catch((err) => console.log("error"));
+
+  }
 
   return (
     <div className="city-div">
@@ -124,10 +156,11 @@ function City() {
               className="form-control"
             />
           </div>
+          
           <div className="form-group">
             <label htmlFor="cityimage">City Image</label>
             <input
-              onChange={(e) => setCityImg(e.target.value)}
+             
               type="text"
               name="cityimage"
               placeholder="City Image"
@@ -135,7 +168,18 @@ function City() {
               value={city_image}
               className="form-control"
             />
+            <div className="add-button">
+              <button
+                type="submit"
+                className="delete-btn"
+                disabled={!city_name }
+                onClick={geturl}
+              >
+                Get URL
+              </button>
+            </div>
           </div>
+          
 
           <div className="btn-main">
             <div className="add-button">
@@ -152,7 +196,7 @@ function City() {
               <button
                 type="submit"
                 className="delete-btn"
-                disabled={!city_name || !city_desc || !city_tagline}
+                disabled={!city_name}
                 onClick={updateDataToAPI}
               >
                 Update
@@ -168,7 +212,16 @@ function City() {
                 Delete
               </button>
             </div>
+
           </div>
+          <div className="form-group">
+
+          <FileUploader
+      onFileSelect={(file) => setSelectedFile(file)}
+  
+/>
+<button className="delete-btn" onClick={submitForm}>Submit</button>
+</div>
         </form>
       </div>
       <div className="city-table">
