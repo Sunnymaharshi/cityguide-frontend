@@ -36,6 +36,10 @@ export default function About({ city }) {
           src="https://storage.googleapis.com/download/storage/v1/b/may-cityguide/o/rtt%2Fmyimage.jpeg?generation=1653277169628092&alt=media"
           alt="my-media url"
         />
+        <img
+          src="https://storage.googleapis.com/download/storage/v1/b/may-cityguide/o/rtt%2Fmyimage2.jpeg?generation=1653279109867641&alt=media"
+          alt="my-media url"
+        />
       </div>
     </>
   );
