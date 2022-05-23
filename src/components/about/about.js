@@ -19,6 +19,7 @@ export default function About({ city }) {
         <div className="city_img">
           <img
             className="img_tag"
+            alt="city"
             src="https://www.karnatakatourism.org/wp-content/uploads/2020/05/p25-gallery.jpg"
           />
         </div>

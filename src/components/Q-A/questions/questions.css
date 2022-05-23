@@ -34,6 +34,7 @@
 }
 .question {
   display: flex;
+  justify-content: space-between;
 }
 .question-link {
   display: block;
@@ -42,7 +43,6 @@
   text-decoration: none;
 }
 .question-link:hover {
-  color: black;
   transform: scale(1.01);
 }
 .questions-content {
@@ -51,8 +51,8 @@
 }
 
 .option-icon {
-  width: 30px;
-  height: 30px;
+  width: 27px;
+  height: 27px;
 }
 .dropdown-item {
   cursor: pointer;

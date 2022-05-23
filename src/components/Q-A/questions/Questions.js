@@ -104,7 +104,7 @@ function Questions({ city }) {
               <Link to={`/answers/${q.ques_id}`} className="question-link">
                 {ind + 1}: {q.description}
               </Link>
-              <div className="dropdown">
+              <div className="dropend">
                 <img
                   className="dropdown-toggle option-icon"
                   type="button"
@@ -112,7 +112,7 @@ function Questions({ city }) {
                   src={dots}
                   id="dropdownMenuButton1"
                   data-bs-toggle="dropdown"
-                  aria-expanded="false"
+                  // aria-expanded="false"
                 />
 
                 <ul
