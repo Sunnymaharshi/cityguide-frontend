@@ -97,6 +97,10 @@ function City() {
         // alert("File Upload success");
         console.log("Uploaded");
         console.log(res.data);
+        console.log(res);
+        if(res.status==200)
+        toast.success("Successfully Uploaded Image!");
+
         
       })
       .catch((err) => console.log("error"));
@@ -118,7 +122,7 @@ function City() {
     <div className="city-div">
       <div className="city-form">
         <form>
-          <h1 className="city-op">City Operations</h1>
+          <h2 className="city-op">City Operations</h2>
 
           <div className="form-group">
             <label htmlFor="cityname">City Name</label>
@@ -156,27 +160,43 @@ function City() {
               className="form-control"
             />
           </div>
-          
           <div className="form-group">
+        <div className='img-form'>
+          <div className='file-upload'>
+            <FileUploader
+                onFileSelect={(file) => setSelectedFile(file)}
+            />
+            </div>
+            <div>
+            <button className="delete-btn" onClick={submitForm}>Upload</button>
+            </div>
+            </div>
+     </div>
+          
+     <div className="form-group">
             <label htmlFor="cityimage">City Image</label>
+            <div className="img-form">
+            <div>
             <input
              
               type="text"
               name="cityimage"
               placeholder="City Image"
-              id="cityname"
+              id="cityimage"
               value={city_image}
               className="form-control"
             />
-            <div className="add-button">
+            </div>
+             <div className='btn-main'> <div className="add-button">
               <button
                 type="submit"
                 className="delete-btn"
-                disabled={!city_name }
+                disabled={!city_name || !city_image}
                 onClick={geturl}
               >
                 Get URL
               </button>
+            </div></div>
             </div>
           </div>
           
@@ -214,14 +234,7 @@ function City() {
             </div>
 
           </div>
-          <div className="form-group">
 
-          <FileUploader
-      onFileSelect={(file) => setSelectedFile(file)}
-  
-/>
-<button className="delete-btn" onClick={submitForm}>Submit</button>
-</div>
         </form>
       </div>
       <div className="city-table">
