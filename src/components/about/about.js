@@ -15,6 +15,7 @@ export default function About({ city }) {
   }, [city]);
   return (
     <>
+      {!city && "loading"}
       <div>
         <div className="city_img">
           <img

@@ -22,7 +22,10 @@
   display: flex;
   align-items: center;
 }
-
+.city-select {
+  display: flex;
+  cursor: pointer;
+}
 select {
   height: 30px;
   border-radius: 20px;
