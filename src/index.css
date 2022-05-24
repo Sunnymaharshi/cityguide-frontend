@@ -1,11 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
-body{
-  font-family: 'Roboto', sans-serif;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
 }
 
 :root {
-  --primary: #5F4BB6;
-  --sec: #86A5D9;
-  --accent: #202A25; 
+  --primary: #5f4bb6;
+  --sec: #86a5d9;
+  --accent: #202a25;
 }
