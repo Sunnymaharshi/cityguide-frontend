@@ -5,17 +5,32 @@ import "./about.css";
 export default function About({ city }) {
   const [About, setAbout] = useState([]);
   useEffect(() => {
-    getCityAbout(city)
-      .then((res) => {
-        setAbout(res.data);
-      })
-      .catch((err) => {
-        console.log("rest error", err);
-      }); // eslint-disable-next-line
+    if (city !== null) {
+      getCityAbout(city)
+        .then((res) => {
+          setAbout(res.data);
+        })
+        .catch((err) => {
+          console.log("rest error", err);
+        });
+    }
+    // eslint-disable-next-line
+  }, []);
+  useEffect(() => {
+    if (city !== null) {
+      getCityAbout(city)
+        .then((res) => {
+          setAbout(res.data);
+        })
+        .catch((err) => {
+          console.log("rest error", err);
+        });
+    }
+    // eslint-disable-next-line
   }, [city]);
   return (
     <>
-            {!city && "loading"}
+      {!city && "loading"}
       {/* <div>
         <div className="city_img">
           <img
@@ -28,7 +43,7 @@ export default function About({ city }) {
         <p className="city_desc">{About.city_desc}</p>
       </div> */}
 
-{/* <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="false">
+      {/* <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="false">
   <div className="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>

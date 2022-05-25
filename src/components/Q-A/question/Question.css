@@ -1,0 +1,14 @@
+.question {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.question-link {
+  display: block;
+  color: black;
+  font-size: x-large;
+  text-decoration: none;
+}
+.question-link:hover {
+  transform: scale(1.01);
+}

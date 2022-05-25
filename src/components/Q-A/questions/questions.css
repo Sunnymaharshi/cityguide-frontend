@@ -29,26 +29,12 @@
 .questions-comp {
   margin: 20px;
 }
-.questions-content {
-}
+
 .questions {
   padding: 20px;
   width: 60vw;
 }
-.question {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.question-link {
-  display: block;
-  color: black;
-  font-size: x-large;
-  text-decoration: none;
-}
-.question-link:hover {
-  transform: scale(1.01);
-}
+
 .questions-content {
   display: flex;
   justify-content: space-around;

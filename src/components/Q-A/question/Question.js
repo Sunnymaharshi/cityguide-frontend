@@ -12,6 +12,7 @@ import {
 import UserContext from "../../../context/user/user.context";
 import { toast } from "react-toastify";
 import { deleteQuestion } from "../../../services/questions/questions.service";
+import "./Question.css";
 const Question = ({ ques, ind, updateQuestions }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
