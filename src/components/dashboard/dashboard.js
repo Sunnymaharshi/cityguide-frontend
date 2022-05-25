@@ -9,6 +9,7 @@ import Restaurant from "../restaurant/restaurant";
 import AdminDashboard from "../../admin-components/admindashboard/AdminDashboard";
 import Questions from "../Q-A/questions/Questions";
 import Answers from "../Q-A/answers/Answers";
+import Contributions from "../contributions/contributions"
 import "./dashboard.css";
 import CityModal from "../citymodal/CityModal";
 import { AnimatePresence } from "framer-motion";
@@ -43,13 +44,14 @@ function Dashboard() {
         <Sidebar />
         <div className="main-content">
           <Routes>
-            <Route path="/" element={<Navigate replace to="dashboard" />} />
-            <Route path="dashboard" element={<About city={city} />} />
+            <Route path="/" element={<Navigate replace to="home" />} />
+            <Route path="home" element={<About city={city} />} />
             <Route path="attractions" element={<Attraction city={city} />} />
             <Route path="restaurants" element={<Restaurant city={city} />} />
             <Route path="admin/*" element={<AdminDashboard />} />
             <Route path="faq" element={<Questions city={city} />} />
             <Route path="answers/:id" element={<Answers />} />
+            <Route path="contributions/*" element={<Contributions />} />
           </Routes>
         </div>
       </div>

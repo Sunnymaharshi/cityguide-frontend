@@ -16,6 +16,12 @@ export const postQuestion = (ques) => {
 export const deleteQuestion = (ques_id) => {
   return axios.delete(BASE_URL + "/delques/" + ques_id, authHeader());
 };
+export const getUserQues = () => {
+  return axios.get(BASE_URL + "/getUserQues", authHeader());
+};
+export const getUserAns = () => {
+  return axios.get(BASE_URL + "/getuseranswers", authHeader());
+};
 
 export const getAnswers = (id) => {
   return axios.get(BASE_URL + "/getanswers/" + id);

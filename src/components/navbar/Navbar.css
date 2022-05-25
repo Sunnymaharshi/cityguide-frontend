@@ -1,4 +1,4 @@
-@import url("../../index.css");
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap");
 
 .nav-bar {
   display: flex;
@@ -8,15 +8,16 @@
   color: white;
   background-color: var(--accent);
   background-color: #3c91e6;
+  background-image: linear-gradient(to right, var(--secondary), var(--accent));
 }
 .logo-drop {
   display: flex;
   align-items: center;
 }
 .logo {
-  font-size: xx-large;
-  margin-left: 30px;
-  margin-right: 10px;
+  font-size: 2.5rem;
+  margin-left: 20px;
+  font-family: "Kalam", cursive;
 }
 .last {
   display: flex;
@@ -26,53 +27,21 @@
   display: flex;
   cursor: pointer;
 }
-select {
-  height: 30px;
-  border-radius: 20px;
-  background-color: whitesmoke;
-  width: 140px;
-  margin-left: 10px;
-  border: 0px;
-  outline: 0px;
-  padding: 5px;
-}
 
 .links {
   display: flex;
   align-items: center;
   font-size: larger;
-  margin-right: 30px;
+  margin-right: 20px;
 }
 
 .nav-link {
   color: white;
 }
 .nav-link:hover {
-  color: gold;
+  color: var(--secondary);
 }
 
 .username {
-  margin-right: 30px;
-  position: relative;
-  display: inline-block;
-}
-
-.logout-content {
-  display: none;
-  position: absolute;
-  background-color: #c0e0de;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  border: 1px solid black;
-  border-radius: 5px;
-}
-.username:hover .logout-content {
-  display: block;
-}
-.logout-btn {
-  color: black;
-  padding: 5px;
-  background-color: #c0e0de;
-  border-radius: 5px;
-  cursor: pointer;
+  margin-right: 20px;
 }

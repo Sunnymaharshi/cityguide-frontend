@@ -8,7 +8,8 @@ import {
   postCity,
   updateCity,
   uploadFile,
-  getimgurl
+  getimgurl,
+  postImg
 } from "../../services/admin/city.service";
 import { toast } from "react-toastify";
 
@@ -20,6 +21,10 @@ function City() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [filename, setFileName]=useState(null);
   const [city, setCity] = useState([]);
+  const [type_id, setTypeId]=useState("");
+  const [type, setType]=useState("City");
+  const [img_url, setImgUrl]=useState("");
+
 
   useEffect(() => {
     getAllCities();
@@ -117,6 +122,22 @@ function City() {
     .catch((err) => console.log("error"));
 
   }
+  const addImg= (e)=>{
+    e.preventDefault();
+    console.log(type);
+    setTypeId(city_name);
+    // let img_url=res_image;
+    console.log(type_id);
+    setImgUrl(city_image);
+    console.log(img_url);
+    console.log(filename);
+    postImg(type, type_id, filename, img_url).
+    then((res)=>{
+      console.log(res.data);
+      toast.success("Added Image to Database");
+    })
+    .catch((err)=> console.log("error!"));
+  };
 
   return (
     <div className="city-div">
@@ -160,47 +181,6 @@ function City() {
               className="form-control"
             />
           </div>
-          <div className="form-group">
-        <div className='img-form'>
-          <div className='file-upload'>
-            <FileUploader
-                onFileSelect={(file) => setSelectedFile(file)}
-            />
-            </div>
-            <div>
-            <button className="delete-btn" onClick={submitForm}>Upload</button>
-            </div>
-            </div>
-     </div>
-          
-     <div className="form-group">
-            <label htmlFor="cityimage">City Image</label>
-            <div className="img-form">
-            <div>
-            <input
-             
-              type="text"
-              name="cityimage"
-              placeholder="City Image"
-              id="cityimage"
-              value={city_image}
-              className="form-control"
-            />
-            </div>
-             <div className='btn-main'> <div className="add-button">
-              <button
-                type="submit"
-                className="delete-btn"
-                disabled={!city_name || !city_image}
-                onClick={geturl}
-              >
-                Get URL
-              </button>
-            </div></div>
-            </div>
-          </div>
-          
-
           <div className="btn-main">
             <div className="add-button">
               <button
@@ -234,7 +214,59 @@ function City() {
             </div>
 
           </div>
+          <div className="form-group">
+        <div className='img-form'>
+          <div className='file-upload'>
+            <FileUploader
+                onFileSelect={(file) => setSelectedFile(file)}
+            />
+            </div>
+            <div>
+            <button className="delete-btn" onClick={submitForm}>Upload</button>
+            </div>
+            </div>
+     </div>
+          
+     <div className="form-group">
+            <label htmlFor="cityimage">City Image</label>
+            <div className="img-form">
+            <div>
+            <input
+             
+              type="text"
+              name="cityimage"
+              placeholder="City Image"
+              id="cityimage"
+              value={city_image}
+              className="form-control"
+            />
+            </div>
+             <div className='btn-main'> <div className="add-button">
+              <button
+                type="submit"
+                className="delete-btn"
+                disabled={!city_name }
+                onClick={geturl}
+              >
+                Get URL
+              </button>
+            </div></div>
+            </div>
+          </div>
+          
 
+
+          <div className="btn-main">
+          <button
+                   style={{marginTop:"0.5rem"}}
+                    type="submit"
+                    className="add-btn"
+                    disabled={ !city_name || !city_image || !filename}
+                    onClick={addImg}
+                  >
+                    Add Image
+                  </button>
+                  </div>
         </form>
       </div>
       <div className="city-table">

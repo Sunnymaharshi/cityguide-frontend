@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import {
   deleteRestaurant,
   getRestaurants,
+  postImg,
   postRestaurant,
   updateRestaurant,
+  uploadFile,
+  getimgurl
 } from "../../services/admin/restaurant.service";
 import "./Restaurant.css";
 import { toast } from "react-toastify";
@@ -18,6 +21,12 @@ function Restaurant() {
   const [res_id, setResId] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [restaurant, setRestaurants] = useState([]);
+  const [type_id, setTypeId]=useState("");
+  const [filename, setFileName]=useState("");
+  const [type, setType]=useState("Restaurant");
+  const [img_url, setImgUrl]=useState("");
+
+ 
 
   useEffect(() => {
     getAllRestaurants();
@@ -40,6 +49,7 @@ function Restaurant() {
       .then(function (response) {
         if (response.data.res_name == res_name) {
           toast.success("Successfully Added!");
+          setResId(response.data.res_id);
           setResName("");
           setDesc("");
           setResLoc("");
@@ -55,7 +65,7 @@ function Restaurant() {
 
   const updateDataToAPI = async (event) => {
     event.preventDefault();
-    updateRestaurant(res_id, description, res_location, city_name,res_image)
+    updateRestaurant(res_id, res_name,description, res_location, city_name)
       .then(function (response) {
         if (response.data.res_name == res_name) {
           toast.success("Successfully Updated!");
@@ -86,6 +96,52 @@ function Restaurant() {
       .catch(function (error) {
         console.log(error);
       });
+  };
+  const submitForm = (e) => {
+
+    e.preventDefault();
+    console.log(selectedFile);
+    uploadFile(city_name,selectedFile)
+        .then((res) => {
+          // alert("File Upload success");
+          console.log("Uploaded");
+          console.log(res.data);
+          console.log(res);
+          if(res.status==200)
+          toast.success("Successfully Uploaded Image!");
+  
+          
+        })
+        .catch((err) => console.log("error"));
+    };
+  
+    const geturl =(e)=>{
+      e.preventDefault();
+       getimgurl(city_name,selectedFile)
+      .then((res)=>{
+        setResImage(res.data);
+        setFileName(selectedFile.name);
+        console.log(res);
+      })
+      .catch((err) => console.log("error"));
+  
+    }
+
+  const addImg= (e)=>{
+    e.preventDefault();
+    console.log(type);
+    setTypeId(res_id.toString());
+    // let img_url=res_image;
+    console.log(type_id);
+    setImgUrl(res_image);
+    console.log(img_url);
+    console.log(filename);
+    postImg(type, type_id, filename, img_url).
+    then((res)=>{
+      console.log(res.data);
+      toast.success("Added Image to Database");
+    })
+    .catch((err)=> console.log("error!"));
   };
 
   
@@ -149,13 +205,71 @@ function Restaurant() {
              
             </div>
             </div>
+
+            <div className="btn-main">
+             <div className="update-btn">
+                <button
+                  type="submit"
+                  className="delete-btn"
+                  disabled={!res_name || !res_location || !city_name ||!description}
+                  onClick={sendDataToAPI}
+                >
+                  Add
+                </button>
+                </div>
+                <div className="update-btn">
+                  <button
+                    type="submit"
+                    className="delete-btn"
+                    disabled={!res_name || !city_name || !res_id }
+                    onClick={updateDataToAPI}
+                  >
+                    Update
+                  </button>
+              </div>
+              <div className="update-btn">
+                <button
+                  type="submit"
+                  className="delete-btn"
+                  disabled={!res_id}
+                  onClick={onDelete}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
            
           <div className="form-row">
-            <div className="form-group col">
+
+          <div className="form-group col-sm-2">
+              <label htmlFor="resid">Restaurant Id</label>
+              <input
+                onChange={(e) => setResId(e.target.value)}
+                type="text"
+                name="resid"
+                placeholder="Res Id"
+                id="resid"
+                value={res_id}
+                className="form-control"
+              />
+              <button
+                   style={{marginTop:"0.5rem"}}
+                    type="submit"
+                    className="delete-btn"
+                    disabled={ !city_name || !res_image || !filename}
+                    onClick={addImg}
+                  >
+                    Add Image
+                  </button>
+            </div>
+
+            <div className="form-group col-sm-4">
             <FileUploaded
                 onFileSelect={(file) => setSelectedFile(file)}
             />
-            <button className="delete-btn" style={{marginTop:"0.5rem"}}>Upload</button>
+            <button className="delete-btn" 
+            style={{marginTop:"0.5rem"}} 
+            onClick={submitForm}>Upload</button>
             </div>
             
      
@@ -174,100 +288,16 @@ function Restaurant() {
                 type="submit"
                 className="delete-btn"
                 style={{marginTop:"0.5rem"}}
-                disabled={!city_name || !res_image}
-               
+                disabled={!city_name}
+                onClick={geturl}
               >
                 Get URL
               </button>
           </div>
+
           
           </div>
        
-
-            <div className="btn-main">
-          
-                <button
-                  type="submit"
-                  className="add-btn"
-                  disabled={!res_name || !res_location || !city_name ||!description}
-                  onClick={sendDataToAPI}
-                >
-                  Add
-                </button>
-            </div>
-            <div className="form-row">
-            <div className="form-group col">
-              <label htmlFor="resid">Restaurant Id</label>
-              <input
-                onChange={(e) => setResId(e.target.value)}
-                type="text"
-                name="resid"
-                placeholder="Restaurant Id"
-                id="resid"
-                value={res_id}
-                className="form-control"
-              />
-            </div>
-            <div className="form-group col idbtn">
-                  <button
-                    type="submit"
-                    className="delete-btn"
-                    disabled={!res_name || !res_location || !city_name || !res_id || !description}
-                    onClick={updateDataToAPI}
-                  >
-                    Update
-                  </button>
-              </div>
-              <div className="form-group col idbtn">
-                <button
-                  type="submit"
-                  className="delete-btn"
-                  disabled={!res_id}
-                  onClick={onDelete}
-                >
-                  Delete
-                </button>
-              </div>
-            
-            </div>
-            {/* <div className="form-group">
-              <label htmlFor="resid">Restaurant Id</label>
-              <input
-                onChange={(e) => setResId(e.target.value)}
-                type="text"
-                name="resid"
-                placeholder="Restaurant Id"
-                id="resid"
-                value={res_id}
-                className="form-control"
-              />
-            </div>
-            <div className="btn-main">
-              <div className="update-btn">
-                <span>
-                  <button
-                    type="submit"
-                    className="delete-btn"
-                    disabled={
-                      !res_name || !res_location || !city_name || !res_id || !description
-                    }
-                    onClick={updateDataToAPI}
-                  >
-                    Update
-                  </button>
-                </span>
-              </div>
-              <div className="">
-                <button
-                  type="submit"
-                  className="delete-btn"
-                  disabled={!res_id}
-                  onClick={onDelete}
-                >
-                  Delete
-                </button>
-              </div>
-            </div> */}
           </form>
         </div>
         <div className="res-table">

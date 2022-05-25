@@ -75,3 +75,21 @@ export const uploadFile = (city_name,selectedFile) => {
 export const getimgurl=(city_name,selectedFile)=>{
    
     return axios.get(BASE_URL+`/geturl/${city_name}/${selectedFile.name}`)}
+export const postImg=(type, type_id, filename, img_url)=>{
+  const userDetails = JSON.parse(localStorage.getItem("user"));
+  return axios
+      .post(BASE_URL+`/addimagedetails`, 
+      {
+        type, 
+        type_id,
+        filename,
+        img_url
+      },
+
+      {
+        headers: {
+          Authorization: "Bearer " + userDetails.token,
+        }
+      })
+
+}

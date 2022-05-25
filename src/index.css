@@ -4,6 +4,7 @@
   --primary: #f2f4f3;
   --secondary: #3c91e6;
   --accent: #161b33;
+  --lightaccent: #2d3247;
 }
 * {
   box-sizing: border-box;

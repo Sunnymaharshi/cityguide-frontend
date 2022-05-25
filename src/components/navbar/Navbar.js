@@ -27,10 +27,10 @@ function Navbar({ openModal, city }) {
     setAnchorEl(null);
   };
   const handleYourQuestions = () => {
-    navigate("/questions", { replace: true });
+    navigate("/contributions/userques", { replace: true });
   };
   const handleYourAnswers = () => {
-    navigate("/answers", { replace: true });
+    navigate("/contributions/userans", { replace: true });
   };
   const handleBookmarks = () => {
     navigate("/bookmarks", { replace: true });
@@ -42,12 +42,11 @@ function Navbar({ openModal, city }) {
 
   return (
     <nav className="nav-bar">
-      <div className="logo-drop">
-        <div className="logo">CityGuide</div>
-      </div>
+      <div className="logo">CityGuide</div>
+
       <div className="last">
         <motion.div
-          whileHover={{ scale: 1.01 }}
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.98 }}
           className="city-select"
           onClick={() => {
@@ -62,10 +61,10 @@ function Navbar({ openModal, city }) {
 
         {!user.username && (
           <div className="links">
-            <Link to="/login" className="nav-link">
+            <Link to="/login" className="nav-link not-selectable">
               Login
             </Link>
-            <Link className="nav-link" to="/signup">
+            <Link className="nav-link not-selectable" to="/signup">
               Signup
             </Link>
           </div>
