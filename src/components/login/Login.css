@@ -7,11 +7,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-image: url("https://cdn.wallpapersafari.com/71/35/QXftxG.jpg");
+
 }
 form {
   color: white;
-  background-color: #465362;
+  background-color: rgba(30, 185, 225, 0);
   width: 400px;
 }
 form small {
@@ -45,8 +46,8 @@ p {
 p {
   margin-top: 15px;
 }
-.signup-link {
-  color: white;
+.signup-link1 {
+  color: black;
 
   text-decoration: none;
 }
