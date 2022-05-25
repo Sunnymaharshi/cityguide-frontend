@@ -26,7 +26,6 @@ function Sidebar() {
 
   // const [isActive, setisActive] = useState({home:true})
   const { user } = useContext(UserContext);
-  console.log(location.pathname);
   return (
     <div className="Sidebar">
       <ul className="SidebarList">
