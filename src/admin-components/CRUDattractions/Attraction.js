@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {FileUploaded} from '../FileUploaded/FileUploaded';
 import {
   deleteAttraction,
   getAttractions,
@@ -16,6 +17,7 @@ function Attraction() {
   const [city_name, setCityName] = useState("");
   const [attr_id, setAttrId] = useState("");
   const [attraction, setAttractions] = useState([]);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   useEffect(() => {
     getAllAttractions();
@@ -89,9 +91,11 @@ function Attraction() {
       <div className="attr-div">
         <div className="attr-form">
           <form>
-            <h2 className="attr-op">Attraction Operations</h2>
 
-            <div className="form-group">
+            <h2 className="attr-op">Attraction Operations</h2>
+         
+         <div className="form-row">
+            <div className="form-group col">
               <label htmlFor="attrname">Attraction Name</label>
               <input
                 onChange={(e) => setAttrName(e.target.value)}
@@ -103,7 +107,7 @@ function Attraction() {
                 className="form-control"
               />
             </div>
-            <div className="form-group">
+            <div className="form-group col">
               <label htmlFor="attrdesc">Attraction Description</label>
               <input
                 onChange={(e) => setDesc(e.target.value)}
@@ -115,7 +119,9 @@ function Attraction() {
                 className="form-control"
               />
             </div>
-            <div className="form-group">
+            </div>
+            <div className="form-row">
+            <div className="form-group col">
               <label htmlFor="attrloc">Attraction Location</label>
               <input
                 onChange={(e) => setAttrLoc(e.target.value)}
@@ -127,20 +133,7 @@ function Attraction() {
                 className="form-control"
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="attrimg">Attraction Image</label>
-              <input
-                onChange={(e) => setAttrImg(e.target.value)}
-                type="text"
-                name="attrimg"
-                placeholder="Attraction Image"
-                id="attrimg"
-                value={attr_img}
-                className="form-control"
-              />
-            </div>
-            
-            <div className="form-group">
+            <div className="form-group col">
               <label htmlFor="cityname">City Name</label>
               <input
                 onChange={(e) => setCityName(e.target.value)}
@@ -152,20 +145,53 @@ function Attraction() {
                 className="form-control"
               />
             </div>
-
+            </div>
+         
+<div className="form-row">
+            <div className="form-group col">
+            <FileUploaded
+                onFileSelect={(file) => setSelectedFile(file)}
+            />
+            <button className="delete-btn" style={{marginTop:"0.5rem"}}>Upload</button>
+            </div>
+            
+     
+     <div className="form-group col">
+            <label htmlFor="attrimage">Attraction Image</label>
+            <input
+             
+              type="text"
+              name="attrimage"
+              placeholder="Attraction Image"
+              id="resimage"
+              value={attr_img}
+              className="form-control"
+            />
+              <button
+                type="submit"
+                className="delete-btn"
+                style={{marginTop:"0.5rem"}}
+                disabled={!city_name || !attr_img}
+               
+              >
+                Get URL
+              </button>
+          </div>
+          </div>
             <div className="btn-main">
-              <div className="add-button">
+              
                 <button
                   type="submit"
-                  className="delete-btn"
+                  className="add-btn"
                   disabled={!attr_name || !attr_loc || !city_name ||!description}
                   onClick={sendDataToAPI}
                 >
                   Add
                 </button>
-              </div>
+              
             </div>
-            <div className="form-group">
+            <div className="form-row">
+            <div className="form-group col">
               <label htmlFor="attrid">Attraction Id</label>
               <input
                 onChange={(e) => setAttrId(e.target.value)}
@@ -177,9 +203,7 @@ function Attraction() {
                 className="form-control"
               />
             </div>
-            <div className="btn-main">
-              <div className="update-btn">
-                <span>
+            <div className="form-group col idbtn">
                   <button
                     type="submit"
                     className="delete-btn"
@@ -189,9 +213,8 @@ function Attraction() {
                   >
                     Update
                   </button>
-                </span>
               </div>
-              <div className="">
+              <div className="form-group col idbtn">
                 <button
                   type="submit"
                   className="delete-btn"
@@ -201,6 +224,7 @@ function Attraction() {
                   Delete
                 </button>
               </div>
+            
             </div>
           </form>
         </div>

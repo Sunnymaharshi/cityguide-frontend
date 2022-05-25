@@ -11,10 +11,14 @@ import Questions from "../Q-A/questions/Questions";
 import Answers from "../Q-A/answers/Answers";
 import Contributions from "../contributions/contributions"
 import "./dashboard.css";
-
+import CityModal from "../citymodal/CityModal";
+import { AnimatePresence } from "framer-motion";
+import { getCityFromLocal, isCitySelected } from "../../common/functions";
 function Dashboard() {
-  const [city, setCity] = useState("Bangalore");
-
+  const [city, setCity] = useState(null);
+  const [modal, setModal] = useState(false);
+  const close = () => setModal(false);
+  const open = () => setModal(true);
   const handleCity = (city) => {
     setCity(city);
   };
@@ -22,13 +26,20 @@ function Dashboard() {
 
   useEffect(() => {
     checkUserLogin();
-
+    if (!isCitySelected()) {
+      setModal(true);
+    } else {
+      setCity(getCityFromLocal());
+    }
     // eslint-disable-next-line
   }, []);
 
   return (
     <>
-      <Navbar handleCity={handleCity} />
+      <AnimatePresence initial={false} exitBeforeEnter={true}>
+        {modal && <CityModal handleClose={close} setCity={setCity} />}
+      </AnimatePresence>
+      <Navbar handleCity={handleCity} openModal={open} city={city} />
       <div className="main">
         <Sidebar />
         <div className="main-content">

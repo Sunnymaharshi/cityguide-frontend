@@ -1,0 +1,25 @@
+.modal {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.modal-content {
+  width: 600px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: var(--primary);
+}
+.city {
+  cursor: pointer;
+  background-color: var(--secondary);
+  padding: 5px 10px 5px 10px;
+  width: 100px;
+  color: white;
+  text-align: center;
+  margin: 5px;
+  font-size: large;
+  border-radius: 15px;
+}

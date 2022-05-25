@@ -7,6 +7,7 @@ import {
 } from "../../services/admin/restaurant.service";
 import "./Restaurant.css";
 import { toast } from "react-toastify";
+import { FileUploaded } from "../FileUploaded/FileUploaded";
 
 function Restaurant() {
   const [res_name, setResName] = useState("");
@@ -15,6 +16,7 @@ function Restaurant() {
   const [res_image, setResImage] = useState("");
   const [city_name, setCityName] = useState("");
   const [res_id, setResId] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
   const [restaurant, setRestaurants] = useState([]);
 
   useEffect(() => {
@@ -86,14 +88,16 @@ function Restaurant() {
       });
   };
 
+  
+
   return (
     <>
       <div className="rest-div">
-        <div className="res-form">
+        <div className="attr-form">
           <form>
             <h2 className="rest-op">Restaurant Operations</h2>
-
-            <div className="form-group">
+            <div className="form-row">
+            <div className="form-group col">
               <label htmlFor="resname">Restaurant Name</label>
               <input
                 onChange={(e) => setResName(e.target.value)}
@@ -105,7 +109,7 @@ function Restaurant() {
                 className="form-control"
               />
             </div>
-            <div className="form-group">
+            <div className="form-group col">
               <label htmlFor="resdesc">Restaurant Description</label>
               <input
                 onChange={(e) => setDesc(e.target.value)}
@@ -117,7 +121,9 @@ function Restaurant() {
                 className="form-control"
               />
             </div>
-            <div className="form-group">
+            </div>
+            <div className="form-row">
+            <div className="form-group col">
               <label htmlFor="resloc">Restaurant Location</label>
               <input
                 onChange={(e) => setResLoc(e.target.value)}
@@ -129,19 +135,7 @@ function Restaurant() {
                 className="form-control"
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="resimg">Restaurant Image</label>
-              <input
-                onChange={(e) => setResImage(e.target.value)}
-                type="text"
-                name="resimg"
-                placeholder="Restaurant Image"
-                id="resimg"
-                value={res_image}
-                className="form-control"
-              />
-            </div>
-            <div className="form-group">
+            <div className="form-group col">
               <label htmlFor="cityname">City Name</label>
               <input
                 onChange={(e) => setCityName(e.target.value)}
@@ -152,21 +146,91 @@ function Restaurant() {
                 value={city_name}
                 className="form-control"
               />
+             
             </div>
+            </div>
+           
+          <div className="form-row">
+            <div className="form-group col">
+            <FileUploaded
+                onFileSelect={(file) => setSelectedFile(file)}
+            />
+            <button className="delete-btn" style={{marginTop:"0.5rem"}}>Upload</button>
+            </div>
+            
+     
+     <div className="form-group col">
+     <label htmlFor="resimage">Restaurant Image</label>
+            <input
+             
+             type="text"
+              name="resimage"
+              placeholder="Restaurant Image"
+              id="resimage"
+              value={res_image}
+              className="form-control"
+            />
+              <button
+                type="submit"
+                className="delete-btn"
+                style={{marginTop:"0.5rem"}}
+                disabled={!city_name || !res_image}
+               
+              >
+                Get URL
+              </button>
+          </div>
+          
+          </div>
+       
 
             <div className="btn-main">
-              <div className="add-button">
+          
                 <button
                   type="submit"
-                  className="delete-btn"
+                  className="add-btn"
                   disabled={!res_name || !res_location || !city_name ||!description}
                   onClick={sendDataToAPI}
                 >
                   Add
                 </button>
-              </div>
             </div>
-            <div className="form-group">
+            <div className="form-row">
+            <div className="form-group col">
+              <label htmlFor="resid">Restaurant Id</label>
+              <input
+                onChange={(e) => setResId(e.target.value)}
+                type="text"
+                name="resid"
+                placeholder="Restaurant Id"
+                id="resid"
+                value={res_id}
+                className="form-control"
+              />
+            </div>
+            <div className="form-group col idbtn">
+                  <button
+                    type="submit"
+                    className="delete-btn"
+                    disabled={!res_name || !res_location || !city_name || !res_id || !description}
+                    onClick={updateDataToAPI}
+                  >
+                    Update
+                  </button>
+              </div>
+              <div className="form-group col idbtn">
+                <button
+                  type="submit"
+                  className="delete-btn"
+                  disabled={!res_id}
+                  onClick={onDelete}
+                >
+                  Delete
+                </button>
+              </div>
+            
+            </div>
+            {/* <div className="form-group">
               <label htmlFor="resid">Restaurant Id</label>
               <input
                 onChange={(e) => setResId(e.target.value)}
@@ -203,7 +267,7 @@ function Restaurant() {
                   Delete
                 </button>
               </div>
-            </div>
+            </div> */}
           </form>
         </div>
         <div className="res-table">

@@ -57,3 +57,7 @@
 .city-op {
   text-align: center;
 }
+.file-div{
+  display: flex;
+  /* justify-content: center; */
+}

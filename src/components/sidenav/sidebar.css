@@ -3,7 +3,7 @@
 .Sidebar {
   height: calc(100vh - 70px);
   /* background-color: #465362; */
-  background-color: #daf1de;
+  background-color: #3c91e6;
 }
 
 .SidebarList {
@@ -17,7 +17,7 @@
   margin: 0%;
   display: flex;
   flex-direction: row;
-  color: black;
+  color: white;
   font-weight: 500;
   justify-content: center;
   align-items: center;

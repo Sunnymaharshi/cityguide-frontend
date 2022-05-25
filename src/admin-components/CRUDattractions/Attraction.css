@@ -36,3 +36,12 @@
 .attr-op {
   text-align: center;
 }
+.attr-form form{
+  width: 700px;
+}
+.form-row{
+  display: flex;
+}
+.idbtn {
+  padding:20px;
+}

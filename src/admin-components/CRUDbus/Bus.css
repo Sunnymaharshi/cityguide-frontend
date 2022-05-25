@@ -2,3 +2,13 @@
     display: flex;
     justify-content: center;
 }
+.img-form .form-control{
+    width: auto;
+    margin-right: 0.7rem;
+}
+.img-form{
+    display: flex;
+}
+.file-upload{
+    width: 70%;
+}
