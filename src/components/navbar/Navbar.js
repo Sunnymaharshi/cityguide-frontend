@@ -17,7 +17,8 @@ function Navbar({ openModal, city }) {
   return (
     <nav className="nav-bar">
       <div className="logo-drop">
-        <div className="logo">CityGuide</div>
+
+        <div className="logo">City Guide</div>
 
         {/* <div className="drop-down">
           <select name="cities" id="city" title="City" onClick={handleDropdown}>
@@ -59,7 +60,7 @@ function Navbar({ openModal, city }) {
         {user.username && (
           <>
             <div className="username">
-              <Avatar>{user.username.charAt(0).toUpperCase()}</Avatar>
+              <Avatar style={{backgroundColor: "#f2f4f3", color:"#161b33"}}>{user.username.charAt(0).toUpperCase()}</Avatar>
               <div className="logout-content">
                 <div className="logout-btn" onClick={handleLogout}>
                   Logout

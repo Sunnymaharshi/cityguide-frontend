@@ -3,7 +3,9 @@
 .Sidebar {
   height: calc(100vh - 70px);
   /* background-color: #465362; */
-  background-color: #3c91e6;
+  background-color: var(--secondary);
+
+  
 }
 
 .SidebarList {
@@ -13,8 +15,10 @@
 
 .SidebarList .row {
   list-style-type: none;
-  padding: 10px;
   margin: 0%;
+  padding: 2px 10px 2px 10px;
+  margin: 0px 0px 15px 15px;
+
   display: flex;
   flex-direction: row;
   color: white;
@@ -24,17 +28,22 @@
   cursor: pointer;
   text-decoration: none;
 }
+
 .row:hover {
   /* transform: scale(0.9); */
+
 }
 .active {
-  background-color: #8eb69b;
+  background-color: var(--primary);
+  border-top-left-radius: 70px;
+  border-bottom-left-radius: 70px;
   font-size: large;
+
 }
 .sidebar-title{
   display: none;
 }
-.icon-btn:hover{
-  background-color: #8eb69b;
-  box-shadow: none;
+.sidebar-icon{
+  color: var(--lightaccent);
+
 }

@@ -15,6 +15,7 @@ import TourOutlinedIcon from '@mui/icons-material/TourOutlined';
 import TourIcon from '@mui/icons-material/Tour';
 import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import HikingIcon from '@mui/icons-material/Hiking';
 
 import "./sidebar.css";
 import { ADMIN } from "../../common/data";
@@ -32,7 +33,7 @@ function Sidebar() {
         <div>
       <NavLink className="row" to="/home">
         <IconButton>
-        {location.pathname==="/home" ? <HomeIcon style={{fontSize: "2.2rem"}}/> : <HomeOutlinedIcon style={{fontSize: "2.2rem"}}/>}
+        {location.pathname==="/home" ? <HomeIcon className="sidebar-icon" style={{fontSize: "2.2rem"}}/> : <HomeOutlinedIcon className="sidebar-icon" style={{fontSize: "2.2rem"}}/>}
         <br/>
             <Typography className="sidebar-title"> Home</Typography>
             </IconButton>
@@ -41,35 +42,35 @@ function Sidebar() {
           </div>
           <NavLink className="row" to="/busdata">
           <IconButton>
-        {location.pathname==="/busdata" ? <DirectionsBusIcon style={{fontSize: "2.2rem"}}/> : <DirectionsBusFilledOutlinedIcon style={{fontSize: "2.2rem"}}/>}
+        {location.pathname==="/busdata" ? <DirectionsBusIcon className="sidebar-icon" style={{fontSize: "2.2rem"}}/> : <DirectionsBusFilledOutlinedIcon className="sidebar-icon" style={{fontSize: "2.2rem"}}/>}
             <Typography className="sidebar-title">Bus Data</Typography>
             </IconButton>
           </NavLink>
           <NavLink className="row" to="/metromap">
           <IconButton>
-        {location.pathname==="/metromap" ? <TramIcon style={{fontSize: "2.2rem"}}/> : <TramOutlinedIcon style={{fontSize: "2.2rem"}}/>}
+        {location.pathname==="/metromap" ? <TramIcon className="sidebar-icon" style={{fontSize: "2.2rem"}}/> : <TramOutlinedIcon className="sidebar-icon" style={{fontSize: "2.2rem"}}/>}
             <Typography className="sidebar-title">Metro Data</Typography>
             </IconButton>
           </NavLink>
           <NavLink className="row" to="/restaurants">
           <IconButton>
-        {location.pathname==="/restaurants" ? <FastfoodIcon style={{fontSize: "2.2rem"}}/> : <FastfoodOutlinedIcon style={{fontSize: "2.2rem"}}/>}
+        {location.pathname==="/restaurants" ? <FastfoodIcon className="sidebar-icon" style={{fontSize: "2.2rem"}}/> : <FastfoodOutlinedIcon className="sidebar-icon" style={{fontSize: "2.2rem"}}/>}
             <Typography className="sidebar-title">Top Restaurants</Typography>
             </IconButton>          </NavLink>
           <NavLink className="row" to="/attractions">
           <IconButton>
-        {location.pathname==="/attractions" ? <TourIcon style={{fontSize: "2.2rem"}}/> : <TourOutlinedIcon style={{fontSize: "2.2rem"}}/>}
+        {location.pathname==="/attractions" ? <HikingIcon className="sidebar-icon" style={{fontSize: "2.2rem"}}/> : <HikingIcon className="sidebar-icon" style={{fontSize: "2.2rem"}}/>}
             <Typography className="sidebar-title">Top Attractions</Typography>
             </IconButton>          </NavLink>
           <NavLink className="row" to="/faq">
           <IconButton>
-        {location.pathname==="/faq" ? <QuestionAnswerIcon style={{fontSize: "2.2rem"}}/> : <QuestionAnswerOutlinedIcon style={{fontSize: "2.2rem"}}/>}
+        {location.pathname==="/faq" ? <QuestionAnswerIcon className="sidebar-icon" style={{fontSize: "2.2rem"}}/> : <QuestionAnswerOutlinedIcon className="sidebar-icon" style={{fontSize: "2.2rem"}}/>}
             <Typography className="sidebar-title">FAQ</Typography>
             </IconButton>
           </NavLink>
           <NavLink className="row" to="/contributions">
           <IconButton>
-        {location.pathname==="/contributions/userques" || location.pathname==="/contributions/userans"? <HomeIcon style={{fontSize: "2.2rem"}}/> : <HomeOutlinedIcon style={{fontSize: "2.2rem"}}/>}
+        {location.pathname==="/contributions/userques" || location.pathname==="/contributions/userans"? <HomeIcon className="sidebar-icon" style={{fontSize: "2.2rem"}}/> : <HomeOutlinedIcon className="sidebar-icon" style={{fontSize: "2.2rem"}}/>}
             <Typography className="sidebar-title">Your Contributions</Typography>
             </IconButton>          
             </NavLink>
@@ -77,8 +78,8 @@ function Sidebar() {
         {user.role === ADMIN && (
           <NavLink className="row" to="/admin">
             <IconButton>
-        {/admin*/.test(location.pathname) ? <AdminPanelSettingsIcon style={{fontSize: "2.2rem"}}/> : <AdminPanelSettingsOutlinedIcon style={{fontSize: "2.2rem"}}/>}
-            <Typography>Admin</Typography>
+        {/admin*/.test(location.pathname) ? <AdminPanelSettingsIcon className="sidebar-icon" style={{fontSize: "2.2rem"}}/> : <AdminPanelSettingsOutlinedIcon className="sidebar-icon" style={{fontSize: "2.2rem"}}/>}
+            <Typography className="sidebar-title">Admin</Typography>
             </IconButton>
           </NavLink>
         )}
