@@ -33,8 +33,8 @@ function Dashboard() {
         <Sidebar />
         <div className="main-content">
           <Routes>
-            <Route path="/" element={<Navigate replace to="dashboard" />} />
-            <Route path="dashboard" element={<About city={city} />} />
+            <Route path="/" element={<Navigate replace to="home" />} />
+            <Route path="home" element={<About city={city} />} />
             <Route path="attractions" element={<Attraction city={city} />} />
             <Route path="restaurants" element={<Restaurant city={city} />} />
             <Route path="admin/*" element={<AdminDashboard />} />

@@ -1,8 +1,7 @@
 @import url("../../index.css");
 
 .Sidebar {
-  height: 100vh;
-  width: 250px;
+  height: calc(100vh - 70px);
   /* background-color: #465362; */
   background-color: #daf1de;
 }
@@ -10,13 +9,11 @@
 .SidebarList {
   height: auto;
   padding: 0;
-  width: 250px;
 }
 
 .SidebarList .row {
-  width: 100%;
-  height: 60px;
   list-style-type: none;
+  padding: 10px;
   margin: 0%;
   display: flex;
   flex-direction: row;
@@ -28,9 +25,16 @@
   text-decoration: none;
 }
 .row:hover {
-  transform: scale(0.9);
+  /* transform: scale(0.9); */
 }
 .active {
   background-color: #8eb69b;
   font-size: large;
+}
+.sidebar-title{
+  display: none;
+}
+.icon-btn:hover{
+  background-color: #8eb69b;
+  box-shadow: none;
 }
