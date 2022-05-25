@@ -37,6 +37,7 @@
 
 .nav-link {
   color: white;
+  cursor: pointer;
 }
 .nav-link:hover {
   color: var(--secondary);
@@ -44,4 +45,14 @@
 
 .username {
   margin-right: 20px;
+}
+.user-details {
+  display: flex;
+  flex-direction: row;
+  color: var(--accent);
+  text-transform: capitalize;
+  justify-content: center;
+  align-items: center;
+  font-size: larger;
+  font-weight: 570;
 }

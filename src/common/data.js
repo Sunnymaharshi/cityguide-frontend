@@ -12,7 +12,9 @@ export const INVALID_PASSWORD_RES = "Wrong Password!";
 export const SIGNUP_SUCCESS_RES = "User Signed In Successfully";
 export const USERNAME_TAKEN_RES = "User with username already Exists";
 export const QUES_DELETED_RES = "Question Deleted";
+export const ANS_DELETED_RES = "Answer Deleted";
 export const QUES_DELETE_UNAUTH = "Unauthorized!";
+export const ANS_DELETE_UNAUTH = "Unauthorized!";
 
 export const LIKE_SUCCESS = "Upvoted!!";
 export const DISLIKE_SUCCESS = "Downvoted!!";

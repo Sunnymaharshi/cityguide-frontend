@@ -33,10 +33,15 @@ export const getAnswer = (ans_id) => {
 export const postAnswer = (answer) => {
   return axios.post(BASE_URL + "/postans", answer, authHeader());
 };
+export const deleteAnswer = (ans_id) => {
+  return axios.delete(BASE_URL + "/deleteans/" + ans_id, authHeader());
+};
 export const postComment = (comment) => {
   return axios.post(BASE_URL + "/postcmnt", comment, authHeader());
 };
-
+export const deleteComment = (comm_id) => {
+  return axios.delete(BASE_URL + "/deletecomm/" + comm_id, authHeader());
+};
 export const checkLike = (ans_id) => {
   return axios.get(BASE_URL + "/checkvote/" + ans_id, authHeader());
 };

@@ -1,32 +1,42 @@
 import React, { useContext, useEffect, useState } from "react";
 import Comments from "../comments/Comments";
-import like from "../../../assets/icons/like.svg";
-import dislike from "../../../assets/icons/dislike.svg";
-import comment from "../../../assets/icons/comment.svg";
-import likeActive from "../../../assets/icons/like-active.svg";
-import dislikeActive from "../../../assets/icons/dislike-active.svg";
-import commentActive from "../../../assets/icons/comment-active.svg";
-import dots from "../../../assets/icons/dots.svg";
-
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {
   addDislike,
   addLike,
   checkLike,
+  deleteAnswer,
   getAnswer,
 } from "../../../services/questions/questions.service";
 import "./Answer.css";
 import { isUserLoggedin } from "../../../common/functions";
 import { toast } from "react-toastify";
-import { ADMIN } from "../../../common/data";
+import { ADMIN, ANS_DELETED_RES } from "../../../common/data";
 import UserContext from "../../../context/user/user.context";
-function Answer({ ans, ind }) {
+import { IconButton, Menu, MenuItem } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ReportIcon from "@mui/icons-material/Report";
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
+import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
+import CommentIcon from "@mui/icons-material/Comment";
+import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
+function Answer({ ans, ind, updateAnswers }) {
   const [showComments, setShowComments] = useState(false);
   const [answer, setAnswer] = useState(ans);
 
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
   const { user } = useContext(UserContext);
-
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   useEffect(() => {
     updateLikes();
     // eslint-disable-next-line
@@ -41,8 +51,18 @@ function Answer({ ans, ind }) {
     }
   };
 
-  const handleDeleteAns = () => {};
-  const handleReportAns = () => {};
+  const handleDeleteAns = () => {
+    handleClose();
+    deleteAnswer(answer.ans_id).then((res) => {
+      if (res.data === ANS_DELETED_RES) {
+        toast.success("Successfully Deleted!");
+        updateAnswers(answer.ans_id);
+      }
+    });
+  };
+  const handleReportAns = () => {
+    handleClose();
+  };
 
   const updateAnswer = () => {
     getAnswer(answer.ans_id).then((res) => {
@@ -91,68 +111,80 @@ function Answer({ ans, ind }) {
         <div className="answer-text">
           {ind + 1}: {answer.description}
         </div>
-        <div className="dropend">
-          <img
-            className="dropdown-toggle option-icon"
-            type="button"
-            alt="options"
-            src={dots}
-            id="answer-options-id"
-            data-bs-toggle="dropdown"
-            // aria-expanded="false"
-          />
-
-          <ul className="dropdown-menu" aria-labelledby="answer-options-id">
-            {(user.username === answer.username || user.role === ADMIN) && (
-              <li>
-                <div
-                  className="dropdown-item"
-                  onClick={() => {
-                    handleDeleteAns();
-                  }}
-                >
-                  Delete
-                </div>
-              </li>
-            )}
-            <li>
-              <div
-                className="dropdown-item"
-                onClick={() => {
-                  handleReportAns();
-                }}
-              >
-                Report
-              </div>
-            </li>
-          </ul>
-        </div>
+        <IconButton
+          aria-label="more"
+          id="long-button"
+          aria-controls={open ? "long-menu" : undefined}
+          aria-expanded={open ? "true" : undefined}
+          aria-haspopup="true"
+          onClick={handleClick}
+        >
+          <MoreVertIcon style={{ color: "var(--accent)" }} />
+        </IconButton>
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+          anchorOrigin={{ vertical: "center", horizontal: "right" }}
+          transformOrigin={{ vertical: "top", horizontal: "left" }}
+        >
+          {(user.username === answer.username || user.role === ADMIN) && (
+            <MenuItem onClick={handleDeleteAns}>
+              <DeleteIcon fontSize="small" style={{ color: "var(--accent)" }} />
+              Delete
+            </MenuItem>
+          )}
+          <MenuItem onClick={handleReportAns}>
+            <ReportIcon fontSize="small" style={{ color: "var(--accent)" }} />
+            Report
+          </MenuItem>
+        </Menu>
       </div>
-      <div className="icons">
-        <div className="i-count" onClick={handleLike}>
-          <img
-            className="icon"
-            alt="Like"
-            src={liked ? `${likeActive}` : `${like}`}
-          />
+      <div className="answer-react-icons">
+        <div className="i-count">
+          {liked ? (
+            <ThumbUpAltIcon
+              onClick={handleLike}
+              className="answer-react-icon"
+            />
+          ) : (
+            <ThumbUpOffAltIcon
+              onClick={handleLike}
+              className="answer-react-icon"
+            />
+          )}
           {answer.upvotes}
         </div>
-        <div className="i-count" onClick={handleDisLike}>
-          <img
-            className="icon"
-            alt="DisLike"
-            src={disliked ? `${dislikeActive}` : `${dislike}`}
-          />
+        <div className="i-count">
+          {disliked ? (
+            <ThumbDownAltIcon
+              onClick={handleDisLike}
+              className="answer-react-icon"
+            />
+          ) : (
+            <ThumbDownOffAltIcon
+              onClick={handleDisLike}
+              className="answer-react-icon"
+            />
+          )}
           {answer.downvotes}
         </div>
         <div className="i-count">
-          <img
-            className="icon"
-            alt="comment"
-            src={showComments ? `${commentActive}` : `${comment}`}
-            onClick={toggleComments}
-          />
-
+          {showComments ? (
+            <CommentIcon
+              onClick={toggleComments}
+              className="answer-react-icon"
+            />
+          ) : (
+            <CommentOutlinedIcon
+              onClick={toggleComments}
+              className="answer-react-icon"
+            />
+          )}
           {answer.commentList.length}
         </div>
       </div>

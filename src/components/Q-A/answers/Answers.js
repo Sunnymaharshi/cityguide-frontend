@@ -40,6 +40,10 @@ function Answers() {
     // eslint-disable-next-line
   }, []);
 
+  const updateAnswers = (ans_id) => {
+    const new_answers = answers.filter((ans) => ans.ans_id !== ans_id);
+    setAnswers(new_answers);
+  };
   return (
     <div className="answers-comp">
       <h2 className="ques">{question}</h2>
@@ -47,7 +51,12 @@ function Answers() {
         <div className="answers">
           {answers.length > 0 &&
             answers.map((ans, ind) => (
-              <Answer ans={ans} ind={ind} key={ans.ans_id} />
+              <Answer
+                ans={ans}
+                ind={ind}
+                key={ans.ans_id}
+                updateAnswers={updateAnswers}
+              />
             ))}
         </div>
         <div className="add-ans">

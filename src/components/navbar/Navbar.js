@@ -80,7 +80,14 @@ function Navbar({ openModal, city }) {
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
               >
-                <Avatar>{user.username.charAt(0).toUpperCase()}</Avatar>
+                <Avatar
+                  style={{
+                    backgroundColor: "var(--primary)",
+                    color: "var(--accent)",
+                  }}
+                >
+                  {user.username.charAt(0).toUpperCase()}
+                </Avatar>
               </IconButton>
               <Menu
                 anchorEl={anchorEl}
@@ -117,6 +124,17 @@ function Navbar({ openModal, city }) {
                 transformOrigin={{ horizontal: "right", vertical: "top" }}
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
+                <div className="user-details">
+                  <Avatar
+                    style={{
+                      backgroundColor: "var(--primary)",
+                      color: "var(--accent)",
+                    }}
+                  >
+                    {user.username.charAt(0).toUpperCase()}
+                  </Avatar>
+                  <div>{user.username}</div>
+                </div>
                 <MenuItem onClick={handleYourQuestions}>
                   Your Questions
                 </MenuItem>
