@@ -1,26 +1,21 @@
-import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+
 import { toast } from "react-toastify";
 import {
-  deleteQuestion,
   getAllQuestions,
   getSimilarQuestions,
   postQuestion,
 } from "../../../services/questions/questions.service";
 import { isUserLoggedin } from "../../../common/functions";
-import {
-  ADMIN,
-  QUES_DELETED_RES,
-  QUES_DELETE_UNAUTH,
-} from "../../../common/data";
-import dots from "../../../assets/icons/dots.svg";
+
 import "./questions.css";
-import UserContext from "../../../context/user/user.context";
+import Question from "../question/Question";
+
 function Questions({ city }) {
   const [questions, setQuestions] = useState([]);
   const [newQuestion, setNewQuestion] = useState("");
   const [query, setQuery] = useState("");
-  const { user } = useContext(UserContext);
+
   useEffect(() => {
     loadQuestions(city);
     // eslint-disable-next-line
@@ -30,6 +25,10 @@ function Questions({ city }) {
     // eslint-disable-next-line
   }, [city]);
 
+  const updateQuestions = (ques_id) => {
+    const new_questions = questions.filter((ques) => ques.ques_id !== ques_id);
+    setQuestions(new_questions);
+  };
   const handleSearch = () => {
     if (query.length < 3) {
       toast.error("Query must be atleast 3 characters");
@@ -44,9 +43,11 @@ function Questions({ city }) {
     }
   };
   const loadQuestions = () => {
-    getAllQuestions(city).then((res) => {
-      setQuestions(res.data);
-    });
+    if (city !== null) {
+      getAllQuestions(city).then((res) => {
+        setQuestions(res.data);
+      });
+    }
   };
   const addQuestion = () => {
     if (isUserLoggedin()) {
@@ -64,21 +65,7 @@ function Questions({ city }) {
       toast.error("Login to post Question...");
     }
   };
-  const handleDeleteQues = (ques_id) => {
-    deleteQuestion(ques_id)
-      .then((res) => {
-        if (res.data === QUES_DELETED_RES) {
-          setQuestions(questions.filter((q) => q.ques_id !== ques_id));
-          toast.success("Question Deleted Successfully");
-        }
-      })
-      .catch((err) => {
-        if (err.response.data === QUES_DELETE_UNAUTH) {
-          toast.error("Unauthorised!");
-        } else toast.error("Unknown error!");
-      });
-  };
-  const handleReportQues = (ques_id) => {};
+
   return (
     <div className="questions-comp">
       <div className="search">
@@ -99,51 +86,13 @@ function Questions({ city }) {
         <div className="questions">
           <h5>Questions</h5>
 
-          {questions.map((q, ind) => (
-            <div key={q.ques_id} className="question">
-              <Link to={`/answers/${q.ques_id}`} className="question-link">
-                {ind + 1}: {q.description}
-              </Link>
-              <div className="dropend">
-                <img
-                  className="dropdown-toggle option-icon"
-                  type="button"
-                  alt="options"
-                  src={dots}
-                  id="dropdownMenuButton1"
-                  data-bs-toggle="dropdown"
-                  // aria-expanded="false"
-                />
-
-                <ul
-                  className="dropdown-menu"
-                  aria-labelledby="dropdownMenuButton1"
-                >
-                  {(user.username === q.username || user.role === ADMIN) && (
-                    <li>
-                      <div
-                        className="dropdown-item"
-                        onClick={() => {
-                          handleDeleteQues(q.ques_id);
-                        }}
-                      >
-                        Delete
-                      </div>
-                    </li>
-                  )}
-                  <li>
-                    <div
-                      className="dropdown-item"
-                      onClick={() => {
-                        handleReportQues(q.ques_id);
-                      }}
-                    >
-                      Report
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
+          {questions.map((ques, ind) => (
+            <Question
+              ques={ques}
+              key={ques.ques_id}
+              ind={ind}
+              updateQuestions={updateQuestions}
+            />
           ))}
         </div>
         <div className="add-ques">

@@ -29,11 +29,15 @@
 .questions-comp {
   margin: 20px;
 }
+.questions-content {
+}
 .questions {
   padding: 20px;
+  width: 60vw;
 }
 .question {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
 }
 .question-link {

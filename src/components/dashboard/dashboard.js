@@ -9,7 +9,7 @@ import Restaurant from "../restaurant/restaurant";
 import AdminDashboard from "../../admin-components/admindashboard/AdminDashboard";
 import Questions from "../Q-A/questions/Questions";
 import Answers from "../Q-A/answers/Answers";
-import Contributions from "../contributions/contributions"
+import Contributions from "../contributions/contributions";
 import "./dashboard.css";
 import CityModal from "../citymodal/CityModal";
 import { AnimatePresence } from "framer-motion";
@@ -29,7 +29,8 @@ function Dashboard() {
     if (!isCitySelected()) {
       setModal(true);
     } else {
-      setCity(getCityFromLocal());
+      const selected_city = getCityFromLocal();
+      setCity(selected_city);
     }
     // eslint-disable-next-line
   }, []);
