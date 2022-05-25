@@ -1,4 +1,4 @@
-
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap");
 
 .signup-com {
   width: 100vw;
@@ -13,11 +13,16 @@ h1,
 p {
   text-align: center;
 }
+.signup-logo{
+  font-family: "Kalam", cursive;
+  font-size: 3.2rem !important;
+
+}
 small {
   color: red;
 }
 form {
-  background-color: rgba(30, 185, 225, 0.3);
+  background-color: rgba(30, 185, 225, 0);
   border-radius: 10px;
   padding-top: 30px;
   padding-bottom: 15px;
@@ -49,5 +54,5 @@ form {
   color: var(--accent);
 }
 .login-link:hover {
-  color:coral;
+  color:darkorange;
 }

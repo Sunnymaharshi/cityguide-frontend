@@ -63,7 +63,7 @@ function Signup() {
   return (
     <div className="signup-com">
       <form onSubmit={handleSubmit}>
-        <h1>City Guide</h1>
+        <h1 className="signup-logo">City Guide</h1>
 
         <div className="form-group">
           <label htmlFor="name">Name</label>

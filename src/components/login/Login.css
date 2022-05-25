@@ -1,4 +1,4 @@
-@import url("../../index.css");
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap");
 
 .login-comp {
   width: 100vw;
@@ -14,6 +14,10 @@ form {
   color: white;
   background-color: rgba(30, 185, 225, 0);
   width: 400px;
+}
+.login-logo{
+  font-family: "Kalam", cursive;
+  font-size: 3.2rem !important;
 }
 form small {
   color: red;
