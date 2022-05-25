@@ -1,14 +1,40 @@
-import { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../services/auth/auth.service";
 import "./Navbar.css";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import UserContext from "../../context/user/user.context";
-import { Avatar } from "@mui/material";
+import {
+  Avatar,
+  Divider,
+  IconButton,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+} from "@mui/material";
 import { motion } from "framer-motion";
+import { Logout } from "@mui/icons-material";
 function Navbar({ openModal, city }) {
   const { user } = useContext(UserContext);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const navigate = useNavigate();
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleYourQuestions = () => {
+    navigate("/questions", { replace: true });
+  };
+  const handleYourAnswers = () => {
+    navigate("/answers", { replace: true });
+  };
+  const handleBookmarks = () => {
+    navigate("/bookmarks", { replace: true });
+  };
   const handleLogout = () => {
     logout();
     window.location.reload();
@@ -18,18 +44,6 @@ function Navbar({ openModal, city }) {
     <nav className="nav-bar">
       <div className="logo-drop">
         <div className="logo">CityGuide</div>
-
-        {/* <div className="drop-down">
-          <select name="cities" id="city" title="City" onClick={handleDropdown}>
-            {cities.map((val, key) => {
-              return (
-                <option key={key} value={val}>
-                  {val}
-                </option>
-              );
-            })}
-          </select>
-        </div> */}
       </div>
       <div className="last">
         <motion.div
@@ -59,12 +73,64 @@ function Navbar({ openModal, city }) {
         {user.username && (
           <>
             <div className="username">
-              <Avatar>{user.username.charAt(0).toUpperCase()}</Avatar>
-              <div className="logout-content">
-                <div className="logout-btn" onClick={handleLogout}>
+              <IconButton
+                onClick={handleClick}
+                size="small"
+                sx={{ ml: 2 }}
+                aria-controls={open ? "account-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+              >
+                <Avatar>{user.username.charAt(0).toUpperCase()}</Avatar>
+              </IconButton>
+              <Menu
+                anchorEl={anchorEl}
+                id="account-menu"
+                open={open}
+                onClose={handleClose}
+                onClick={handleClose}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: "visible",
+                    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                    mt: 1.5,
+                    "& .MuiAvatar-root": {
+                      width: 32,
+                      height: 32,
+                      ml: -0.5,
+                      mr: 1,
+                    },
+                    "&:before": {
+                      content: '""',
+                      display: "block",
+                      position: "absolute",
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: "background.paper",
+                      transform: "translateY(-50%) rotate(45deg)",
+                      zIndex: 0,
+                    },
+                  },
+                }}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+              >
+                <MenuItem onClick={handleYourQuestions}>
+                  Your Questions
+                </MenuItem>
+                <MenuItem onClick={handleYourAnswers}>Your Answers</MenuItem>
+                <MenuItem onClick={handleBookmarks}>Bookmarks</MenuItem>
+                <Divider />
+                <MenuItem onClick={handleLogout}>
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
                   Logout
-                </div>
-              </div>
+                </MenuItem>
+              </Menu>
             </div>
           </>
         )}
