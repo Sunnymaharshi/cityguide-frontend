@@ -99,9 +99,15 @@ function Login() {
             Login
           </button>
         </div>
-        <p>
+        <p className="signup-link1">
           <Link to="/signup" className="signup-link">
             <b>Create Account</b>
+          </Link>
+        </p>
+        <p className="signup-link1">
+          Don't want to Login?{" "}
+          <Link to="/home" className="signup-link">
+            <b>Goto Home</b>
           </Link>
         </p>
       </form>

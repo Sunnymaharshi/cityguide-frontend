@@ -1,7 +1,9 @@
+
+
 .signup-com {
   width: 100vw;
   height: 100vh;
-  background-color: white;
+  background-image: url("https://cdn.wallpapersafari.com/71/35/QXftxG.jpg");
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,7 +17,7 @@ small {
   color: red;
 }
 form {
-  background-color: #465362;
+  background-color: rgba(30, 185, 225, 0.3);
   border-radius: 10px;
   padding-top: 30px;
   padding-bottom: 15px;
@@ -43,9 +45,9 @@ form {
   transform: scale(0.95);
 }
 
-.login-link {
-  color: white;
+.login-link1 {
+  color: var(--accent);
 }
 .login-link:hover {
-  color: gold;
+  color:coral;
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import UserContext from "../../context/user/user.context";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -11,8 +11,6 @@ import TramOutlinedIcon from "@mui/icons-material/TramOutlined";
 import TramIcon from "@mui/icons-material/Tram";
 import FastfoodOutlinedIcon from "@mui/icons-material/FastfoodOutlined";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
-import TourOutlinedIcon from "@mui/icons-material/TourOutlined";
-import TourIcon from "@mui/icons-material/Tour";
 import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlined";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import HikingIcon from "@mui/icons-material/Hiking";
@@ -24,7 +22,6 @@ import { IconButton, Typography } from "@mui/material";
 function Sidebar() {
   const location = useLocation();
 
-  // const [isActive, setisActive] = useState({home:true})
   const { user } = useContext(UserContext);
   return (
     <div className="Sidebar">

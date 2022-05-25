@@ -138,10 +138,16 @@ function Signup() {
           </button>
         </div>
 
-        <p>
+        <p className="login-link1">
           Already registered?{" "}
           <Link to="/login" className="login-link">
             <b>Login</b>
+          </Link>
+        </p>
+        <p className="login-link1">
+          Don't want to SignUp?{" "}
+          <Link to="/home" className="login-link">
+            <b>Goto Home</b>
           </Link>
         </p>
       </form>
