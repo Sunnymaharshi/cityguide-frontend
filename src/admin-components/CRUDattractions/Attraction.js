@@ -5,6 +5,9 @@ import {
   getAttractions,
   postAtrraction,
   updateAttraction,
+  uploadFile,
+  getimgurl,
+  postImg
 } from "../../services/admin/attraction.service";
 import "./Attraction.css";
 import { toast } from "react-toastify";
@@ -18,6 +21,10 @@ function Attraction() {
   const [attr_id, setAttrId] = useState("");
   const [attraction, setAttractions] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [type_id, setTypeId]=useState("");
+  const [filename, setFileName]=useState("");
+  const [type, setType]=useState("Attraction");
+  const [img_url, setImgUrl]=useState("");
 
   useEffect(() => {
     getAllAttractions();
@@ -39,6 +46,7 @@ function Attraction() {
       .then(function (response) {
         if (response.data.attr_name == attr_name)
         toast.success("Successfully Added!");
+        setAttrId(response.data.attr_id);
         setAttrName("");
         setDesc("");
         setAttrLoc("");
@@ -53,7 +61,7 @@ function Attraction() {
 
   const updateDataToAPI = async (event) => {
     event.preventDefault();
-    updateAttraction(attr_id, attr_name,description, attr_loc, city_name, attr_img)
+    updateAttraction(attr_id, attr_name,description, attr_loc, city_name)
       .then(function (response) {
         if (response.data.attr_name == attr_name) {
           toast.success("Successfully Updated!");
@@ -85,6 +93,53 @@ function Attraction() {
         console.log(error);
       });
   };
+  const submitForm = (e) => {
+
+    e.preventDefault();
+    console.log(selectedFile);
+    uploadFile(city_name,selectedFile)
+        .then((res) => {
+          // alert("File Upload success");
+          console.log("Uploaded");
+          console.log(res.data);
+          console.log(res);
+          if(res.status==200)
+          toast.success("Successfully Uploaded Image!");
+  
+          
+        })
+        .catch((err) => console.log("error"));
+    };
+  
+    const geturl =(e)=>{
+      e.preventDefault();
+       getimgurl(city_name,selectedFile)
+      .then((res)=>{
+        setAttrImg(res.data);
+        setFileName(selectedFile.name);
+        console.log(res);
+      })
+      .catch((err) => console.log("error"));
+  
+    }
+
+  const addImg= (e)=>{
+    e.preventDefault();
+    console.log(type);
+    setTypeId(attr_id.toString());
+    // let img_url=res_image;
+    console.log(type_id);
+    setImgUrl(attr_img);
+    console.log(img_url);
+    console.log(filename);
+    postImg(type, type_id, filename, img_url).
+    then((res)=>{
+      console.log(res.data);
+      toast.success("Added Image to Database");
+    })
+    .catch((err)=> console.log("error!"));
+  };
+
 
   return (
     <>
@@ -146,13 +201,65 @@ function Attraction() {
               />
             </div>
             </div>
+            <div className="btn-main">
+              <div className="update-btn"><button
+                  type="submit"
+                  className="delete-btn"
+                  disabled={!attr_name || !attr_loc || !city_name ||!description}
+                  onClick={sendDataToAPI}
+                >
+                  Add
+                </button></div>
+              <div className="update-btn">
+              <button
+                    type="submit"
+                    className="delete-btn"
+                    disabled={!attr_name || !attr_loc || !city_name || !attr_id 
+                    || !description}
+                    onClick={updateDataToAPI}
+                  >
+                    Update
+                  </button>
+              </div>
+              <div className="update-btn">
+              <button
+                  type="submit"
+                  className="delete-btn"
+                  disabled={!attr_id}
+                  onClick={onDelete}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
          
 <div className="form-row">
-            <div className="form-group col">
+<div className="form-group col-sm-2">
+              <label htmlFor="attrid">Attraction Id</label>
+              <input
+                onChange={(e) => setAttrId(e.target.value)}
+                type="text"
+                name="attrid"
+                placeholder="Attraction Id"
+                id="attrid"
+                value={attr_id}
+                className="form-control"
+              />
+              <button
+                   style={{marginTop:"0.5rem"}}
+                    type="submit"
+                    className="delete-btn"
+                    disabled={ !city_name || !attr_img || !filename}
+                    onClick={addImg}
+                  >
+                    Add Image
+                  </button>
+            </div>
+            <div className="form-group col-sm-4">
             <FileUploaded
                 onFileSelect={(file) => setSelectedFile(file)}
             />
-            <button className="delete-btn" style={{marginTop:"0.5rem"}}>Upload</button>
+            <button className="delete-btn" style={{marginTop:"0.5rem"}} onClick={submitForm}>Upload</button>
             </div>
             
      
@@ -171,61 +278,16 @@ function Attraction() {
                 type="submit"
                 className="delete-btn"
                 style={{marginTop:"0.5rem"}}
-                disabled={!city_name || !attr_img}
-               
+                disabled={!city_name}
+               onClick={geturl}
               >
                 Get URL
               </button>
           </div>
+
+         
           </div>
-            <div className="btn-main">
-              
-                <button
-                  type="submit"
-                  className="add-btn"
-                  disabled={!attr_name || !attr_loc || !city_name ||!description}
-                  onClick={sendDataToAPI}
-                >
-                  Add
-                </button>
-              
-            </div>
-            <div className="form-row">
-            <div className="form-group col">
-              <label htmlFor="attrid">Attraction Id</label>
-              <input
-                onChange={(e) => setAttrId(e.target.value)}
-                type="text"
-                name="attrid"
-                placeholder="Attraction Id"
-                id="attrid"
-                value={attr_id}
-                className="form-control"
-              />
-            </div>
-            <div className="form-group col idbtn">
-                  <button
-                    type="submit"
-                    className="delete-btn"
-                    disabled={!attr_name || !attr_loc || !city_name || !attr_id 
-                    || !description}
-                    onClick={updateDataToAPI}
-                  >
-                    Update
-                  </button>
-              </div>
-              <div className="form-group col idbtn">
-                <button
-                  type="submit"
-                  className="delete-btn"
-                  disabled={!attr_id}
-                  onClick={onDelete}
-                >
-                  Delete
-                </button>
-              </div>
-            
-            </div>
+           
           </form>
         </div>
         <div className="attr-table">

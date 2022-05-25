@@ -26,7 +26,7 @@ export const postRestaurant = async (res_name,description,res_location,city_name
       )
 }
 
-export const updateRestaurant= async(res_id,res_name,description,res_location,city_name,res_image)=>{
+export const updateRestaurant= async(res_id,res_name,description,res_location,city_name)=>{
     const userDetails = JSON.parse(localStorage.getItem("user"));
     return await axios
       .put(
@@ -36,7 +36,6 @@ export const updateRestaurant= async(res_id,res_name,description,res_location,ci
           res_name,
           description,
           res_location,
-          res_image,
           city_name
 
         },
@@ -78,3 +77,22 @@ export const uploadFile = (city_name,selectedFile) => {
 export const getimgurl=(city_name,selectedFile)=>{
  
   return axios.get(BASE_URL+`/geturl/${city_name}/${selectedFile.name}`)}
+
+export const postImg=(type, type_id, filename, img_url)=>{
+  const userDetails = JSON.parse(localStorage.getItem("user"));
+  return axios
+      .post(BASE_URL+`/addimagedetails`, 
+      {
+        type, 
+        type_id,
+        filename,
+        img_url
+      },
+
+      {
+        headers: {
+          Authorization: "Bearer " + userDetails.token,
+        }
+      })
+
+}

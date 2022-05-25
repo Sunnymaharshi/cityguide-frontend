@@ -27,7 +27,7 @@ export const postAtrraction = async (attr_name,description,attr_loc,city_name, a
       )
 }
 
-export const updateAttraction= async(attr_id,attr_name,description,attr_loc,city_name,attr_img)=>{
+export const updateAttraction= async(attr_id,attr_name,description,attr_loc,city_name)=>{
     const userDetails = JSON.parse(localStorage.getItem("user"));
     return await axios
       .put(
@@ -37,7 +37,6 @@ export const updateAttraction= async(attr_id,attr_name,description,attr_loc,city
           attr_name,
           description,
           attr_loc,
-          attr_img,
           city_name
 
         },
@@ -57,4 +56,43 @@ export const deleteAttraction = async(attr_id)=>{
           Authorization: "Bearer " + userDetails.token,
         },
       })
+}
+export const uploadFile = (city_name,selectedFile) => {
+
+
+  console.log(selectedFile);
+  const formData = new FormData();
+    formData.append('image',selectedFile)
+  const userDetails = JSON.parse(localStorage.getItem("user"));
+    return axios
+      .post(BASE_URL+`/imageUpload/${city_name}`, formData,
+
+      {
+        headers: {
+          Authorization: "Bearer " + userDetails.token,
+          'content-type': 'multipart/form-data'
+        }
+      })
+  }
+export const getimgurl=(city_name,selectedFile)=>{
+ 
+  return axios.get(BASE_URL+`/geturl/${city_name}/${selectedFile.name}`)}
+
+export const postImg=(type, type_id, filename, img_url)=>{
+  const userDetails = JSON.parse(localStorage.getItem("user"));
+  return axios
+      .post(BASE_URL+`/addimagedetails`, 
+      {
+        type, 
+        type_id,
+        filename,
+        img_url
+      },
+
+      {
+        headers: {
+          Authorization: "Bearer " + userDetails.token,
+        }
+      })
+
 }
