@@ -11,9 +11,9 @@ import TramOutlinedIcon from "@mui/icons-material/TramOutlined";
 import TramIcon from "@mui/icons-material/Tram";
 import FastfoodOutlinedIcon from "@mui/icons-material/FastfoodOutlined";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
-import QuestionAnswerOutlinedIcon from "@mui/icons-material/QuestionAnswerOutlined";
-import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import HikingIcon from "@mui/icons-material/Hiking";
+import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
+import HelpIcon from '@mui/icons-material/Help';
 
 import "./sidebar.css";
 import { ADMIN } from "../../common/data";
@@ -111,12 +111,12 @@ function Sidebar() {
         <NavLink className="row" to="/faq">
           <IconButton>
             {location.pathname === "/faq" ? (
-              <QuestionAnswerIcon
+              <HelpIcon
                 className="sidebar-icon"
                 style={{ fontSize: "2.2rem" }}
               />
             ) : (
-              <QuestionAnswerOutlinedIcon
+              <HelpOutlineOutlinedIcon
                 className="sidebar-icon"
                 style={{ fontSize: "2.2rem" }}
               />

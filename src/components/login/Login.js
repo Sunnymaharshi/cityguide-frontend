@@ -65,7 +65,7 @@ function Login() {
   return (
     <div className="login-comp">
       <form onSubmit={handleSubmit}>
-        <h1>City Guide</h1>
+        <h1 className="login-logo">City Guide</h1>
 
         <div className="form-group">
           <label htmlFor="username">Username</label>
