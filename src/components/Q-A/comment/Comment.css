@@ -1,0 +1,22 @@
+.comment-comp {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--accent);
+  padding: 10px;
+}
+.comment-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 10px;
+}
+.comment-text {
+  margin-left: 10px;
+}
+.comm-username {
+  color: var(--accent);
+  font-size: large;
+  font-weight: 300;
+}

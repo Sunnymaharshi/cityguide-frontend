@@ -1,13 +1,25 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { isUserLoggedin } from "../../../common/functions";
 import UserContext from "../../../context/user/user.context";
-import { postComment } from "../../../services/questions/questions.service";
+import {
+  getComments,
+  postComment,
+} from "../../../services/questions/questions.service";
+import Comment from "../comment/Comment";
 import "./Comments.css";
-function Comments({ commentList, handleCommentsUpdate, ans_id }) {
-  const [comments, setComments] = useState(commentList);
+function Comments({ ans_id, handleCommentsUpdate }) {
+  const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
   const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    getComments(ans_id).then((res) => {
+      setComments(res.data);
+    });
+    // eslint-disable-next-line
+  }, []);
+
   const addComment = () => {
     if (isUserLoggedin()) {
       if (comment.trim().length > 0) {
@@ -15,7 +27,7 @@ function Comments({ commentList, handleCommentsUpdate, ans_id }) {
           const new_comments = [res.data, ...comments];
 
           setComments(new_comments);
-          handleCommentsUpdate(new_comments);
+          handleCommentsUpdate(new_comments.length);
           setComment("");
         });
       } else {
@@ -24,6 +36,11 @@ function Comments({ commentList, handleCommentsUpdate, ans_id }) {
     } else {
       toast.error("Login to comment...");
     }
+  };
+
+  const updateComments = (comm_id) => {
+    const new_comments = comments.filter((com) => com.comm_id !== comm_id);
+    setComments(new_comments);
   };
   return (
     <div className="comments-comp">
@@ -44,15 +61,12 @@ function Comments({ commentList, handleCommentsUpdate, ans_id }) {
 
       <div className="comments">
         <div style={{ color: "blue" }}>Comments</div>
-        {comments?.map((com) => (
-          <div className="comment" key={com.comm_id}>
-            <div>
-              {com.description}
-              <span className="comm-username">
-                ~<b>{com.username}</b>
-              </span>
-            </div>
-          </div>
+        {comments?.map((comm) => (
+          <Comment
+            comm={comm}
+            key={comm.comm_id}
+            updateComments={updateComments}
+          />
         ))}
       </div>
     </div>

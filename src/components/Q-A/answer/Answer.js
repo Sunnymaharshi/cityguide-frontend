@@ -7,6 +7,7 @@ import {
   checkLike,
   deleteAnswer,
   getAnswer,
+  getComments,
 } from "../../../services/questions/questions.service";
 import "./Answer.css";
 import { isUserLoggedin } from "../../../common/functions";
@@ -28,6 +29,7 @@ function Answer({ ans, ind, updateAnswers }) {
 
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
+  const [commentsLength, setCommentsLength] = useState(0);
   const { user } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -39,6 +41,9 @@ function Answer({ ans, ind, updateAnswers }) {
   };
   useEffect(() => {
     updateLikes();
+    getComments(ans.ans_id).then((res) => {
+      setCommentsLength(res.data.length);
+    });
     // eslint-disable-next-line
   }, []);
 
@@ -73,8 +78,8 @@ function Answer({ ans, ind, updateAnswers }) {
     setShowComments((showComments) => !showComments);
   };
 
-  const handleCommentsUpdate = (commentList) => {
-    setAnswer({ ...answer, commentList });
+  const handleCommentsUpdate = (commentLength) => {
+    setCommentsLength(commentLength);
   };
   const handleLike = () => {
     if (isUserLoggedin()) {
@@ -185,20 +190,16 @@ function Answer({ ans, ind, updateAnswers }) {
               className="answer-react-icon"
             />
           )}
-          {answer.commentList.length}
+          {commentsLength}
         </div>
       </div>
-      <div
-        style={{
-          display: showComments ? "block" : "none",
-        }}
-      >
+
+      {showComments && (
         <Comments
-          commentList={answer.commentList}
           ans_id={answer.ans_id}
           handleCommentsUpdate={handleCommentsUpdate}
         />
-      </div>
+      )}
     </div>
   );
 }

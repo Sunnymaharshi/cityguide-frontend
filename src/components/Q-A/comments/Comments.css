@@ -1,10 +1,6 @@
 .comments-comp {
   margin-top: 15px;
 }
-
-.comm-username {
-  margin: 15px;
-}
 .comment-btn {
   margin-top: 10px;
   background-color: var(--accent);

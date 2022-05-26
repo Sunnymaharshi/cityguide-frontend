@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Answer from "../answer/Answer";
 import {
+  getAnswers,
   getQuestion,
   postAnswer,
 } from "../../../services/questions/questions.service";
@@ -21,7 +22,7 @@ function Answers() {
         const ans = { description: newAnswer, ques_id: id };
         postAnswer(ans).then((res) => {
           setNewAnswer("");
-          setAnswers((prev) => [...prev, res.data]);
+          setAnswers((prev) => [res.data, ...prev]);
           toast.success(POST_ANSWER_SUCCESS_MSG);
         });
       } else {
@@ -34,7 +35,9 @@ function Answers() {
   useEffect(() => {
     getQuestion(id).then((res) => {
       setQuestion(res.data.description);
-      setAnswers(res.data.answerList);
+    });
+    getAnswers(id).then((res) => {
+      setAnswers(res.data);
     });
 
     // eslint-disable-next-line
@@ -49,7 +52,7 @@ function Answers() {
       <h2 className="ques">{question}</h2>
       <div className="content">
         <div className="answers">
-          {answers.length > 0 &&
+          {answers?.length > 0 &&
             answers.map((ans, ind) => (
               <Answer
                 ans={ans}

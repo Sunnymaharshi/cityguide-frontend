@@ -14,6 +14,8 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 import { Logout } from "@mui/icons-material";
+import BookmarksIcon from "@mui/icons-material/Bookmarks";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 function Navbar({ openModal, city }) {
   const { user } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -28,9 +30,6 @@ function Navbar({ openModal, city }) {
   };
   const handleYourQuestions = () => {
     navigate("/contributions/userques", { replace: true });
-  };
-  const handleYourAnswers = () => {
-    navigate("/contributions/userans", { replace: true });
   };
   const handleBookmarks = () => {
     navigate("/bookmarks", { replace: true });
@@ -135,11 +134,20 @@ function Navbar({ openModal, city }) {
                   </Avatar>
                   <div>{user.username}</div>
                 </div>
+
                 <MenuItem onClick={handleYourQuestions}>
-                  Your Questions
+                  <ListItemIcon>
+                    <QuestionAnswerIcon fontSize="small" />
+                  </ListItemIcon>
+                  Your Q&A's
                 </MenuItem>
-                <MenuItem onClick={handleYourAnswers}>Your Answers</MenuItem>
-                <MenuItem onClick={handleBookmarks}>Bookmarks</MenuItem>
+
+                <MenuItem onClick={handleBookmarks}>
+                  <ListItemIcon>
+                    <BookmarksIcon fontSize="small" />
+                  </ListItemIcon>
+                  Bookmarks
+                </MenuItem>
                 <Divider />
                 <MenuItem onClick={handleLogout}>
                   <ListItemIcon>

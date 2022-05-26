@@ -13,6 +13,7 @@ export const SIGNUP_SUCCESS_RES = "User Signed In Successfully";
 export const USERNAME_TAKEN_RES = "User with username already Exists";
 export const QUES_DELETED_RES = "Question Deleted";
 export const ANS_DELETED_RES = "Answer Deleted";
+export const COMM_DELETED_RES = "Comment Deleted";
 export const QUES_DELETE_UNAUTH = "Unauthorized!";
 export const ANS_DELETE_UNAUTH = "Unauthorized!";
 

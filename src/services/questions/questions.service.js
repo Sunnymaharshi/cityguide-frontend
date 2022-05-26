@@ -36,12 +36,7 @@ export const postAnswer = (answer) => {
 export const deleteAnswer = (ans_id) => {
   return axios.delete(BASE_URL + "/deleteans/" + ans_id, authHeader());
 };
-export const postComment = (comment) => {
-  return axios.post(BASE_URL + "/postcmnt", comment, authHeader());
-};
-export const deleteComment = (comm_id) => {
-  return axios.delete(BASE_URL + "/deletecomm/" + comm_id, authHeader());
-};
+
 export const checkLike = (ans_id) => {
   return axios.get(BASE_URL + "/checkvote/" + ans_id, authHeader());
 };
@@ -50,4 +45,14 @@ export const addLike = (ans_id) => {
 };
 export const addDislike = (ans_id) => {
   return axios.put(BASE_URL + "/downvote/" + ans_id, null, authHeader());
+};
+
+export const getComments = (ans_id) => {
+  return axios.get(BASE_URL + "/getcmnts/" + ans_id);
+};
+export const postComment = (comment) => {
+  return axios.post(BASE_URL + "/postcmnt", comment, authHeader());
+};
+export const deleteComment = (comm_id) => {
+  return axios.delete(BASE_URL + "/deletecomm/" + comm_id, authHeader());
 };
