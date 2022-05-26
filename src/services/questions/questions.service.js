@@ -56,3 +56,7 @@ export const postComment = (comment) => {
 export const deleteComment = (comm_id) => {
   return axios.delete(BASE_URL + "/deletecomm/" + comm_id, authHeader());
 };
+
+export const report = (type, id) => {
+  return axios.post(BASE_URL + `/report/${type}/${id}`);
+};

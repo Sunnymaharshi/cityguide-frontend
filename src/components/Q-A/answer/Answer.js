@@ -8,11 +8,16 @@ import {
   deleteAnswer,
   getAnswer,
   getComments,
+  report,
 } from "../../../services/questions/questions.service";
 import "./Answer.css";
 import { isUserLoggedin } from "../../../common/functions";
 import { toast } from "react-toastify";
-import { ADMIN, ANS_DELETED_RES } from "../../../common/data";
+import {
+  ADMIN,
+  ANS_DELETED_RES,
+  REPORT_ANSWER_TYPE,
+} from "../../../common/data";
 import UserContext from "../../../context/user/user.context";
 import { IconButton, Menu, MenuItem } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -67,6 +72,11 @@ function Answer({ ans, ind, updateAnswers }) {
   };
   const handleReportAns = () => {
     handleClose();
+    report(REPORT_ANSWER_TYPE, answer.ans_id).then((res) => {
+      if (res.data.report_type_id === answer.ans_id) {
+        toast.success("Reported Successfully!");
+      }
+    });
   };
 
   const updateAnswer = () => {

@@ -6,8 +6,15 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ReportIcon from "@mui/icons-material/Report";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import UserContext from "../../../context/user/user.context";
-import { ADMIN, COMM_DELETED_RES } from "../../../common/data";
-import { deleteComment } from "../../../services/questions/questions.service";
+import {
+  ADMIN,
+  COMM_DELETED_RES,
+  REPORT_COMMENT_TYPE,
+} from "../../../common/data";
+import {
+  deleteComment,
+  report,
+} from "../../../services/questions/questions.service";
 import { toast } from "react-toastify";
 const Comment = ({ comm, updateComments }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -29,7 +36,14 @@ const Comment = ({ comm, updateComments }) => {
       }
     });
   };
-  const handleReportComm = () => {};
+  const handleReportComm = () => {
+    handleClose();
+    report(REPORT_COMMENT_TYPE, comm.comm_id).then((res) => {
+      if (res.data.report_type_id === comm.comm_id) {
+        toast.success("Reported Successfully!");
+      }
+    });
+  };
 
   return (
     <div className="comment-comp">

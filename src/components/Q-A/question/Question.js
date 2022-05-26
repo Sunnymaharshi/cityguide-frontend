@@ -8,10 +8,14 @@ import {
   ADMIN,
   QUES_DELETED_RES,
   QUES_DELETE_UNAUTH,
+  REPORT_QUESTION_TYPE,
 } from "../../../common/data";
 import UserContext from "../../../context/user/user.context";
 import { toast } from "react-toastify";
-import { deleteQuestion } from "../../../services/questions/questions.service";
+import {
+  deleteQuestion,
+  report,
+} from "../../../services/questions/questions.service";
 import "./Question.css";
 const Question = ({ ques, ind, updateQuestions }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -25,7 +29,7 @@ const Question = ({ ques, ind, updateQuestions }) => {
   };
   const handleDeleteQues = (ques_id) => {
     handleClose();
-    console.log(ques_id);
+
     deleteQuestion(ques_id)
       .then((res) => {
         if (res.data === QUES_DELETED_RES) {
@@ -41,6 +45,11 @@ const Question = ({ ques, ind, updateQuestions }) => {
   };
   const handleReportQues = (ques_id) => {
     handleClose();
+    report(REPORT_QUESTION_TYPE, ques_id).then((res) => {
+      if (res.data.report_type_id === ques_id) {
+        toast.success("Reported Successfully!");
+      }
+    });
   };
   return (
     <div className="question">
