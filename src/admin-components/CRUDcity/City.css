@@ -43,7 +43,7 @@
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #465362;
+  background-color: var(--secondary);
   color: white;
 }
 .city-div {
@@ -60,4 +60,11 @@
 .file-div{
   display: flex;
   /* justify-content: center; */
+}
+.city-form form{
+  background-image: linear-gradient(to left, var(--secondary),  #005c99);
+border-radius: 10px;
+padding-top: 30px;
+padding-bottom: 15px;
+
 }

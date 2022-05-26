@@ -12,3 +12,11 @@
 .file-upload{
     width: 70%;
 }
+
+.bus-form form{
+    border-radius: 10px;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    background-image: linear-gradient(to left, var(--secondary),  #005c99);
+    
+    }

@@ -22,7 +22,7 @@
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #465362;
+  background-color: var(--secondary);
   color: white;
 }
 .attr-div {

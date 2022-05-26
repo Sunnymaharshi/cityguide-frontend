@@ -144,8 +144,9 @@ function City() {
       <div className="city-form">
         <form>
           <h2 className="city-op">City Operations</h2>
-
-          <div className="form-group">
+      
+      <div className="form-row">
+          <div className="form-group col">
             <label htmlFor="cityname">City Name</label>
             <input
               onChange={(e) => setCityName(e.target.value)}
@@ -157,7 +158,7 @@ function City() {
               className="form-control"
             />
           </div>
-          <div className="form-group">
+          <div className="form-group col">
             <label htmlFor="citytag">City Tagline</label>
             <input
               onChange={(e) => setCityTagline(e.target.value)}
@@ -168,6 +169,7 @@ function City() {
               value={city_tagline}
               className="form-control"
             />
+          </div>
           </div>
           <div className="form-group">
             <label htmlFor="citydesc">City Description</label>
@@ -270,7 +272,6 @@ function City() {
         </form>
       </div>
       <div className="city-table">
-        <h2 className="city-det">City Details</h2>
         <table id="citytable">
           <tbody>
             <tr>

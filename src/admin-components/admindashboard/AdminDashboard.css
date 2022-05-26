@@ -20,20 +20,29 @@
   display: flex;
   align-items: center;
   width: fit-content;
-  background-color: #465362;
+  background-color: var(--secondary);
   margin-bottom: 20px;
-  border-radius: 15px;
+  /* border-radius: 15px; */
 }
 .admin-btn {
   margin: 10px;
-  color: white;
+  color: var(--accent);
   font-size: large;
   padding: 5px 10px 5px 10px;
-  border: 0;
-  border-radius: 5px;
+  border-bottom: 1px solid var(--secondary);
+  /* border-radius: 5px; */
   text-decoration: none;
+  background-color: var(--secondary);
 }
 .admin-btn:hover {
-  color: white;
+  color:white;
   transform: scale(0.95);
 }
+ .admin-btns .active{
+  background-color: var(--secondary);
+  font-size: large;
+  border-bottom: 2px solid white;
+  color: white;
+  border-bottom-left-radius: 0;
+}
+

@@ -65,9 +65,11 @@ function Restaurant() {
 
   const updateDataToAPI = async (event) => {
     event.preventDefault();
+    console.log("hi!");
     updateRestaurant(res_id, res_name,description, res_location, city_name)
       .then(function (response) {
         if (response.data.res_name == res_name) {
+          console.log("bye");
           toast.success("Successfully Updated!");
           setResName("");
           setDesc("");
@@ -301,7 +303,6 @@ function Restaurant() {
           </form>
         </div>
         <div className="res-table">
-          <h2 className="rest-det">Restaurant Details</h2>
           <table id="resttable">
             <tbody>
               <tr>
