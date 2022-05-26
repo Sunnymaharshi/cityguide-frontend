@@ -23,7 +23,7 @@ function Restaurant() {
   const [restaurant, setRestaurants] = useState([]);
   const [type_id, setTypeId]=useState("");
   const [filename, setFileName]=useState("");
-  const [type, setType]=useState("Restaurant");
+  const [type]=useState("Restaurant");
   const [img_url, setImgUrl]=useState("");
 
  
@@ -47,7 +47,7 @@ function Restaurant() {
     event.preventDefault();
     postRestaurant(res_name,description, res_location, city_name,res_image)
       .then(function (response) {
-        if (response.data.res_name == res_name) {
+        if (response.data.res_name === res_name) {
           toast.success("Successfully Added!");
           setResId(response.data.res_id);
           setResName("");
@@ -65,11 +65,9 @@ function Restaurant() {
 
   const updateDataToAPI = async (event) => {
     event.preventDefault();
-    console.log("hi!");
     updateRestaurant(res_id, res_name,description, res_location, city_name)
       .then(function (response) {
-        if (response.data.res_name == res_name) {
-          console.log("bye");
+        if (response.data.res_name === res_name) {
           toast.success("Successfully Updated!");
           setResName("");
           setDesc("");
@@ -109,7 +107,7 @@ function Restaurant() {
           console.log("Uploaded");
           console.log(res.data);
           console.log(res);
-          if(res.status==200)
+          if(res.status===200)
           toast.success("Successfully Uploaded Image!");
   
           
@@ -138,8 +136,8 @@ function Restaurant() {
     setImgUrl(res_image);
     console.log(img_url);
     console.log(filename);
-    postImg(type, type_id, filename, img_url).
-    then((res)=>{
+    postImg(type, type_id, filename, img_url)
+    .then((res)=>{
       console.log(res.data);
       toast.success("Added Image to Database");
     })
@@ -283,7 +281,7 @@ function Restaurant() {
               name="resimage"
               placeholder="Restaurant Image"
               id="resimage"
-              value={res_image}
+              defaultValue={res_image}
               className="form-control"
             />
               <button

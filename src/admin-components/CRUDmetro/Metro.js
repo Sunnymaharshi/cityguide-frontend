@@ -9,14 +9,12 @@ import "./Metro.css"
 function Metro() {
     const [city_name, setCityName]=useState("");
     const [metromap_img, setMetroImg]=useState("");
-    const [description, setDesc]=useState("");
     const [selectedFile, setSelectedFile] = useState(null);
     const sendDataToAPI = async (event) => {
       event.preventDefault();
       postMetro(city_name,metromap_img)
         .then(function (response) {
           if (response.data.city_name === city_name) {
-            // setSuccessMsg("Successfully Added!");
             toast.success("Successfully Added");
             setCityName("");
             setMetroImg("");
@@ -33,11 +31,10 @@ function Metro() {
       console.log(selectedFile);
       uploadFile(city_name,selectedFile)
           .then((res) => {
-            // alert("File Upload success");
             console.log("Uploaded");
             console.log(res.data);
             console.log(res);
-            if(res.status==200)
+            if(res.status===200)
             toast.success("Successfully Uploaded Image!");
     
             
@@ -95,7 +92,7 @@ function Metro() {
               name="metroimage"
               placeholder="Metro Image"
               id="metroname"
-              value={metromap_img}
+              defaultValue={metromap_img}
               className="form-control"
             />
             </div>

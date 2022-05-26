@@ -15,34 +15,34 @@
   display: flex;
   justify-content: center;
   margin-top: 10px;
+  /* border-radius: 15px; */
 }
 .admin-btns {
   display: flex;
   align-items: center;
   width: fit-content;
-  background-color: var(--secondary);
+  background-color: var(--accent);
   margin-bottom: 20px;
-  /* border-radius: 15px; */
+  border-radius: 15px;
 }
 .admin-btn {
   margin: 10px;
-  color: var(--accent);
+  color: white;
   font-size: large;
   padding: 5px 10px 5px 10px;
-  border-bottom: 1px solid var(--secondary);
-  /* border-radius: 5px; */
   text-decoration: none;
-  background-color: var(--secondary);
+  background-color: var(--accent);
 }
 .admin-btn:hover {
   color:white;
   transform: scale(0.95);
 }
  .admin-btns .active{
-  background-color: var(--secondary);
+  background-color:var(--accent);
   font-size: large;
+  font-weight: bolder;
   border-bottom: 2px solid white;
-  color: white;
+  font-size: large;
   border-bottom-left-radius: 0;
 }
 
