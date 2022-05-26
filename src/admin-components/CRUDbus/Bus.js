@@ -10,7 +10,6 @@ import "./Bus.css"
 function Bus() {
     const [city_name, setCityName]=useState("");
     const [busmap_img, setBusImg]=useState("");
-    const [description, setDesc]=useState("");
     const [selectedFile, setSelectedFile] = useState(null);
 
     const sendDataToAPI = async (event) => {
@@ -18,7 +17,6 @@ function Bus() {
       postBus(city_name,busmap_img)
         .then(function (response) {
           if (response.data.city_name === city_name) {
-            // setSuccessMsg("Successfully Added!");
             toast.success("Successfully Added");
             setCityName("");
             setBusImg("");
@@ -35,11 +33,10 @@ function Bus() {
       console.log(selectedFile);
       uploadFile(city_name,selectedFile)
           .then((res) => {
-            // alert("File Upload success");
             console.log("Uploaded");
             console.log(res.data);
             console.log(res);
-            if(res.status==200)
+            if(res.status===200)
             toast.success("Successfully Uploaded Image!");
     
             
@@ -97,7 +94,7 @@ function Bus() {
               name="busimage"
               placeholder="Bus Image"
               id="busname"
-              value={busmap_img}
+              defaultValue={busmap_img}
               className="form-control"
             />
             </div>

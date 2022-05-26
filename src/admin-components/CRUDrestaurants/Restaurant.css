@@ -37,7 +37,7 @@
   text-align: center;
 }
 .attr-form form{
-  background-image: linear-gradient(to left, var(--secondary),  #005c99);
+  background-image: linear-gradient(to right, var(--secondary),  #005c99);
 border-radius: 10px;
 padding-top: 30px;
 padding-bottom: 15px;

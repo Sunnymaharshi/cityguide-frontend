@@ -23,7 +23,7 @@ function Attraction() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [type_id, setTypeId]=useState("");
   const [filename, setFileName]=useState("");
-  const [type, setType]=useState("Attraction");
+  const [type]=useState("Attraction");
   const [img_url, setImgUrl]=useState("");
 
   useEffect(() => {
@@ -44,7 +44,7 @@ function Attraction() {
     event.preventDefault();
     postAtrraction(attr_name, description, attr_loc, city_name, attr_img)
       .then(function (response) {
-        if (response.data.attr_name == attr_name)
+        if (response.data.attr_name === attr_name)
         toast.success("Successfully Added!");
         setAttrId(response.data.attr_id);
         setAttrName("");
@@ -63,7 +63,7 @@ function Attraction() {
     event.preventDefault();
     updateAttraction(attr_id, attr_name,description, attr_loc, city_name)
       .then(function (response) {
-        if (response.data.attr_name == attr_name) {
+        if (response.data.attr_name === attr_name) {
           toast.success("Successfully Updated!");
           setAttrName("");
           setDesc("");
@@ -103,7 +103,7 @@ function Attraction() {
           console.log("Uploaded");
           console.log(res.data);
           console.log(res);
-          if(res.status==200)
+          if(res.status===200)
           toast.success("Successfully Uploaded Image!");
   
           
@@ -132,8 +132,8 @@ function Attraction() {
     setImgUrl(attr_img);
     console.log(img_url);
     console.log(filename);
-    postImg(type, type_id, filename, img_url).
-    then((res)=>{
+    postImg(type, type_id, filename, img_url)
+    .then((res)=>{
       console.log(res.data);
       toast.success("Added Image to Database");
     })
@@ -271,7 +271,7 @@ function Attraction() {
               name="attrimage"
               placeholder="Attraction Image"
               id="resimage"
-              value={attr_img}
+              defaultValue={attr_img}
               className="form-control"
             />
               <button
