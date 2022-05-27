@@ -8,6 +8,7 @@ import Attraction from "../CRUDattractions/Attraction";
 import Bus from "../CRUDbus/Bus";
 import Metro from "../CRUDmetro/Metro";
 import { ADMIN } from "../../common/data";
+import Report from "../Report/Report";
 
 function AdminDashboard() {
   const { user, checkUserLogin } = useContext(UserContext);
@@ -37,6 +38,9 @@ function AdminDashboard() {
             <NavLink to="/admin/metro" className="admin-btn">
               Metro
             </NavLink>
+            <NavLink to="/admin/report" className="admin-btn">
+              Report
+            </NavLink>
             </div>
           </div>
 
@@ -47,6 +51,7 @@ function AdminDashboard() {
             <Route path="attraction" element={<Attraction />} />
             <Route path="bus" element={<Bus />} />
             <Route path="metro" element={<Metro />}/>
+            <Route path="report" element={<Report />}/>
           </Routes>
         </div>
       )}
