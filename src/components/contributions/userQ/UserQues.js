@@ -18,11 +18,9 @@ export default function UserQues() {
   return (
     <div>
       {Ques.length === 0 && <p>No Questions posted</p>}
-      {Ques.length>0 && <h3>You have posted {Ques.length} Questions</h3>}
+      {Ques.length > 0 && <h3>You have posted {Ques.length} Questions</h3>}
       {Ques.map((p) => {
-        
-          return (<p>{p.description}</p>);
-        
+        return <p key={p.ques_id}>{p.description}</p>;
       })}
     </div>
   );

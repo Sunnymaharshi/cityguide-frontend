@@ -22,7 +22,7 @@ function AdminDashboard() {
       {user.role === ADMIN && (
         <div className="admin-content">
           <div className="admin-bar">
-            <div className="admin-btns">
+            <div className="admin-btns not-selectable">
               <NavLink to="/admin/city" className="admin-btn">
                 Cities
               </NavLink>
@@ -33,14 +33,14 @@ function AdminDashboard() {
                 Attractions
               </NavLink>
               <NavLink to="/admin/bus" className="admin-btn">
-              Bus
-            </NavLink>
-            <NavLink to="/admin/metro" className="admin-btn">
-              Metro
-            </NavLink>
-            <NavLink to="/admin/report" className="admin-btn">
-              Report
-            </NavLink>
+                Bus
+              </NavLink>
+              <NavLink to="/admin/metro" className="admin-btn">
+                Metro
+              </NavLink>
+              <NavLink to="/admin/report" className="admin-btn">
+                Report
+              </NavLink>
             </div>
           </div>
 
@@ -50,8 +50,8 @@ function AdminDashboard() {
             <Route path="restaurant" element={<Restaurant />} />
             <Route path="attraction" element={<Attraction />} />
             <Route path="bus" element={<Bus />} />
-            <Route path="metro" element={<Metro />}/>
-            <Route path="report" element={<Report />}/>
+            <Route path="metro" element={<Metro />} />
+            <Route path="report" element={<Report />} />
           </Routes>
         </div>
       )}

@@ -9,7 +9,6 @@ export default function UserAns() {
     getUserAns(user.username)
       .then((res) => {
         setAns(res.data);
-        console.log(res);
       })
       .catch((err) => {
         console.log("error", err);
@@ -19,11 +18,9 @@ export default function UserAns() {
   return (
     <div>
       {Ans.length === 0 && <p>No Answers posted</p>}
-      {Ans.length>0 && <h3>You have posted {Ans.length} Answers</h3>}
+      {Ans.length > 0 && <h3>You have posted {Ans.length} Answers</h3>}
       {Ans.map((p) => {
-        
-          return (<p>{p.description}</p>);
-        
+        return <p key={p.ans_id}>{p.description}</p>;
       })}
     </div>
   );
