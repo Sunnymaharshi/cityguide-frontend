@@ -9,4 +9,8 @@ body {
 }
 .main-content {
   width: 100%;
+  height: calc(100vh - 70px);
+
+  scroll-behavior: smooth;
+  overflow: scroll;
 }

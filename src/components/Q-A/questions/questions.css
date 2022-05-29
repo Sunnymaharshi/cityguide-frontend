@@ -1,8 +1,12 @@
+.questions-comp {
+  height: calc(100vh - 70px);
+  padding: 20px;
+}
+
 .search {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 2rem;
 }
 .search-bar {
   width: 60%;
@@ -25,19 +29,18 @@
   font-size: large;
   border-radius: 15px;
 }
-
-.questions-comp {
-  margin: 20px;
+.questions-content {
+  display: flex;
+  padding: 20px;
+  justify-content: space-between;
 }
 
 .questions {
-  padding: 20px;
-  width: 60vw;
-}
+  width: 100%;
+  height: calc(100vh - 205px);
 
-.questions-content {
-  display: flex;
-  justify-content: space-around;
+  scroll-behavior: smooth;
+  overflow: scroll;
 }
 
 .option-icon {
@@ -49,4 +52,5 @@
 }
 .add-ques {
   padding: 20px;
+  height: fit-content;
 }

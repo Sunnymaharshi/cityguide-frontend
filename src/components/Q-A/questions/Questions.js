@@ -83,24 +83,25 @@ function Questions({ city }) {
         </button>
       </div>
       <div className="questions-content">
-        <div className="questions">
-          <h5>Questions</h5>
-
-          {questions.map((ques, ind) => (
-            <Question
-              ques={ques}
-              key={ques.ques_id}
-              ind={ind}
-              updateQuestions={updateQuestions}
-            />
-          ))}
+        <div style={{ width: "100%" }}>
+          <div style={{ fontSize: "large" }}>Questions({questions.length})</div>
+          <div className="questions">
+            {questions.map((ques, ind) => (
+              <Question
+                ques={ques}
+                key={ques.ques_id}
+                ind={ind}
+                updateQuestions={updateQuestions}
+              />
+            ))}
+          </div>
         </div>
         <div className="add-ques">
           <h5>Add Your Question</h5>
           <textarea
             type="text"
             placeholder="Your Question"
-            cols="30"
+            cols="40"
             onChange={(e) => {
               setNewQuestion(e.target.value);
             }}
