@@ -42,6 +42,7 @@ function Restaurant() {
 
   const sendDataToAPI = async (event) => {
     event.preventDefault();
+    if(res_name && description && res_location && city_name){
     postRestaurant(res_name, description, res_location, city_name, res_image)
       .then(function (response) {
         if (response.data.res_name === res_name) {
@@ -58,10 +59,15 @@ function Restaurant() {
       .catch(function (error) {
         console.log(error);
       });
+    }
+    else{
+      toast.error("Enter City name, Restaurant Name,description, location!")
+    }
   };
 
   const updateDataToAPI = async (event) => {
     event.preventDefault();
+    if(res_id && res_name && description && res_location && city_name){
     updateRestaurant(res_id, res_name, description, res_location, city_name)
       .then((response) => {
         if (response.data.res_name === res_name) {
@@ -78,10 +84,15 @@ function Restaurant() {
       .catch((error) => {
         console.log(error.response);
       });
+    }
+    else{
+      toast.error("Enter City name, Restaurant Id Name,description, location!")
+    }
   };
 
   const onDelete = async (event) => {
     event.preventDefault();
+    if(res_id){
     deleteRestaurant(res_id)
       .then(function (response) {
         if (response.data === "Deleted!") {
@@ -93,24 +104,38 @@ function Restaurant() {
       .catch((error) => {
         console.log(error.response);
       });
+    }
+    else{
+      toast.error("Enter Restaurant Id!");
+    }
   };
   const submitForm = (e) => {
     e.preventDefault();
+    if(city_name && selectedFile){
     uploadFile(city_name, selectedFile)
       .then((res) => {
         if (res.status === 200) toast.success("Successfully Uploaded Image!");
       })
       .catch((err) => console.log(err.response));
+    }
+      else{
+        toast.error("Enter the city name and select a file!")
+      }
   };
 
   const geturl = (e) => {
     e.preventDefault();
+    if(city_name && selectedFile){
     getimgurl(city_name, selectedFile)
       .then((res) => {
         setResImage(res.data);
         setFileName(selectedFile.name);
       })
       .catch((err) => console.log(err.response));
+    }
+    else{
+      toast.error("Enter the city name and select a file!")
+    }
   };
 
   const addImg = (e) => {
@@ -119,12 +144,17 @@ function Restaurant() {
     setTypeId(res_id.toString());
 
     setImgUrl(res_image);
+    if(res_id && res_image && type_id && filename){
 
     postImg(type, type_id, filename, img_url)
       .then((res) => {
         toast.success("Added Image to Database");
       })
       .catch((err) => console.log(err.response));
+    }
+    else{
+      toast.error("Enter the restaurant Id and image!");
+    }
   };
 
   return (
@@ -191,9 +221,6 @@ function Restaurant() {
                 <button
                   type="submit"
                   className="delete-btn"
-                  disabled={
-                    !res_name || !res_location || !city_name || !description
-                  }
                   onClick={sendDataToAPI}
                 >
                   Add
@@ -203,7 +230,6 @@ function Restaurant() {
                 <button
                   type="submit"
                   className="delete-btn"
-                  disabled={!res_name || !city_name || !res_id}
                   onClick={updateDataToAPI}
                 >
                   Update
@@ -213,7 +239,6 @@ function Restaurant() {
                 <button
                   type="submit"
                   className="delete-btn"
-                  disabled={!res_id}
                   onClick={onDelete}
                 >
                   Delete
@@ -237,7 +262,6 @@ function Restaurant() {
                   style={{ marginTop: "0.5rem" }}
                   type="submit"
                   className="delete-btn"
-                  disabled={!city_name || !res_image || !filename}
                   onClick={addImg}
                 >
                   Add Image
@@ -269,7 +293,6 @@ function Restaurant() {
                   type="submit"
                   className="delete-btn"
                   style={{ marginTop: "0.5rem" }}
-                  disabled={!city_name}
                   onClick={geturl}
                 >
                   Get URL

@@ -14,7 +14,9 @@ function Bus() {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const sendDataToAPI = async (event) => {
+   
     event.preventDefault();
+    if(city_name && busmap_img){
     postBus(city_name, busmap_img)
       .then((response) => {
         if (response.data.city_name === city_name) {
@@ -26,24 +28,38 @@ function Bus() {
       .catch((error) => {
         console.log(error);
       });
+    }
+    else{
+      toast.error("Enter the city name and image field!")
+    }
   };
 
   const submitForm = (e) => {
     e.preventDefault();
+    if(city_name && selectedFile){
     uploadFile(city_name, selectedFile)
       .then((res) => {
         if (res.status === 200) toast.success("Successfully Uploaded Image!");
       })
       .catch((err) => console.log(err.response));
+    }
+    else{
+      toast.error("Enter the city name and select a file!")
+    }
   };
 
   const geturl = (e) => {
     e.preventDefault();
+    if(city_name && selectedFile){
     getimgurl(city_name, selectedFile)
       .then((res) => {
         setBusImg(res.data);
       })
       .catch((err) => console.log(err.response));
+    }
+    else{
+      toast.error("Enter the city name and select a file!")
+    }
   };
   return (
     <div className="bus-form">
@@ -93,7 +109,6 @@ function Bus() {
                 <button
                   type="submit"
                   className="delete-btn"
-                  disabled={!city_name}
                   onClick={geturl}
                 >
                   Get URL
@@ -104,16 +119,13 @@ function Bus() {
         </div>
 
         <div className="btn-main">
-          {/* <div className="add-button"> */}
           <button
             type="submit"
             className="add-btn"
-            disabled={!city_name || !busmap_img}
             onClick={sendDataToAPI}
           >
             Add
           </button>
-          {/* </div> */}
         </div>
       </form>
     </div>

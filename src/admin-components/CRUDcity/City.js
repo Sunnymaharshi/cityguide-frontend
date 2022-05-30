@@ -40,10 +40,10 @@ function City() {
 
   const sendDataToAPI = async (event) => {
     event.preventDefault();
+    if(city_name){
     postCity(city_name, city_tagline, city_desc, city_image)
       .then((response) => {
         if (response.data.city_name === city_name) {
-          // setSuccessMsg("Successfully Added!");
           toast.success("Successfully Added");
           setCityName("");
           setCityTagline("");
@@ -55,11 +55,16 @@ function City() {
       .catch((error) => {
         console.log(error.response);
       });
+    }
+    else{
+      toast.error("Enter City Name!");
+    }
   };
 
   const updateDataToAPI = async (event) => {
     event.preventDefault();
-    updateCity(city_name, city_tagline, filename, city_desc, city_image)
+    if(city_name && city_tagline && city_desc && city_image){
+    updateCity(city_name, city_tagline, city_desc, city_image)
       .then((response) => {
         if (response.data.city_name === city_name) {
           toast.success("Successfully Updated!");
@@ -73,10 +78,15 @@ function City() {
       .catch((error) => {
         console.log(error.response);
       });
+    }
+    else{
+      toast.error("Enter City Name, Tagline, Descriprion and image!");
+    }
   };
 
   const onDelete = async (event) => {
     event.preventDefault();
+    if(city_name){
     deleteCity(city_name)
       .then((response) => {
         if (response.data === "Deleted!") {
@@ -89,38 +99,55 @@ function City() {
       .catch((error) => {
         console.log(error.response);
       });
+    }
+    else{
+      toast.error("Enter City Name!");
+    }
   };
 
   const submitForm = (e) => {
     e.preventDefault();
+    if(city_name && selectedFile){
     uploadFile(city_name, selectedFile)
       .then((res) => {
         if (res.status === 200) toast.success("Successfully Uploaded Image!");
       })
       .catch((err) => console.log(err.response));
+    }
+    else{
+      toast.error("Enter the city name and select a file!")
+    }
   };
 
   const geturl = (e) => {
     e.preventDefault();
+    if(city_name && selectedFile){
     getimgurl(city_name, selectedFile)
       .then((res) => {
         setCityImg(res.data);
         setFileName(selectedFile.name);
       })
       .catch((err) => console.log(err.response));
+    }
+    else{
+      toast.error("Enter the city name and select a file!")
+    }
   };
   const addImg = (e) => {
     e.preventDefault();
 
     setTypeId(city_name);
-    // let img_url=res_image;
     setImgUrl(city_image);
-
+    if(city_name && city_image && type_id && filename){
     postImg(type, type_id, filename, img_url)
       .then((res) => {
         toast.success("Added Image to Database");
       })
       .catch((err) => console.log(err.response));
+    }
+    else{
+      toast.error("Enter the city name and image!");
+    }
   };
 
   return (
@@ -172,7 +199,6 @@ function City() {
               <button
                 type="submit"
                 className="delete-btn"
-                disabled={!city_name || !city_desc || !city_tagline}
                 onClick={sendDataToAPI}
               >
                 Add
@@ -182,7 +208,6 @@ function City() {
               <button
                 type="submit"
                 className="delete-btn"
-                disabled={!city_name}
                 onClick={updateDataToAPI}
               >
                 Update
@@ -192,7 +217,6 @@ function City() {
               <button
                 type="submit"
                 className="delete-btn"
-                disabled={!city_name}
                 onClick={onDelete}
               >
                 Delete
@@ -227,7 +251,6 @@ function City() {
                 type="submit"
                 className="delete-btn"
                 style={{ marginTop: "0.5rem" }}
-                disabled={!city_name}
                 onClick={geturl}
               >
                 Get URL
@@ -240,7 +263,6 @@ function City() {
               style={{ marginTop: "0.5rem" }}
               type="submit"
               className="add-btn"
-              disabled={!city_name || !city_image || !filename}
               onClick={addImg}
             >
               Add Image

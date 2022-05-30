@@ -42,6 +42,7 @@ function Attraction() {
 
   const sendDataToAPI = async (event) => {
     event.preventDefault();
+    if(attr_name && description && attr_loc && city_name){
     postAtrraction(attr_name, description, attr_loc, city_name, attr_img)
       .then((response) => {
         if (response.data.attr_name === attr_name)
@@ -57,10 +58,15 @@ function Attraction() {
       .catch((error) => {
         console.log(error.response);
       });
+    }
+    else{
+      toast.error("Enter City Name and Attraction name,desc, location fields!");
+    }
   };
 
   const updateDataToAPI = async (event) => {
     event.preventDefault();
+    if(attr_id && attr_name && description && attr_loc && city_name){
     updateAttraction(attr_id, attr_name, description, attr_loc, city_name)
       .then((response) => {
         if (response.data.attr_name === attr_name) {
@@ -77,10 +83,16 @@ function Attraction() {
       .catch((error) => {
         console.log(error.response);
       });
-  };
+    }
+      else{
+        toast.error("Enter City Name and Attraction ID, name,desc, location fields!");
+      }
+    }
+  
 
   const onDelete = async (event) => {
     event.preventDefault();
+    if(attr_id)
     deleteAttraction(attr_id)
       .then((response) => {
         if (response.data === "Deleted!") {
@@ -92,38 +104,46 @@ function Attraction() {
       .catch((error) => {
         console.log(error.response);
       });
+      else
+      toast.error("Enter Attraction Id!")
   };
   const submitForm = (e) => {
     e.preventDefault();
+    if(city_name && selectedFile)
     uploadFile(city_name, selectedFile)
       .then((res) => {
-        // alert("File Upload success");
-
         if (res.status === 200) toast.success("Successfully Uploaded Image!");
       })
       .catch((err) => console.log(err.response));
+      else
+      toast.error("Enter the city name and select a file!");
   };
 
   const geturl = (e) => {
     e.preventDefault();
+    if(city_name && selectedFile)
     getimgurl(city_name, selectedFile)
       .then((res) => {
         setAttrImg(res.data);
         setFileName(selectedFile.name);
       })
       .catch((err) => console.log(err.response));
+      toast.error("Enter the city name and select a file!")
   };
 
   const addImg = (e) => {
     e.preventDefault();
     setTypeId(attr_id.toString());
-    // let img_url=res_image;
     setImgUrl(attr_img);
+    if(attr_id && attr_img && type_id && filename)
     postImg(type, type_id, filename, img_url)
       .then((res) => {
         toast.success("Added Image to Database");
       })
       .catch((err) => console.log(err.response));
+      else{
+        toast.error("Enter the Attraction Id and image!");
+      }
   };
 
   return (
@@ -190,9 +210,6 @@ function Attraction() {
                 <button
                   type="submit"
                   className="delete-btn"
-                  disabled={
-                    !attr_name || !attr_loc || !city_name || !description
-                  }
                   onClick={sendDataToAPI}
                 >
                   Add
@@ -202,13 +219,6 @@ function Attraction() {
                 <button
                   type="submit"
                   className="delete-btn"
-                  disabled={
-                    !attr_name ||
-                    !attr_loc ||
-                    !city_name ||
-                    !attr_id ||
-                    !description
-                  }
                   onClick={updateDataToAPI}
                 >
                   Update
@@ -218,7 +228,6 @@ function Attraction() {
                 <button
                   type="submit"
                   className="delete-btn"
-                  disabled={!attr_id}
                   onClick={onDelete}
                 >
                   Delete
@@ -242,7 +251,6 @@ function Attraction() {
                   style={{ marginTop: "0.5rem" }}
                   type="submit"
                   className="delete-btn"
-                  disabled={!city_name || !attr_img || !filename}
                   onClick={addImg}
                 >
                   Add Image
@@ -273,7 +281,6 @@ function Attraction() {
                   type="submit"
                   className="delete-btn"
                   style={{ marginTop: "0.5rem" }}
-                  disabled={!city_name}
                   onClick={geturl}
                 >
                   Get URL
