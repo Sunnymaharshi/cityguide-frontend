@@ -40,6 +40,7 @@
     justify-content: center;
     background-color: #dbe9f4;
     font-weight: 600;
+    letter-spacing: 2px;
   }
   li {
     border-radius: 5px;
@@ -63,10 +64,10 @@
   
   .underline {
     position: absolute;
-    bottom: 1px;
+    bottom: -1px;
     left: 0;
     right: 0;
-    height: 1px;
+    height: 2px;
     background: var(--accent);
   }
   
