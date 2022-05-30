@@ -5,6 +5,9 @@
   display: flex;
 }
 .main-content {
-  width: calc(100vw - 101px);
-  background-color: var(--primary);
+  width: 100%;
+  height: calc(100vh - 70px);
+
+  scroll-behavior: smooth;
+  overflow: scroll;
 }

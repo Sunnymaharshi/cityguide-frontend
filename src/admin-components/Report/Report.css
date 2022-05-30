@@ -1,0 +1,17 @@
+.report-div {
+    display: flex;
+    justify-content: center;
+  }
+  .report-form {
+    margin-right: 5rem;
+  }
+  .report-op {
+    text-align: center;
+  }
+  .report-form form{
+    background-image: linear-gradient(to right, var(--secondary),  #005c99);
+  border-radius: 10px;
+  padding-top: 30px;
+  padding-bottom: 15px;
+  width: 400px;
+  }
