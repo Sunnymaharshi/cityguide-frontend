@@ -22,8 +22,8 @@ small {
   color: red;
 }
 form {
-  background-color: rgba(30, 185, 225, 0);
   border-radius: 10px;
+  /* background-color: rgba(30, 185, 225, 0); */
   padding-top: 30px;
   padding-bottom: 15px;
 }
@@ -52,6 +52,8 @@ form {
 
 .login-link1 {
   color: var(--accent);
+  margin-top: 10px;
+  font-weight: 500;
 }
 .login-link:hover {
   color:darkorange;

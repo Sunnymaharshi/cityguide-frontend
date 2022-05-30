@@ -12,7 +12,7 @@
 }
 form {
   color: white;
-  background-color: rgba(30, 185, 225, 0);
+  /* background-color: rgba(30, 185, 225, 0); */
   width: 400px;
 }
 .login-logo{
@@ -47,12 +47,9 @@ p {
 .login-btn:hover {
   transform: scale(0.95);
 }
-p {
-  margin-top: 15px;
-}
 .signup-link1 {
   color: black;
-
+  margin-top: 15px;
   text-decoration: none;
 }
 .signup-link:hover {

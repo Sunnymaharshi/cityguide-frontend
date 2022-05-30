@@ -1,9 +1,11 @@
 import React from "react";
 import "./card.css";
+import { motion } from "framer-motion";
 
 const card = ({ details }) => {
   return (
     <>
+      
       <div className="card">
         <div>
           {details.res_name && (

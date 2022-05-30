@@ -1,9 +1,31 @@
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { getCityAbout } from "../../services/dashboard/dashboard.service";
-import "./about.css";
+import { Slide} from "react-slideshow-image";
+import 'react-slideshow-image/dist/styles.css';
 
+import "./about.css";
+import image1c from "../../assets/image1c.jpg";
+
+const slideImages = [image1c, image1c, image1c,image1c];
+const delay = 4000;
+const properties = {
+  duration: 3000,
+  transitionDuration: 1000,
+  easing:"ease",
+  pauseOnHover:true,
+  infinite: true
+};
 export default function About({ city }) {
   const [About, setAbout] = useState([]);
+  const [index, setIndex] = useState(0);
+  const timeoutRef = useRef(null);
+
+  function resetTimeout() {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  }
+
   useEffect(() => {
     if (city !== null) {
       getCityAbout(city)
@@ -20,6 +42,7 @@ export default function About({ city }) {
     if (city !== null) {
       getCityAbout(city)
         .then((res) => {
+          console.log(res);
           setAbout(res.data);
         })
         .catch((err) => {
@@ -28,59 +51,85 @@ export default function About({ city }) {
     }
     // eslint-disable-next-line
   }, [city]);
+
+  useEffect(() => {
+    resetTimeout();
+    timeoutRef.current = setTimeout(
+      () =>
+        setIndex((prevIndex) =>
+          prevIndex === slideImages.length - 1 ? 0 : prevIndex + 1
+        ),
+      delay
+    );
+
+    return () => {
+      resetTimeout();
+    };
+  }, [index]);
   return (
     <>
       {!city && "loading"}
-      {/* <div>
-        <div className="city_img">
-          <img
-            className="img_tag"
-            alt="city"
-            src="https://www.karnatakatourism.org/wp-content/uploads/2020/05/p25-gallery.jpg"
-          />
-        </div>
-        <h1 className="city_tagline">{About.city_tagline}</h1>
-        <p className="city_desc">{About.city_desc}</p>
+      {/* <div className="App-carousel">
+        <motion.div ref={carousel} className="carousel" whileTap={{cursor: "grabbing"}}>
+          <motion.div drag="x"
+            dragConstraints={{ "right":0, "left": -width}}
+            className="inner-carousel"
+          >
+            {images.map((image)=>{
+              return (
+                <motion.div className="item" key={image.text}>
+                  <img src={image.photo} alt=""/>
+                  <h4>{image.text}</h4>
+                  </motion.div>
+              );
+            })}
+          </motion.div>
+        </motion.div>
       </div> */}
+      <h1 className="tagline">
+        {About.city_tagline}
+        </h1>
+      <div className="ease1">
+        <Slide {...properties}>
+        {slideImages.map((slideImage, index)=> (
+            <><div className="each-slide" key={index}>
+            <div style={{ 'backgroundImage': `url(${slideImage})` }}>
+            </div>
 
-      {/* <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="false">
-  <div className="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div className="carousel-inner carousel-content">
-    <div className="carousel-item active">
-      <img src="https://www.fabhotels.com/blog/wp-content/uploads/2019/02/Clubs-with-Dance-Floor.jpg" className="d-block w-100 cover" alt="..."/>
-      <div className="carousel-caption d-none d-md-block">
-        <h5>First slide label</h5>
-        <p>Some representative placeholder content for the first slide.</p>
+          </div>
+          <span className="city-desc">{About.city_desc}</span>
+          </>
+
+          ))} 
+          {/* <div className="each-slide">
+            <div style={{ backgroundImage: `url(${slideImages[0]})`}}>
+              <span>{About.city_name}</span>
+            </div>
+          </div>
+          <div className="each-slide">
+            <div style={{ backgroundImage: `url(${slideImages[1]})` }}>
+              <span>Slide 2</span>
+            </div>
+          </div>
+          <div className="each-slide">
+            <div style={{ backgroundImage: `url(${slideImages[2]})` }}>
+              <span>Slide 3</span>
+            </div>
+          </div> */}
+        </Slide>
+
+        <div className="slideshowDots">
+        {slideImages.map((_, idx) => (
+          <div
+            key={idx}
+            className={`slideshowDot${index === idx ? " active" : ""}`}
+            onClick={() => {
+              setIndex(idx);
+            }}
+          ></div>
+        ))}
       </div>
-    </div>
-    <div className="carousel-item">
-      <img src="..." className="d-block w-100" alt="..."/>
-      <div className="carousel-caption d-none d-md-block">
-        <h5>Second slide label</h5>
-        <p>Some representative placeholder content for the second slide.</p>
       </div>
-    </div>
-    <div className="carousel-item">
-      <img src="..." className="d-block w-100" alt="..."/>
-      <div className="carousel-caption d-none d-md-block">
-        <h5>Third slide label</h5>
-        <p>Some representative placeholder content for the third slide.</p>
-      </div>
-    </div>
-  </div>
-  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span className="visually-hidden">Previous</span>
-  </button>
-  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-    <span className="visually-hidden">Next</span>
-  </button>
-</div> */}
     </>
   );
 }

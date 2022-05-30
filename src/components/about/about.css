@@ -1,4 +1,4 @@
-.img_tag{
+/* .img_tag{
     width: 850px;
     height: 350px;
     display: block;
@@ -30,4 +30,51 @@
 .cover{
   object-fit: cover;
 
+} */
+
+.tagline{
+  margin-top: 30px;
+  color: brown;
+}
+.ease1{
+  margin: 30px;
+}
+.each-slide > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  height: 650px;
+}
+
+.each-slide span {
+  padding: 10px;
+  font-size: 20px;
+  background: #efefef;
+  text-align: center;
+}
+.city-desc{
+  text-align: center;
+  font-size: 20px;
+
+}
+
+.slideshowDots {
+  text-align: center;
+}
+
+.slideshowDot {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+
+  cursor: pointer;
+  margin: 15px 7px 0px;
+
+  background-color: #c4c4c4;
+}
+
+.slideshowDot.active {
+  background-color: #6a0dad;
 }

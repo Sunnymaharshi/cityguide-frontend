@@ -6,14 +6,12 @@
     margin-bottom: 30px;
     border-radius: 10px; 
     transition: transform 100ms;
-
 }
 .card:hover{
     box-shadow: 0 0 3px black;
     box-shadow: 20px 20px 20px 3px rgb(0 0 0 / 3%);
   -webkit-transform: translateY(-4px);
   transform: translateY(-8px);
-
 }
 
 .card-image img{
@@ -27,7 +25,6 @@
 .card-title, description{
     text-align: left;
     margin: 0;
-
     margin-left: 8px;
     padding: 10px;
 }
@@ -49,7 +46,6 @@
 
 .home-cards > .card{
     display: inline-block;
-    
 }
 
 .attr-heading, .attr-tagline{

@@ -1,12 +1,10 @@
 @import url("../../index.css");
 
-body {
-  width: 100%;
-  background-color: whitesmoke;
-}
+
 .main {
   display: flex;
 }
 .main-content {
-  width: 100%;
+  width: calc(100vw - 101px);
+  background-color: var(--primary);
 }
