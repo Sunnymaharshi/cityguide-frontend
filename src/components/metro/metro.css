@@ -83,3 +83,29 @@
     cursor: pointer;
     flex-shrink: 0;
   }
+
+  .metro-content{
+    width: 100%;
+    height: 100%;
+  }
+  .mapimg-div{
+    overflow: auto; /* adds scrollbars */
+    margin-top: 2px;
+    height: 800px;
+    position: relative;
+  }
+  .mapdata{
+    width: 100%;
+    height: 400px;
+    object-fit:scale-down;
+  }
+  .mapimg-div > img {
+    height: auto; /* probably looks neater if auto */
+    width: 100%; /* double width image to show only first quarter */
+    vertical-align: bottom; /* moves image to true text bottom */
+}
+.metro-line-data{
+  object-fit: contain;
+  width: 100%;
+    height: 400px;
+}
