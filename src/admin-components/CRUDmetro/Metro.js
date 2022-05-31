@@ -11,15 +11,18 @@ import "./Metro.css";
 function Metro() {
   const [city_name, setCityName] = useState("");
   const [metromap_img, setMetroImg] = useState("");
+  const [filename, setFileName]= useState("");
+  const [description, setDesc]=useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const sendDataToAPI = async (event) => {
     event.preventDefault();
-    if(city_name && metromap_img){
-    postMetro(city_name, metromap_img)
+    if(city_name && metromap_img && description && filename){
+    postMetro(city_name, metromap_img, description, filename)
       .then((response) => {
         console.log(response);
         if (response.data.city_name === city_name) {
           toast.success("Successfully Added");
+          setDesc("");
           setCityName("");
           setMetroImg("");
         }
@@ -29,7 +32,7 @@ function Metro() {
       });
     }
     else{
-      toast.error("Enter City Name and image!");
+      toast.error("Enter City Name, description and image!");
     }
   };
 
@@ -53,6 +56,7 @@ function Metro() {
     getimgurl(city_name, selectedFile)
       .then((res) => {
         setMetroImg(res.data);
+        setFileName(selectedFile.name);
       })
       .catch((err) => console.log(err.response));
     }
@@ -74,6 +78,18 @@ function Metro() {
             placeholder="City Name"
             id="cityname"
             value={city_name}
+            className="form-control"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="desc">Description</label>
+          <input
+            onChange={(e) => setDesc(e.target.value)}
+            type="text"
+            name="desc"
+            placeholder="Description"
+            id="desc"
+            value={description}
             className="form-control"
           />
         </div>
@@ -103,7 +119,6 @@ function Metro() {
               />
             </div>
             <div className="btn-main">
-              {" "}
               <div className="add-button">
                 <button
                   type="submit"

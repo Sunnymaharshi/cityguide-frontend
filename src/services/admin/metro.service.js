@@ -1,13 +1,15 @@
 import axios from "axios";
 import { BASE_URL } from "../../common/data";
-export const postMetro = async (city_name,metromap_img)=>{
+export const postMetro = async (city_name,metromap_img, description, filename)=>{
     const userDetails = JSON.parse(localStorage.getItem("user"));
     return await axios
       .post(
         BASE_URL+"/addmetro",
         {
           city_name,
-          metromap_img
+          metromap_img,
+          description,
+          filename
 
         },
         {

@@ -11,16 +11,19 @@ import "./Bus.css";
 function Bus() {
   const [city_name, setCityName] = useState("");
   const [busmap_img, setBusImg] = useState("");
+  const [filename, setFileName]= useState("");
+  const [description, setDesc]=useState("");
   const [selectedFile, setSelectedFile] = useState(null);
 
   const sendDataToAPI = async (event) => {
    
     event.preventDefault();
-    if(city_name && busmap_img){
-    postBus(city_name, busmap_img)
+    if(city_name && busmap_img  && description && filename){
+    postBus(city_name, busmap_img, description, filename)
       .then((response) => {
         if (response.data.city_name === city_name) {
           toast.success("Successfully Added");
+          setDesc("");
           setCityName("");
           setBusImg("");
         }
@@ -30,7 +33,7 @@ function Bus() {
       });
     }
     else{
-      toast.error("Enter the city name and image field!")
+      toast.error("Enter the city name, desc and image field!")
     }
   };
 
@@ -54,6 +57,7 @@ function Bus() {
     getimgurl(city_name, selectedFile)
       .then((res) => {
         setBusImg(res.data);
+        setFileName(selectedFile.name);
       })
       .catch((err) => console.log(err.response));
     }
@@ -75,6 +79,18 @@ function Bus() {
             placeholder="City Name"
             id="cityname"
             value={city_name}
+            className="form-control"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="desc">Description</label>
+          <input
+            onChange={(e) => setDesc(e.target.value)}
+            type="text"
+            name="desc"
+            placeholder="Description"
+            id="desc"
+            value={description}
             className="form-control"
           />
         </div>
