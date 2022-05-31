@@ -123,15 +123,15 @@ function Answer({ ans, ind, updateAnswers }) {
   return (
     <div className="answer-comp">
       <div className="answer-option">
-        <div className="answer-text">
-          {ind + 1}: {answer.description}
-        </div>
+        <div>{ind + 1}:</div>
+        <div className="answer-text">{answer.description}</div>
         <IconButton
           aria-label="more"
           id="long-button"
           aria-controls={open ? "long-menu" : undefined}
           aria-expanded={open ? "true" : undefined}
           aria-haspopup="true"
+          style={{ height: "fit-content" }}
           onClick={handleClick}
         >
           <MoreVertIcon style={{ color: "var(--accent)" }} />

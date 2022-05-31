@@ -50,24 +50,29 @@ function Answers() {
   return (
     <div className="answers-comp">
       <h2 className="ques">{question}</h2>
-      <div className="content">
-        <div className="answers">
-          {answers?.length > 0 &&
-            answers.map((ans, ind) => (
-              <Answer
-                ans={ans}
-                ind={ind}
-                key={ans.ans_id}
-                updateAnswers={updateAnswers}
-              />
-            ))}
+      <div className="answers-content">
+        <div style={{ width: "100%" }}>
+          <div style={{ fontSize: "large", paddingLeft: "10px" }}>
+            Answers({answers?.length})
+          </div>
+          <div className="answers">
+            {answers?.length > 0 &&
+              answers.map((ans, ind) => (
+                <Answer
+                  ans={ans}
+                  ind={ind}
+                  key={ans.ans_id}
+                  updateAnswers={updateAnswers}
+                />
+              ))}
+          </div>
         </div>
         <div className="add-ans">
           <h5>Add Your Answer</h5>
           <textarea
             type="text"
             placeholder="Your Answer"
-            cols="30"
+            cols="60"
             onChange={(e) => {
               setNewAnswer(e.target.value);
             }}

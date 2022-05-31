@@ -68,6 +68,7 @@ const Comment = ({ comm, updateComments }) => {
         aria-expanded={open ? "true" : undefined}
         aria-haspopup="true"
         onClick={handleClick}
+        style={{ height: "fit-content" }}
       >
         <MoreVertIcon style={{ color: "var(--accent)" }} />
       </IconButton>

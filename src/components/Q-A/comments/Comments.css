@@ -1,14 +1,17 @@
 .comments-comp {
   margin-top: 15px;
 }
+.add-comment {
+  display: flex;
+  align-items: center;
+}
 .comment-btn {
-  margin-top: 10px;
   background-color: var(--accent);
   color: white;
   font-size: large;
   padding: 3px 5px;
   border: 0;
-  font-size: large;
+  margin-left: 10px;
   border-radius: 5px;
 }
 .comment-btn:hover {

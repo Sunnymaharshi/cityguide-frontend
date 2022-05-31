@@ -84,7 +84,9 @@ function Questions({ city }) {
       </div>
       <div className="questions-content">
         <div style={{ width: "100%" }}>
-          <div style={{ fontSize: "large" }}>Questions({questions.length})</div>
+          <div style={{ fontSize: "large", paddingLeft: "10px" }}>
+            Questions({questions.length})
+          </div>
           <div className="questions">
             {questions.map((ques, ind) => (
               <Question
@@ -101,7 +103,7 @@ function Questions({ city }) {
           <textarea
             type="text"
             placeholder="Your Question"
-            cols="40"
+            cols="60"
             onChange={(e) => {
               setNewQuestion(e.target.value);
             }}

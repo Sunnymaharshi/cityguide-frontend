@@ -52,6 +52,7 @@ function Comments({ ans_id, handleCommentsUpdate }) {
             placeholder="Your Comment"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
+            style={{ outlineColor: "var(--secondary)" }}
           />
           <button className="comment-btn" onClick={addComment}>
             Comment
@@ -60,7 +61,7 @@ function Comments({ ans_id, handleCommentsUpdate }) {
       )}
 
       <div className="comments">
-        <div style={{ color: "blue" }}>Comments</div>
+        <div style={{ color: "blue" }}>Comments({comments?.length})</div>
         {comments?.map((comm) => (
           <Comment
             comm={comm}

@@ -1,16 +1,15 @@
 .comment-comp {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
   border-bottom: 1px solid var(--accent);
-  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .comment-content {
   display: flex;
   flex-direction: row;
-  align-items: center;
   margin-left: 10px;
+  width: 100%;
 }
 .comment-text {
   margin-left: 10px;
@@ -19,4 +18,8 @@
   color: var(--accent);
   font-size: large;
   font-weight: 300;
+}
+.comm-description {
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
