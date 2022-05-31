@@ -54,7 +54,7 @@ function Dashboard() {
             <Route path="faq" element={<Questions city={city} />} />
             <Route path="answers/:id" element={<Answers />} />
             <Route path="contributions/*" element={<Contributions />} />
-            <Route path="metromap" element={<Metro />} />
+            <Route path="metromap" element={<Metro city={city}/>} />
 
           </Routes>
         </div>

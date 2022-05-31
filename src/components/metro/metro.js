@@ -1,12 +1,12 @@
-
-import * as React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Accordion from "../accordion/Accordion";
 import "./metro.css"
+import { getMetro } from "../../services/dashboard/dashboard.service";
 const tabs=["Map", "Lines", "Schedule"];
 
 const Map=()=> {
+
   return (
       <div className="mapimg-div">
         <img className="mapdata" src="https://english.bmrc.co.in/AllImages/Gallery/adbc89Gallery.jpg" alt="no data"/>
@@ -27,9 +27,17 @@ const Schedule=()=>{
     <Accordion i={i} expanded={expanded} setExpanded={setExpanded} line={line} key={i}/>
   ));
 }
-export default function Metro(){
+export default function Metro({city}){
 
     const [selectedTab, setSelectedTab] = useState(tabs[0]);
+    useEffect(() => {
+      getMetro(city).then(res=>{
+        console.log(res);
+      });
+    
+      
+    }, [city])
+    
 
   return (
     <div className="window">

@@ -15,3 +15,6 @@ export const getAttractions = (city) => {
 export const getRestaurants = (city) => {
   return axios.get(BASE_URL + "/getrest/" + city);
 };
+export const getMetro = (city) => {
+  return axios.get(BASE_URL+ "/getmetro/"+city);
+}

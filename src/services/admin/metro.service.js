@@ -4,7 +4,7 @@ export const postMetro = async (city_name,metromap_img)=>{
     const userDetails = JSON.parse(localStorage.getItem("user"));
     return await axios
       .post(
-        BASE_URL+"/addbus",
+        BASE_URL+"/addmetro",
         {
           city_name,
           metromap_img

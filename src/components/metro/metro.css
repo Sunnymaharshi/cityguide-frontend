@@ -117,6 +117,12 @@
     height: 400px;
 }
 .metro-header{
+  margin-top: 10px;
   text-align: center;
+  height: 50px;
+
   color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

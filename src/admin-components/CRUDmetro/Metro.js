@@ -17,6 +17,7 @@ function Metro() {
     if(city_name && metromap_img){
     postMetro(city_name, metromap_img)
       .then((response) => {
+        console.log(response);
         if (response.data.city_name === city_name) {
           toast.success("Successfully Added");
           setCityName("");
