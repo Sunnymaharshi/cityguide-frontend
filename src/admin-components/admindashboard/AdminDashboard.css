@@ -35,3 +35,8 @@
   border-bottom: 3px solid var(--accent);
   border-bottom-left-radius: 0;
 }
+.unauthorised {
+  text-align: center;
+  font-size: x-large;
+  color: var(--accent);
+}
