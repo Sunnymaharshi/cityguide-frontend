@@ -25,7 +25,7 @@ export const postCity = async (city_name,city_tagline, city_desc, city_image)=>{
       )
 }
 
-export const updateCity= async(city_name,city_tagline,filename, city_desc, city_image)=>{
+export const updateCity= async(city_name,city_tagline, city_desc, city_image)=>{
     const userDetails = JSON.parse(localStorage.getItem("user"));
     return await axios
       .put(
@@ -33,7 +33,6 @@ export const updateCity= async(city_name,city_tagline,filename, city_desc, city_
         {
             city_name,
             city_tagline,
-            filename,
             city_desc,
             city_image
         },

@@ -14,6 +14,7 @@ function Metro() {
   const [selectedFile, setSelectedFile] = useState(null);
   const sendDataToAPI = async (event) => {
     event.preventDefault();
+    if(city_name && metromap_img){
     postMetro(city_name, metromap_img)
       .then((response) => {
         if (response.data.city_name === city_name) {
@@ -25,24 +26,38 @@ function Metro() {
       .catch((error) => {
         console.log(error.response);
       });
+    }
+    else{
+      toast.error("Enter City Name and image!");
+    }
   };
 
   const submitForm = (e) => {
     e.preventDefault();
+    if(city_name && selectedFile){
     uploadFile(city_name, selectedFile)
       .then((res) => {
         if (res.status === 200) toast.success("Successfully Uploaded Image!");
       })
       .catch((err) => console.log(err.response));
+    }
+    else{
+      toast.error("Enter City Name and select a file!");
+    }
   };
 
   const geturl = (e) => {
     e.preventDefault();
+    if(city_name && selectedFile){
     getimgurl(city_name, selectedFile)
       .then((res) => {
         setMetroImg(res.data);
       })
       .catch((err) => console.log(err.response));
+    }
+    else{
+      toast.error("Enter City Name and select a file!");
+    }
   };
   return (
     <div className="metro-form">
@@ -92,7 +107,6 @@ function Metro() {
                 <button
                   type="submit"
                   className="delete-btn"
-                  disabled={!city_name}
                   onClick={geturl}
                 >
                   Get URL
@@ -106,7 +120,6 @@ function Metro() {
           <button
             type="submit"
             className="add-btn"
-            disabled={!city_name}
             onClick={sendDataToAPI}
           >
             Add

@@ -56,3 +56,11 @@ export const deleteReport= (report_id,report_type,report_type_id)=>{
       });
 
 }
+export const deleteRep=(report_id)=>{
+    const userDetails = JSON.parse(localStorage.getItem("user"));
+    return axios.delete(BASE_URL+`/deletereport/${report_id}`, {
+        headers: {
+          Authorization: "Bearer " + userDetails.token,
+        },
+      });
+}

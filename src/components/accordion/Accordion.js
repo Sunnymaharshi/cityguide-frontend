@@ -12,6 +12,7 @@ const Accordion = ({ i, expanded, setExpanded ,line}) => {
           initial={false}
           animate={{ backgroundColor: isOpen ? "#FF0088" : "#0055FF" }}
           onClick={() => setExpanded(isOpen ? false : i)}
+          className="metro-header"
         >
             <h3>{line.title}</h3>
         </motion.header>

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { getReports, deleteReport } from "../../services/admin/Report.service";
+import React, { useState, useEffect} from "react";
+import { getReports, deleteReport, deleteRep } from "../../services/admin/Report.service";
 import "./Report.css";
 import { toast } from "react-toastify";
 function Report() {
@@ -12,6 +12,24 @@ function Report() {
     getAllReports();
   }, []);
 
+const validateDelete = (e) =>{
+  e.preventDefault();
+  if(report_id && report_type && report_type_id){
+  onDelete(e);
+  }
+  else{
+      toast.error("Fill report id, type and type id!");
+  }
+ }
+ const validateDelReport = (e) =>{
+    e.preventDefault();
+    if(report_id){
+    onDeleteReport(e);
+    }
+    else{
+        toast.error("Fill report id!");
+    }
+   }
   const getAllReports = () => {
     getReports()
       .then((res) => {
@@ -35,6 +53,20 @@ function Report() {
         console.log(err.response);
       });
   };
+  const onDeleteReport=(e)=>{
+      e.preventDefault();
+      deleteRep(report_id)
+      .then((res)=>{
+          toast.success("Report Deleted Successfully!");
+          setReportId("");
+          getAllReports();
+      })
+      .catch((err)=>{
+           console.log(err.response);
+      });
+
+  };
+
   return (
     <div className="report-div">
       <div className="report-form">
@@ -43,7 +75,8 @@ function Report() {
           <div className="form-group">
             <label htmlFor="reporttype">Report Type</label>
             <input
-              onChange={(e) => setReportType(e.target.value)}
+              onChange={(e) => {setReportType(e.target.value);
+                                }}
               type="text"
               name="reporttype"
               placeholder="Report Type"
@@ -55,7 +88,7 @@ function Report() {
           <div className="form-group">
             <label htmlFor="reporttypeid">Type Id</label>
             <input
-              onChange={(e) => setReportTypeId(e.target.value)}
+              onChange={(e) => {setReportTypeId(e.target.value)}}
               type="text"
               name="reporttypeid"
               placeholder="Type Id"
@@ -67,7 +100,7 @@ function Report() {
           <div className="form-group">
             <label htmlFor="reportid">Report Id</label>
             <input
-              onChange={(e) => setReportId(e.target.value)}
+              onChange={(e) => {setReportId(e.target.value);}}
               type="text"
               name="reportid"
               placeholder="Report Id"
@@ -77,15 +110,27 @@ function Report() {
             />
           </div>
           <div className="btn-main">
+              <div className="update-btn">
             <button
               style={{ marginTop: "0.5rem" }}
               type="submit"
-              className="add-btn"
-              disabled={!report_id || !report_type || !report_type_id}
-              onClick={onDelete}
+              className="delete-btn"
+              onClick={validateDelete}
             >
-              Delete
+              Delete Data
             </button>
+            </div>
+            <div>
+            <button
+              style={{ marginTop: "0.5rem" }}
+              type="submit"
+              className="delete-btn"
+              
+              onClick={validateDelReport}
+            >
+              Delete Report
+            </button>
+            </div>
           </div>
         </form>
       </div>

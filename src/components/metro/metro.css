@@ -1,7 +1,7 @@
   .window {
       margin: 20px;
-    width: 91vw;
-    height: 80vh;
+    width: 92vw;
+    height: 87vh;
     border-radius: 10px;
     background: white;
     overflow: hidden;
@@ -35,7 +35,13 @@
     display: flex;
     width: 100%;
   }
-  
+  .ul > li{
+    font-size:larger;
+    justify-content: center;
+    background-color: #dbe9f4;
+    font-weight: 600;
+    letter-spacing: 2px;
+  }
   li {
     border-radius: 5px;
     border-bottom-left-radius: 0;
@@ -61,12 +67,12 @@
     bottom: -1px;
     left: 0;
     right: 0;
-    height: 1px;
+    height: 2px;
     background: var(--accent);
   }
   
   li.selected {
-    background: #eee;
+    background-color:skyblue;
   }
   
   li button {
@@ -87,6 +93,7 @@
   .metro-content{
     width: 100%;
     height: 100%;
+    margin-top: 10px;
   }
   .mapimg-div{
     overflow: auto; /* adds scrollbars */
@@ -108,4 +115,8 @@
   object-fit: contain;
   width: 100%;
     height: 400px;
+}
+.metro-header{
+  text-align: center;
+  color: #fff;
 }
