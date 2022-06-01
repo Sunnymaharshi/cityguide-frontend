@@ -35,14 +35,8 @@
     display: flex;
     width: 100%;
   }
-  .ul > li{
-    font-size:larger;
-    justify-content: center;
-    background-color: #dbe9f4;
-    font-weight: 600;
-    letter-spacing: 2px;
-  }
-  li {
+  
+  .ul > li {
     border-radius: 5px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -61,7 +55,13 @@
     position: relative;
     user-select: none;
   }
-  
+  .ul > li{
+    font-size:larger;
+    justify-content: center;
+    background-color: #dbe9f4;
+    font-weight: 600;
+    letter-spacing: 2px;
+  }
   .underline {
     position: absolute;
     bottom: -1px;
@@ -94,6 +94,9 @@
     width: 100%;
     height: 100%;
     margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .mapimg-div{
     overflow: auto; /* adds scrollbars */
@@ -114,10 +117,11 @@
 .metro-line-data{
   object-fit: contain;
   width: 100%;
-    height: 400px;
+  height: 400px;
 }
 .metro-header{
   margin-top: 10px;
+  width: 70%;
   text-align: center;
   height: 50px;
 

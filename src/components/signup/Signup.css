@@ -43,18 +43,23 @@ form {
   font-size: large;
   padding: 5px 10px 5px 10px;
   border: 0;
-  font-size: large;
   border-radius: 10px;
 }
 .signup-btn:hover {
   transform: scale(0.95);
+
 }
 
 .login-link1 {
   color: var(--accent);
   margin-top: 10px;
-  font-weight: 500;
+  font-weight: 550;
+}
+.login-link{
+  text-decoration: none;
 }
 .login-link:hover {
-  color:darkorange;
+  color:brown;
+  text-decoration: underline;
+
 }

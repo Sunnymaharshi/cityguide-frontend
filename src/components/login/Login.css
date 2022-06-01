@@ -47,12 +47,19 @@ p {
 .login-btn:hover {
   transform: scale(0.95);
 }
+.signup-link{
+  text-decoration: none;
+}
 .signup-link1 {
   color: black;
   margin-top: 15px;
   text-decoration: none;
+
 }
 .signup-link:hover {
-  color: gold;
+  color:brown;
   text-decoration: underline;
+}
+.signup-link-div{
+  margin-top: 100px;
 }

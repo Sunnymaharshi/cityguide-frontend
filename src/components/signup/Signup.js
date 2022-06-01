@@ -134,7 +134,7 @@ function Signup() {
         </div>
         <div className="signup-div">
           <button type="submit" className="signup-btn">
-            Signup
+            SIGN UP
           </button>
         </div>
 
@@ -145,7 +145,7 @@ function Signup() {
           </Link>
         </p>
         <p className="login-link1">
-          Don't want to SignUp?{" "}
+          Don't want to Sign Up?{" "}
           <Link to="/home" className="login-link">
             <b>Goto Home</b>
           </Link>

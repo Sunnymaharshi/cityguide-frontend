@@ -96,9 +96,10 @@ function Login() {
         </div>
         <div className="login-div">
           <button type="submit" className="login-btn">
-            Login
+            LOGIN
           </button>
         </div>
+        <div className="signup-link-div">
         <p className="signup-link1">
           <Link to="/signup" className="signup-link">
             <b>Create Account</b>
@@ -110,6 +111,7 @@ function Login() {
             <b>Goto Home</b>
           </Link>
         </p>
+        </div>
       </form>
     </div>
   );
