@@ -2,11 +2,13 @@ import React, { useState, useEffect} from "react";
 import { getReports, deleteReport, deleteRep } from "../../services/admin/Report.service";
 import "./Report.css";
 import { toast } from "react-toastify";
+import { Skeleton } from "@mui/material";
 function Report() {
   const [report_id, setReportId] = useState("");
   const [report_type, setReportType] = useState("");
   const [report_type_id, setReportTypeId] = useState("");
   const [report, setReport] = useState([]);
+  const [isLoading,setIsLoading]=useState(true);
 
   useEffect(() => {
     getAllReports();
@@ -33,7 +35,9 @@ const validateDelete = (e) =>{
   const getAllReports = () => {
     getReports()
       .then((res) => {
-        setReport(res.data);
+    setTimeout(() => setIsLoading(false), 1200)
+      setReport(res.data);
+        
       })
       .catch((err) => {
         console.log(err.response);
@@ -153,7 +157,34 @@ const validateDelete = (e) =>{
               <th>Type Id</th>
               <th>Description</th>
             </tr>
-            {report.map((r) => {
+            {
+              isLoading && <><tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              <tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              <tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              <tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              </>
+            }
+            {!isLoading && report.map((r) => {
               return (
                 <tr key={r.report_id}>
                   <td>{r.report_id}</td>
