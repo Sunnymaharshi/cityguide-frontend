@@ -1,125 +1,125 @@
-  .window {
-      margin: 20px;
-    width: 92vw;
-    height: 87vh;
-    border-radius: 10px;
-    background: white;
-    overflow: hidden;
-    box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
-      0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
-      0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .tabs {
-    flex-grow: 1;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
-    flex-wrap: nowrap;
-    width: 100%;
-  }
-  
-  ul,
-  li {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    font-family: "Poppins", sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-  }
-  
-   .ul {
-    display: flex;
-    width: 100%;
-  }
-  
-  .ul > li {
-    border-radius: 5px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    width: 100%;
-    padding: 10px 15px;
-    position: relative;
-    background: white;
-    cursor: pointer;
-    height: 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    flex: 1;
-    min-width: 0;
-    position: relative;
-    user-select: none;
-  }
-  .ul > li{
-    font-size:larger;
-    justify-content: center;
-    background-color: #dbe9f4;
-    font-weight: 600;
-    letter-spacing: 2px;
-  }
-  .underline {
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--accent);
-  }
-  
-  li.selected {
-    background-color:skyblue;
-  }
-  
-  li button {
-    width: 20px;
-    height: 20px;
-    border: 0;
-    background: #fff;
-    border-radius: 3px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    stroke: #000;
-    margin-left: 10px;
-    cursor: pointer;
-    flex-shrink: 0;
-  }
-
-  .metro-content{
-    width: 100%;
-    height: 100%;
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .mapimg-div{
-    overflow: auto; /* adds scrollbars */
-    margin-top: 2px;
-    height: 800px;
-    position: relative;
-  }
-  .mapdata{
-    width: 100%;
-    height: 400px;
-    object-fit:scale-down;
-  }
-  .mapimg-div > img {
-    height: auto; /* probably looks neater if auto */
-    width: 100%; /* double width image to show only first quarter */
-    vertical-align: bottom; /* moves image to true text bottom */
+.window {
+  margin: 20px;
+  width: 92vw;
+  height: 87vh;
+  border-radius: 10px;
+  background: white;
+  overflow: hidden;
+  box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
+    0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
+    0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
+  display: flex;
+  flex-direction: column;
 }
-.metro-line-data{
+
+.tabs {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.ul {
+  display: flex;
+  width: 100%;
+}
+
+.ul > li {
+  border-radius: 5px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  width: 100%;
+  padding: 10px 15px;
+  position: relative;
+  background: white;
+  cursor: pointer;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  user-select: none;
+}
+.ul > li {
+  font-size: larger;
+  justify-content: center;
+  background-color: #dbe9f4;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+.underline {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+}
+
+li.selected {
+  background-color: skyblue;
+}
+
+li button {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  background: #fff;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  stroke: #000;
+  margin-left: 10px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.metro-content {
+  width: 100%;
+  height: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mapimg-div {
+  overflow: auto; /* adds scrollbars */
+  position: relative;
+  margin-top: 2px;
+  height: 800px;
+}
+.mapdata {
+  width: 100%;
+  height: 400px;
+  object-fit: scale-down;
+}
+.mapimg-div > img {
+  height: auto; /* probably looks neater if auto */
+  width: 100%; /* double width image to show only first quarter */
+  vertical-align: bottom; /* moves image to true text bottom */
+}
+.metro-line-data {
   object-fit: contain;
   width: 100%;
   height: 400px;
 }
-.metro-header{
+.metro-header {
   margin-top: 10px;
   width: 70%;
   text-align: center;

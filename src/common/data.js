@@ -11,6 +11,11 @@ export const REPORT_QUESTION_TYPE = "Question";
 export const REPORT_ANSWER_TYPE = "Answer";
 export const REPORT_COMMENT_TYPE = "Comment";
 
+// image types
+export const IMG_RES_TYPE = "Restaurant";
+export const IMG_CITY_TYPE = "City";
+export const IMG_ATTR_TYPE = "Attraction";
+
 // Response Messages
 export const INVALID_USERNAME_RES = "Username does not exist!";
 export const INVALID_PASSWORD_RES = "Wrong Password!";

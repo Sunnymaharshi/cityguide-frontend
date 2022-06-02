@@ -11,7 +11,7 @@ const delay = 4000;
 const properties = {
   duration: 3000,
   transitionDuration: 1000,
-  indicators:true,
+  indicators: true,
   easing: "ease",
   pauseOnHover: true,
   infinite: true,
@@ -69,16 +69,15 @@ export default function About({ city }) {
   return (
     <>
       {!city && "loading"}
-  
+
       <div className="ease1">
         <Slide {...properties}>
           {slideImages.map((slideImage, index) => (
-            <>
-              <div className="each-slide" key={index}>
+            <div key={index}>
+              <div className="each-slide">
                 <div style={{ backgroundImage: `url(${slideImage})` }}></div>
               </div>
-              
-            </>
+            </div>
           ))}
         </Slide>
 
@@ -94,7 +93,7 @@ export default function About({ city }) {
           ))}
         </div>
         <h1 className="tagline">{About.city_tagline}</h1>
-              <span className="city-desc">{About.city_desc}</span>
+        <span className="city-desc">{About.city_desc}</span>
       </div>
     </>
   );

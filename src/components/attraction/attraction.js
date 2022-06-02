@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Card from "../card/card";
+import Card from "../card/Card";
 import { getAttractions } from "../../services/dashboard/dashboard.service";
 
 export default function Attraction({ city }) {
