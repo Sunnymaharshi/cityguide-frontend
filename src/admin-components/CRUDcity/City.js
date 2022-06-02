@@ -11,6 +11,10 @@ import {
 } from "../../services/admin/city.service";
 import { toast } from "react-toastify";
 import { FileUploaded } from "../FileUploaded/FileUploaded";
+import { Skeleton } from "@mui/material";
+
+
+
 
 function City() {
   const [city_name, setCityName] = useState("");
@@ -23,9 +27,14 @@ function City() {
   const [type_id, setTypeId] = useState("");
   const [type] = useState("City");
   const [img_url, setImgUrl] = useState("");
+  const [isLoading,setIsLoading]=useState(true);
+ 
+  
+
 
   useEffect(() => {
     getAllCities();
+    setTimeout(() => setIsLoading(false), 2000)
   }, []);
 
   const getAllCities = async (event) => {
@@ -270,22 +279,33 @@ function City() {
           </div>
         </form>
       </div>
+      
+
+    
       <div className="city-table">
         <table id="citytable">
-          <tbody>
+
+      
+         <tbody>
+      
             <tr>
               <th>Name</th>
               <th>Tagline</th>
               <th>Description</th>
             </tr>
             {city.map((c) => {
-              return (
+              return  (isLoading?(<tr>
+                <td><Skeleton  height={30}/></td>
+                <td><Skeleton  height={30}/></td>
+                <td><Skeleton  height={30}/></td>
+                 </tr>
+              ):(
                 <tr key={c.city_name}>
                   <td>{c.city_name}</td>
                   <td>{c.city_tagline}</td>
                   <td>{c.city_desc}</td>
                 </tr>
-              );
+              ));
             })}
           </tbody>
         </table>

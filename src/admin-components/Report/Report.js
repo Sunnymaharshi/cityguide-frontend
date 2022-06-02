@@ -2,14 +2,17 @@ import React, { useState, useEffect} from "react";
 import { getReports, deleteReport, deleteRep } from "../../services/admin/Report.service";
 import "./Report.css";
 import { toast } from "react-toastify";
+import { Skeleton } from "@mui/material";
 function Report() {
   const [report_id, setReportId] = useState("");
   const [report_type, setReportType] = useState("");
   const [report_type_id, setReportTypeId] = useState("");
   const [report, setReport] = useState([]);
+  const [isLoading,setIsLoading]=useState(true);
 
   useEffect(() => {
     getAllReports();
+    setTimeout(() => setIsLoading(false), 2000)
   }, []);
 
 const validateDelete = (e) =>{
@@ -154,14 +157,20 @@ const validateDelete = (e) =>{
               <th>Description</th>
             </tr>
             {report.map((r) => {
-              return (
+              return (isLoading?(<tr>
+                <td><Skeleton  height={30}/></td>
+                <td><Skeleton  height={30}/></td>
+                <td><Skeleton  height={30}/></td>
+                <td><Skeleton  height={30}/></td>
+                 </tr>
+              ):(
                 <tr key={r.report_id}>
                   <td>{r.report_id}</td>
                   <td>{r.report_type}</td>
                   <td>{r.report_type_id}</td>
                   <td>{r.report_desc}</td>
                 </tr>
-              );
+              ));
             })}
           </tbody>
         </table>

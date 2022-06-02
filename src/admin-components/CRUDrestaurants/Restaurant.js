@@ -11,6 +11,7 @@ import {
 import "./Restaurant.css";
 import { toast } from "react-toastify";
 import { FileUploaded } from "../FileUploaded/FileUploaded";
+import { Skeleton } from "@mui/material";
 
 function Restaurant() {
   const [res_name, setResName] = useState("");
@@ -25,9 +26,11 @@ function Restaurant() {
   const [filename, setFileName] = useState("");
   const [type] = useState("Restaurant");
   const [img_url, setImgUrl] = useState("");
+  const [isLoading,setIsLoading]=useState(true);
 
   useEffect(() => {
     getAllRestaurants();
+    setTimeout(() => setIsLoading(false), 2000)
   }, []);
 
   const getAllRestaurants = async () => {
@@ -312,7 +315,14 @@ function Restaurant() {
                 <th>City</th>
               </tr>
               {restaurant.map((rest) => {
-                return (
+                return (isLoading?(<tr>
+                  <td><Skeleton  height={30}/></td>
+                  <td><Skeleton  height={30}/></td>
+                  <td><Skeleton  height={30}/></td>
+                  <td><Skeleton  height={30}/></td>
+                  <td><Skeleton  height={30}/></td>
+                   </tr>
+                ):(
                   <tr key={rest.res_id}>
                     <td>{rest.res_id}</td>
                     <td>{rest.res_name}</td>
@@ -320,7 +330,7 @@ function Restaurant() {
                     <td>{rest.description}</td>
                     <td>{rest.city_name}</td>
                   </tr>
-                );
+                ));
               })}
             </tbody>
           </table>

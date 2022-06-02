@@ -11,6 +11,7 @@ import {
 } from "../../services/admin/attraction.service";
 import "./Attraction.css";
 import { toast } from "react-toastify";
+import { Skeleton } from "@mui/material";
 
 function Attraction() {
   const [attr_name, setAttrName] = useState("");
@@ -25,9 +26,11 @@ function Attraction() {
   const [filename, setFileName] = useState("");
   const [type] = useState("Attraction");
   const [img_url, setImgUrl] = useState("");
+  const [isLoading,setIsLoading]=useState(true);
 
   useEffect(() => {
     getAllAttractions();
+    setTimeout(() => setIsLoading(false), 2000)
   }, []);
 
   const getAllAttractions = async (event) => {
@@ -290,7 +293,6 @@ function Attraction() {
           </form>
         </div>
         <div className="attr-table">
-          <h2 className="attr-det">Attraction Details</h2>
           <table id="attrtable">
             <tbody>
               <tr>
@@ -301,7 +303,14 @@ function Attraction() {
                 <th>City</th>
               </tr>
               {attraction.map((attr) => {
-                return (
+                return (isLoading?(<tr>
+                  <td><Skeleton  height={30}/></td>
+                  <td><Skeleton  height={30}/></td>
+                  <td><Skeleton  height={30}/></td>
+                  <td><Skeleton  height={30}/></td>
+                  <td><Skeleton  height={30}/></td>
+                   </tr>
+                ):(
                   <tr key={attr.attr_id}>
                     <td>{attr.attr_id}</td>
                     <td>{attr.attr_name}</td>
@@ -309,7 +318,7 @@ function Attraction() {
                     <td>{attr.description}</td>
                     <td>{attr.city_name}</td>
                   </tr>
-                );
+                ));
               })}
             </tbody>
           </table>
