@@ -30,12 +30,12 @@ function Restaurant() {
 
   useEffect(() => {
     getAllRestaurants();
-    setTimeout(() => setIsLoading(false), 2000)
   }, []);
 
   const getAllRestaurants = async () => {
     getRestaurants()
       .then((res) => {
+        setTimeout(() => setIsLoading(false), 1200)
         setRestaurants(res.data);
       })
       .catch((err) => {
@@ -314,15 +314,39 @@ function Restaurant() {
                 <th>Description</th>
                 <th>City</th>
               </tr>
-              {restaurant.map((rest) => {
-                return (isLoading?(<tr>
-                  <td><Skeleton  height={30}/></td>
-                  <td><Skeleton  height={30}/></td>
-                  <td><Skeleton  height={30}/></td>
-                  <td><Skeleton  height={30}/></td>
-                  <td><Skeleton  height={30}/></td>
-                   </tr>
-                ):(
+              {
+              isLoading && <><tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              <tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              <tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              <tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              </>
+            }
+              {!isLoading && restaurant.map((rest) => {
+                return (
                   <tr key={rest.res_id}>
                     <td>{rest.res_id}</td>
                     <td>{rest.res_name}</td>
@@ -330,7 +354,7 @@ function Restaurant() {
                     <td>{rest.description}</td>
                     <td>{rest.city_name}</td>
                   </tr>
-                ));
+                );
               })}
             </tbody>
           </table>

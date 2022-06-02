@@ -12,7 +12,6 @@ function Report() {
 
   useEffect(() => {
     getAllReports();
-    setTimeout(() => setIsLoading(false), 2000)
   }, []);
 
 const validateDelete = (e) =>{
@@ -36,7 +35,9 @@ const validateDelete = (e) =>{
   const getAllReports = () => {
     getReports()
       .then((res) => {
-        setReport(res.data);
+    setTimeout(() => setIsLoading(false), 1200)
+      setReport(res.data);
+        
       })
       .catch((err) => {
         console.log(err.response);
@@ -156,21 +157,42 @@ const validateDelete = (e) =>{
               <th>Type Id</th>
               <th>Description</th>
             </tr>
-            {report.map((r) => {
-              return (isLoading?(<tr>
-                <td><Skeleton  height={30}/></td>
-                <td><Skeleton  height={30}/></td>
-                <td><Skeleton  height={30}/></td>
-                <td><Skeleton  height={30}/></td>
-                 </tr>
-              ):(
+            {
+              isLoading && <><tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              <tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              <tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              <tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              </>
+            }
+            {!isLoading && report.map((r) => {
+              return (
                 <tr key={r.report_id}>
                   <td>{r.report_id}</td>
                   <td>{r.report_type}</td>
                   <td>{r.report_type_id}</td>
                   <td>{r.report_desc}</td>
                 </tr>
-              ));
+              );
             })}
           </tbody>
         </table>

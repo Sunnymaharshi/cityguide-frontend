@@ -34,12 +34,13 @@ function City() {
 
   useEffect(() => {
     getAllCities();
-    setTimeout(() => setIsLoading(false), 2000)
+    
   }, []);
 
   const getAllCities = async (event) => {
     getCity()
       .then((res) => {
+        setTimeout(() => setIsLoading(false), 1200)
         setCity(res.data);
       })
       .catch((err) => {
@@ -293,19 +294,37 @@ function City() {
               <th>Tagline</th>
               <th>Description</th>
             </tr>
-            {city.map((c) => {
-              return  (isLoading?(<tr>
-                <td><Skeleton  height={30}/></td>
-                <td><Skeleton  height={30}/></td>
-                <td><Skeleton  height={30}/></td>
-                 </tr>
-              ):(
+            {
+              isLoading && <><tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              <tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              <tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              <tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              </>
+            }
+            {!isLoading && city.map((c) => {
+              return  (
                 <tr key={c.city_name}>
                   <td>{c.city_name}</td>
                   <td>{c.city_tagline}</td>
                   <td>{c.city_desc}</td>
                 </tr>
-              ));
+              );
             })}
           </tbody>
         </table>

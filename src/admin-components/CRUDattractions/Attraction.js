@@ -30,12 +30,13 @@ function Attraction() {
 
   useEffect(() => {
     getAllAttractions();
-    setTimeout(() => setIsLoading(false), 2000)
+
   }, []);
 
   const getAllAttractions = async (event) => {
     getAttractions()
       .then((res) => {
+        setTimeout(() => setIsLoading(false), 1200)
         setAttractions(res.data);
       })
       .catch((err) => {
@@ -302,15 +303,39 @@ function Attraction() {
                 <th>Description</th>
                 <th>City</th>
               </tr>
-              {attraction.map((attr) => {
-                return (isLoading?(<tr>
-                  <td><Skeleton  height={30}/></td>
-                  <td><Skeleton  height={30}/></td>
-                  <td><Skeleton  height={30}/></td>
-                  <td><Skeleton  height={30}/></td>
-                  <td><Skeleton  height={30}/></td>
-                   </tr>
-                ):(
+              {
+              isLoading && <><tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              <tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              <tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              <tr>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              <td><Skeleton  height={30}/></td>
+              </tr>
+              </>
+            }
+              {!isLoading && attraction.map((attr) => {
+                return (
                   <tr key={attr.attr_id}>
                     <td>{attr.attr_id}</td>
                     <td>{attr.attr_name}</td>
@@ -318,7 +343,7 @@ function Attraction() {
                     <td>{attr.description}</td>
                     <td>{attr.city_name}</td>
                   </tr>
-                ));
+                );
               })}
             </tbody>
           </table>
