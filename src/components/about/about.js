@@ -1,13 +1,15 @@
-import { useRef, useEffect, useState } from "react";
-import { getCityAbout } from "../../services/dashboard/dashboard.service";
+import { useEffect, useState } from "react";
+import {
+  getCityAbout,
+  getImages,
+} from "../../services/dashboard/dashboard.service";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 
 import "./about.css";
 import image1c from "../../assets/image1c.jpg";
+import { IMG_CITY_TYPE } from "../../common/data";
 
-const slideImages = [image1c, image1c, image1c, image1c];
-const delay = 4000;
 const properties = {
   duration: 3000,
   transitionDuration: 1000,
@@ -19,13 +21,8 @@ const properties = {
 export default function About({ city }) {
   const [About, setAbout] = useState([]);
   const [index, setIndex] = useState(0);
-  const timeoutRef = useRef(null);
 
-  function resetTimeout() {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-  }
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
     if (city !== null) {
@@ -34,8 +31,12 @@ export default function About({ city }) {
           setAbout(res.data);
         })
         .catch((err) => {
-          console.log("rest error", err);
+          console.log("about error", err);
         });
+      getImages(IMG_CITY_TYPE, city).then((res) => {
+        console.log(res);
+        setImages(res.data);
+      });
     }
     // eslint-disable-next-line
   }, []);
@@ -52,37 +53,23 @@ export default function About({ city }) {
     // eslint-disable-next-line
   }, [city]);
 
-  useEffect(() => {
-    resetTimeout();
-    timeoutRef.current = setTimeout(
-      () =>
-        setIndex((prevIndex) =>
-          prevIndex === slideImages.length - 1 ? 0 : prevIndex + 1
-        ),
-      delay
-    );
-
-    return () => {
-      resetTimeout();
-    };
-  }, [index]);
   return (
     <>
       {!city && "loading"}
 
       <div className="ease1">
         <Slide {...properties}>
-          {slideImages.map((slideImage, index) => (
-            <div key={index}>
+          {images.map((image) => (
+            <div key={image.image_id}>
               <div className="each-slide">
-                <div style={{ backgroundImage: `url(${slideImage})` }}></div>
+                <div style={{ backgroundImage: `url(${image.img_url})` }}></div>
               </div>
             </div>
           ))}
         </Slide>
 
         <div className="slideshowDots">
-          {slideImages.map((_, idx) => (
+          {images.map((_, idx) => (
             <div
               key={idx}
               className={`slideshowDot${index === idx ? " active" : ""}`}
