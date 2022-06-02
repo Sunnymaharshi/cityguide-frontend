@@ -24,7 +24,10 @@ function Questions({ city }) {
     loadQuestions(city);
     // eslint-disable-next-line
   }, [city]);
-
+  const handleQuery = (e) => {
+    setQuery(e.target.value);
+    if (e.target.value === "") loadQuestions(city);
+  };
   const updateQuestions = (ques_id) => {
     const new_questions = questions.filter((ques) => ques.ques_id !== ques_id);
     setQuestions(new_questions);
@@ -73,9 +76,7 @@ function Questions({ city }) {
           type="search"
           className="search-bar"
           placeholder="Search Questions"
-          onChange={(e) => {
-            setQuery(e.target.value);
-          }}
+          onChange={handleQuery}
         />
 
         <button onClick={handleSearch} className="search-btn">

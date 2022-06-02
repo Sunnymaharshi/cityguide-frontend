@@ -8,6 +8,7 @@
 
 .answer-option {
   display: flex;
+  font-size: larger;
 }
 
 .i-count {
