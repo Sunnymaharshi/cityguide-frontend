@@ -15,6 +15,7 @@ import CityModal from "../citymodal/CityModal";
 import { AnimatePresence } from "framer-motion";
 import { getCityFromLocal, isCitySelected } from "../../common/functions";
 import Metro from "../metro/metro";
+import Bus from "../bus/Bus";
 function Dashboard() {
   const [city, setCity] = useState(null);
   const [modal, setModal] = useState(false);
@@ -55,6 +56,7 @@ function Dashboard() {
             <Route path="answers/:id" element={<Answers />} />
             <Route path="contributions/*" element={<Contributions />} />
             <Route path="metromap" element={<Metro city={city}/>} />
+            <Route path="busdata" element={<Bus city={city}/>}/>
 
           </Routes>
         </div>
