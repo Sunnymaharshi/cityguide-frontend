@@ -1,7 +1,4 @@
-.bus-form{
-    display: flex;
-    justify-content: center;
-}
+
 .img-form .form-control{
     width: auto;
     margin-right: 0.7rem;
@@ -18,5 +15,6 @@
     padding-top: 30px;
     padding-bottom: 15px;
     background-image: linear-gradient(to right, var(--secondary),  #005c99);
+}
+
     
-    }

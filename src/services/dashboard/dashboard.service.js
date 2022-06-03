@@ -18,7 +18,9 @@ export const getRestaurants = (city) => {
 export const getMetro = (city) => {
   return axios.get(BASE_URL + "/getmetro/" + city);
 };
-
+export const getBus =(city)=>{
+  return axios.get(BASE_URL + "/getbus/" + city);
+}
 export const getImages = (type, type_id) => {
   return axios.get(BASE_URL + `/getimagedetails/${type}/${type_id}`);
 };
