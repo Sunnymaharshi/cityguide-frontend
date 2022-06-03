@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "../../common/data";
+import { authHeader } from "../../common/functions";
 
 export const getRestaurants = async (event) => {
   return await axios.get(BASE_URL + "/getrest");
@@ -12,7 +13,6 @@ export const postRestaurant = async (
   city_name,
   res_image
 ) => {
-  const userDetails = JSON.parse(localStorage.getItem("user"));
   return await axios.post(
     BASE_URL + "/addrest",
     {
@@ -22,11 +22,7 @@ export const postRestaurant = async (
       res_image,
       city_name,
     },
-    {
-      headers: {
-        Authorization: "Bearer " + userDetails.token,
-      },
-    }
+    authHeader()
   );
 };
 
@@ -37,7 +33,6 @@ export const updateRestaurant = async (
   res_location,
   city_name
 ) => {
-  const userDetails = JSON.parse(localStorage.getItem("user"));
   return await axios.put(
     BASE_URL + "/updaterest",
     {
@@ -47,38 +42,22 @@ export const updateRestaurant = async (
       res_location,
       city_name,
     },
-    {
-      headers: {
-        Authorization: "Bearer " + userDetails.token,
-      },
-    }
+    authHeader()
   );
 };
 
 export const deleteRestaurant = async (res_id) => {
-  const userDetails = JSON.parse(localStorage.getItem("user"));
-  return await axios.delete(BASE_URL + `/deleterest/${res_id}`, {
-    headers: {
-      Authorization: "Bearer " + userDetails.token,
-    },
-  });
+  return await axios.delete(BASE_URL + `/deleterest/${res_id}`, authHeader());
 };
 
 export const uploadFile = (city_name, selectedFile) => {
   console.log(selectedFile);
   const formData = new FormData();
   formData.append("image", selectedFile);
-  const userDetails = JSON.parse(localStorage.getItem("user"));
   return axios.post(
     BASE_URL + `/imageUpload/${city_name}`,
     formData,
-
-    {
-      headers: {
-        Authorization: "Bearer " + userDetails.token,
-        "content-type": "multipart/form-data",
-      },
-    }
+    authHeader()
   );
 };
 export const getimgurl = (city_name, selectedFile) => {

@@ -10,17 +10,13 @@ ANS_DELETE_UNAUTH,
 COMM_DELETED_RES} from "../../common/data";
 import { toast } from "react-toastify";
 import { deleteAnswer, deleteComment, deleteQuestion } from "../questions/questions.service";
-export const getReports = async (event) =>{
-    const userDetails = JSON.parse(localStorage.getItem("user"));
-    return await axios.get(BASE_URL+"/getreports",{
-        headers: {
-          Authorization: "Bearer " + userDetails.token,
-        },
-      });    
+import { authHeader } from "../../common/functions";
 
+export const getReports = async (event) =>{
+    return await axios.get(BASE_URL+"/getreports",authHeader());    
 }
+
 export const deleteReport= (report_type,report_type_id)=>{
-    const userDetails = JSON.parse(localStorage.getItem("user"));
     if(report_type===REPORT_QUESTION_TYPE)
     {
         
@@ -72,10 +68,5 @@ export const deleteReport= (report_type,report_type_id)=>{
 
 }
 export const deleteRep=(report_id)=>{
-    const userDetails = JSON.parse(localStorage.getItem("user"));
-    return axios.delete(BASE_URL+`/deletereport/${report_id}`, {
-        headers: {
-          Authorization: "Bearer " + userDetails.token,
-        },
-      });
+    return axios.delete(BASE_URL+`/deletereport/${report_id}`,authHeader());
 }
