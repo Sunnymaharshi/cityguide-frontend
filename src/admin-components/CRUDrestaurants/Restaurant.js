@@ -128,9 +128,12 @@ function Restaurant() {
 
   const geturl = (e) => {
     e.preventDefault();
+    console.log("not happening!");
     if(city_name && selectedFile){
     getimgurl(city_name, selectedFile)
       .then((res) => {
+        console.log("not happening@!");
+        console.log(res);
         setResImage(res.data);
         setFileName(selectedFile.name);
       })
@@ -145,7 +148,6 @@ function Restaurant() {
     e.preventDefault();
 
     setTypeId(res_id.toString());
-
     setImgUrl(res_image);
     if(res_id && res_image && type_id && filename){
 
