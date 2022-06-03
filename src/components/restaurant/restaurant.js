@@ -1,18 +1,29 @@
+import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
-import Card from "../card/Card";
 import { getRestaurants } from "../../services/dashboard/dashboard.service";
+import MyCard from "../mycard/MyCard";
 
 export default function Restaurant({ city }) {
   const [Restaurants, setRestaurants] = useState([]);
+  const loadRestaurants = () => {
+    if (city !== null) {
+      getRestaurants(city)
+        .then((res) => {
+          setRestaurants(res.data);
+        })
+        .catch((err) => {
+          console.log("rest error", err);
+        });
+    }
+  };
   useEffect(() => {
-    getRestaurants(city)
-      .then((res) => {
-        setRestaurants(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log("rest error", err);
-      }); // eslint-disable-next-line
+    loadRestaurants();
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    loadRestaurants();
+    // eslint-disable-next-line
   }, [city]);
 
   return (
@@ -22,10 +33,17 @@ export default function Restaurant({ city }) {
       </h2>
       <h3 className="attr-tagline">Here We Got Some For You</h3>
       {Restaurants.length === 0 && <p>Restaurants Not Found</p>}
-
-      {Restaurants.map((p) => {
-        return <Card details={p} key={p.res_id} />;
-      })}
+      <div style={{ margin: "30px" }}>
+        <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
+          {Restaurants.map((p) => {
+            return (
+              <Box gridColumn="span 3" key={p.res_id}>
+                <MyCard details={p} />
+              </Box>
+            );
+          })}
+        </Box>
+      </div>
     </div>
   );
 }
