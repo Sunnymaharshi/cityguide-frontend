@@ -22,19 +22,16 @@ const MyCard = ({ details }) => {
     // eslint-disable-next-line
   }, []);
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 445 }}>
       <CardMedia
         component="img"
-        height="140"
+        height="340"
         image={img_url}
         alt="restaurant"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {details.res_name}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {details.description}
         </Typography>
       </CardContent>
     </Card>
