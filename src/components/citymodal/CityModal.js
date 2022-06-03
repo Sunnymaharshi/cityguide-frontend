@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { getCities } from "../../services/dashboard/dashboard.service";
 import "./CityModal.css";
 import Backdrop from "../backdrop/Backdrop";
+import { toast } from "react-toastify";
+import { Skeleton } from "@mui/material";
 const dropIn = {
   hidden: {
     y: "-100vh",
@@ -19,15 +21,18 @@ const dropIn = {
 };
 function CityModal({ handleClose, setCity }) {
   const [cities, setCities] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     getCities()
       .then((res) => {
         if (res.data.length > 0) {
           setCities(res.data);
+          setLoading(false);
         }
       })
       .catch((err) => {
-        console.log("city names error", err);
+        toast.error("Error fetching cities!");
+        // setLoading(false);
       }); // eslint-disable-next-line
   }, []);
 
@@ -47,18 +52,39 @@ function CityModal({ handleClose, setCity }) {
         exit="exit"
       >
         <div className="modal-content">
-          {cities.map((city) => {
-            return (
-              <option
-                className="city"
-                key={city}
-                onClick={handleSelect}
-                value={city}
-              >
-                {city}
-              </option>
-            );
-          })}
+          <div style={{ fontSize: "large" }}>Choose a city</div>
+          {loading && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-around",
+                width: "100%",
+                paddingTop: "10px",
+              }}
+            >
+              <Skeleton variant="rectangular" width={100} height={40} />
+
+              <Skeleton variant="rectangular" width={100} height={40} />
+
+              <Skeleton variant="rectangular" width={100} height={40} />
+              <Skeleton variant="rectangular" width={100} height={40} />
+            </div>
+          )}
+          <div className="cities-row">
+            {!loading &&
+              cities.map((city) => {
+                return (
+                  <option
+                    className="city"
+                    key={city}
+                    onClick={handleSelect}
+                    value={city}
+                  >
+                    {city}
+                  </option>
+                );
+              })}
+          </div>
         </div>
       </motion.div>
     </Backdrop>
