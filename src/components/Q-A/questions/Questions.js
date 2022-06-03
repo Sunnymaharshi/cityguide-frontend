@@ -56,11 +56,15 @@ function Questions({ city }) {
     if (isUserLoggedin()) {
       if (newQuestion.trim().length > 0) {
         const ques = { description: newQuestion, city_name: city };
-        postQuestion(ques).then((res) => {
-          setQuestions([res.data, ...questions]);
-          toast.success("Question posted Successfully");
-          setNewQuestion("");
-        });
+        postQuestion(ques)
+          .then((res) => {
+            setQuestions([res.data, ...questions]);
+            toast.success("Question posted Successfully");
+            setNewQuestion("");
+          })
+          .catch((err) => {
+            toast.error(err.response.data, { autoClose: 5000 });
+          });
       } else {
         toast.error("Question can't be empty");
       }

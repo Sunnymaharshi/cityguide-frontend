@@ -20,7 +20,7 @@ function App() {
           </Routes>
         </Router>
       </UserState>
-      <ToastContainer autoClose={3000} />
+      <ToastContainer autoClose={3000} style={{ width: "fit-content" }} />
     </>
   );
 }
