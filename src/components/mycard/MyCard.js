@@ -30,7 +30,12 @@ const MyCard = ({ details }) => {
         alt="restaurant"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          style={{ fontFamily: "PT Sans Narrow, sans-serif" }}
+        >
           {details.res_name}
         </Typography>
       </CardContent>
