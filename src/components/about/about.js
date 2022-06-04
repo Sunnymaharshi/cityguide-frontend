@@ -7,7 +7,6 @@ import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 
 import "./about.css";
-import image1c from "../../assets/image1c.jpg";
 import { IMG_CITY_TYPE } from "../../common/data";
 
 const properties = {

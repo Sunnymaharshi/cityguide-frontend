@@ -4,8 +4,6 @@ import Accordion from "../accordion/Accordion";
 import "./metro.css";
 
 import { getMetro } from "../../services/dashboard/dashboard.service";
-import green_schedule from "../../assets/green_line_schedule.png";
-import purple_schedule from "../../assets/purple_line_schedule.png";
 
 const tabs = ["Map", "Lines", "Schedule"];
 
