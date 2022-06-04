@@ -63,9 +63,6 @@ function Navbar({ openModal, city }) {
             <Link to="/login" className="nav-link not-selectable">
               Login
             </Link>
-            <Link className="nav-link not-selectable" to="/signup">
-              Signup
-            </Link>
           </div>
         )}
         {user.username && (

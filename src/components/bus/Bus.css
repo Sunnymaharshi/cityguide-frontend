@@ -1,31 +1,63 @@
+.bus-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.bus-search-bar {
+  width: 60%;
+  height: 3rem;
+  text-align: center;
+  font-size: large;
+  border: 2px solid black;
+  border-radius: 15px;
+  padding: 10px;
+  outline: none;
+}
+.bus-search-btn {
+  width: 150px;
+  background-color: var(--accent);
+  color: white;
+  padding: 5px 10px 5px 10px;
+  border: 0;
+  height: 3rem;
+  margin-left: 10px;
+  font-size: large;
+  border-radius: 15px;
+}
+.bus-table {
+  display: flex;
+  flex-direction: column;
+}
 #resttable {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 40vw;
-  }
-  
-  #bustable td,
-  #bustable th {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  #bustable tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  #bustable tr:hover {
-    background-color: #ddd;
-  }
-  
-  #bustable th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: var(--secondary);
-    color: white;
-  }
-  .bus-table{
-      justify-content: center;
-      display: flex ;
-  }
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 40vw;
+}
+
+#bustable td,
+#bustable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#bustable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#bustable tr:hover {
+  background-color: #ddd;
+}
+
+#bustable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: var(--secondary);
+  color: white;
+}
+.bus-table {
+  justify-content: center;
+  display: flex;
+  padding: 0 30px;
+}
