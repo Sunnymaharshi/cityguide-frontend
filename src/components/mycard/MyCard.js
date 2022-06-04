@@ -2,6 +2,7 @@ import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { getImages } from "../../services/dashboard/dashboard.service";
 import { IMG_ATTR_TYPE, IMG_RES_TYPE } from "../../common/data";
+import "./MyCard.css";
 const MyCard = ({ details }) => {
   const [img_url, setImg_url] = useState(null);
 
@@ -22,12 +23,13 @@ const MyCard = ({ details }) => {
     // eslint-disable-next-line
   }, []);
   return (
-    <Card sx={{ maxWidth: 445 }}>
+    <Card sx={{ maxWidth: 445 }} className="mycard-comp">
       <CardMedia
         component="img"
         height="340"
         image={img_url}
         alt="restaurant"
+        className="card-image"
       />
       <CardContent>
         <Typography
@@ -37,6 +39,7 @@ const MyCard = ({ details }) => {
           style={{ fontFamily: "PT Sans Narrow, sans-serif" }}
         >
           {details.res_name}
+          {details.attr_name}
         </Typography>
       </CardContent>
     </Card>
