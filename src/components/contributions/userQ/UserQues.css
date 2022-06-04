@@ -1,0 +1,12 @@
+.user-ques-comp {
+  padding: 0 30px;
+}
+.user-ques-des {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  font-size: larger;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}

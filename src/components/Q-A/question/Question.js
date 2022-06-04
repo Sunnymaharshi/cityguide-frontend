@@ -62,6 +62,7 @@ const Question = ({ ques, ind, updateQuestions }) => {
         aria-controls={open ? "long-menu" : undefined}
         aria-expanded={open ? "true" : undefined}
         aria-haspopup="true"
+        style={{ height: "fit-content" }}
         onClick={handleClick}
       >
         <MoreVertIcon style={{ color: "var(--accent)" }} />

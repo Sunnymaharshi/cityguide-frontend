@@ -57,9 +57,9 @@ function Bus({ city }) {
         <tbody>
           <tr>
             <th>Bus Codes</th>
-            <th>Bus Routes</th>
             <th>Source</th>
             <th>Destination</th>
+            <th>Bus Routes</th>
           </tr>
           {isLoading && (
             <>
@@ -127,9 +127,9 @@ function Bus({ city }) {
               return (
                 <tr key={bus.bus_id}>
                   <td>{bus.bus_codes}</td>
-                  <td>{bus.bus_routes}</td>
                   <td>{bus.source}</td>
                   <td>{bus.destination}</td>
+                  <td>{bus.bus_routes}</td>
                 </tr>
               );
             })}
@@ -139,9 +139,9 @@ function Bus({ city }) {
               return (
                 <tr key={bus.bus_id}>
                   <td>{bus.bus_codes}</td>
-                  <td>{bus.bus_routes}</td>
                   <td>{bus.source}</td>
                   <td>{bus.destination}</td>
+                  <td>{bus.bus_routes}</td>
                 </tr>
               );
             })}
