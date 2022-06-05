@@ -1,6 +1,5 @@
 export const USER_DATA = "user";
 export const CITY_DATA = "city";
-// export const BASE_URL = "http://localhost:8080";
 export const BASE_URL =
   "https://hu-may-prod-city-guide-backend-urtjok3rza-wl.a.run.app";
 
