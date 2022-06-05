@@ -10,6 +10,7 @@ import {
   USERNAME_TAKEN_RES,
 } from "../../common/data";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 function Signup() {
   const initialValues = {
@@ -136,9 +137,10 @@ function Signup() {
           <small>{formErrors.password}</small>
         </div>
         <div className="signup-div">
-          <button type="submit" className="signup-btn">
+          <motion.button type="submit" className="signup-btn" whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}>
             SIGN UP
-          </button>
+          </motion.button>
         </div>
 
         <p className="login-link1">

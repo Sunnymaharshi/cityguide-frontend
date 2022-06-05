@@ -3,6 +3,7 @@ import { getReports, deleteReport, deleteRep } from "../../services/admin/Report
 import "./Report.css";
 import { toast } from "react-toastify";
 import { Skeleton } from "@mui/material";
+import { motion } from "framer-motion";
 function Report() {
   const [report_id, setReportId] = useState("");
   const [report_type, setReportType] = useState("");
@@ -79,8 +80,7 @@ const validateDelete = (e) =>{
           <div className="form-row">
              <div className="form-group col">
             <label htmlFor="reportid">Report Id</label>
-            {/* <div className="img-form"> */}
-              {/* <div> */}
+
             <input
               onChange={(e) => {setReportId(e.target.value);}}
               type="text"
@@ -90,19 +90,21 @@ const validateDelete = (e) =>{
               value={report_id}
               className="form-control"
             />
-            {/* </div> */}
+
              </div>
              <div className="form-group col">
           <div className="btn-main">
               <div className="update-btn">
-            <button
+            <motion.button
               type="submit"
               style={{marginTop:"1.5rem"}}
               className="delete-btn"
               onClick={validateDelReport}
+              whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
             >
               Delete Report
-            </button>
+            </motion.button>
          </div>
          </div>
              </div>
@@ -135,14 +137,16 @@ const validateDelete = (e) =>{
 
           <div className="btn-main">
               <div className="update-btn">
-            <button
+            <motion.button
               style={{ marginTop: "0.5rem" }}
               type="submit"
               className="delete-btn"
               onClick={validateDelete}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
             >
               Delete Data
-            </button>
+            </motion.button>
             </div>
           </div>
         </form>

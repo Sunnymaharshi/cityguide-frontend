@@ -12,6 +12,7 @@ import {
 import { toast } from "react-toastify";
 import { FileUploaded } from "../FileUploaded/FileUploaded";
 import { Skeleton } from "@mui/material";
+import { motion } from "framer-motion";
 
 
 
@@ -206,44 +207,52 @@ function City() {
           </div>
           <div className="btn-main">
             <div className="add-button">
-              <button
+              <motion.button
                 type="submit"
                 className="delete-btn"
                 onClick={sendDataToAPI}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
               >
                 Add
-              </button>
+              </motion.button>
             </div>
             <div className="update-btn">
-              <button
+              <motion.button
                 type="submit"
                 className="delete-btn"
                 onClick={updateDataToAPI}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
               >
                 Update
-              </button>
+              </motion.button>
             </div>
             <div className="">
-              <button
+              <motion.button
                 type="submit"
                 className="delete-btn"
                 onClick={onDelete}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
               >
                 Delete
-              </button>
+              </motion.button>
             </div>
           </div>
           <div className="form-row">
             <div className="form-group col">
               <FileUploaded onFileSelect={(file) => setSelectedFile(file)} />
 
-              <button
+              <motion.button
                 className="delete-btn"
                 style={{ marginTop: "0.5rem" }}
                 onClick={submitForm}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
               >
                 Upload
-              </button>
+              </motion.button>
             </div>
 
             <div className="form-group col">
@@ -257,26 +266,30 @@ function City() {
                 className="form-control"
               />
 
-              <button
+              <motion.button
                 type="submit"
                 className="delete-btn"
                 style={{ marginTop: "0.5rem" }}
                 onClick={geturl}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
               >
                 Get URL
-              </button>
+              </motion.button>
             </div>
           </div>
 
           <div className="btn-main">
-            <button
+            <motion.button
               style={{ marginTop: "0.5rem" }}
               type="submit"
               className="add-btn"
               onClick={addImg}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
             >
               Add Image
-            </button>
+            </motion.button>
           </div>
         </form>
       </div>

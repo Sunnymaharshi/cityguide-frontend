@@ -1,5 +1,6 @@
 import React, { useState , useEffect} from "react";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 import {
   deleteBus,
   postBus,
@@ -149,13 +150,15 @@ function Bus() {
         </div>
 
         <div className="btn-main">
-          <button
+          <motion.button
             type="submit"
             className="add-btn"
             onClick={sendDataToAPI}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
           >
             Add
-          </button>
+          </motion.button>
         </div>
         <div className="form-row">
         <div className="form-group col">
@@ -171,14 +174,16 @@ function Bus() {
           />
         </div>
         <div className="form-group col btn-main">
-          <button
+          <motion.button
             type="submit"
             style={{marginTop:"1.5rem"}}
             className="add-btn"
             onClick={onDelete}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
           >
             Delete
-          </button>
+          </motion.button>
         </div>
         </div>
       </form>

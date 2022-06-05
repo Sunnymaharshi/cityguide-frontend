@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { FileUploaded } from "../FileUploaded/FileUploaded";
 import {
   deleteAttraction,
@@ -220,31 +221,37 @@ function Attraction() {
             </div>
             <div className="btn-main">
               <div className="update-btn">
-                <button
+                <motion.button
                   type="submit"
                   className="delete-btn"
                   onClick={sendDataToAPI}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   Add
-                </button>
+                </motion.button>
               </div>
               <div className="update-btn">
-                <button
+                <motion.button
                   type="submit"
                   className="delete-btn"
                   onClick={updateDataToAPI}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   Update
-                </button>
+                </motion.button>
               </div>
               <div className="update-btn">
-                <button
+                <motion.button
                   type="submit"
                   className="delete-btn"
                   onClick={onDelete}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   Delete
-                </button>
+                </motion.button>
               </div>
             </div>
 
@@ -260,24 +267,28 @@ function Attraction() {
                   value={attr_id}
                   className="form-control"
                 />
-                <button
+                <motion.button
                   style={{ marginTop: "0.5rem" }}
                   type="submit"
                   className="delete-btn"
                   onClick={addImg}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   Add Image
-                </button>
+                </motion.button>
               </div>
               <div className="form-group col-sm-4">
                 <FileUploaded onFileSelect={(file) => setSelectedFile(file)} />
-                <button
+                <motion.button
+                 whileHover={{ scale: 1.05 }}
+                 whileTap={{ scale: 0.98 }}
                   className="delete-btn"
                   style={{ marginTop: "0.5rem" }}
                   onClick={submitForm}
                 >
                   Upload
-                </button>
+                </motion.button>
               </div>
 
               <div className="form-group col">
@@ -291,14 +302,16 @@ function Attraction() {
                   className="form-control"
                   onChange={(e) => setAttrImg(e.target.value)}
                 />
-                <button
+                <motion.button
                   type="submit"
                   className="delete-btn"
                   style={{ marginTop: "0.5rem" }}
                   onClick={geturl}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   Get URL
-                </button>
+                </motion.button>
               </div>
             </div>
           </form>

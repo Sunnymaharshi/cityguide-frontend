@@ -3,6 +3,7 @@ import "./Bus.css";
 import { toast } from "react-toastify";
 import { Skeleton } from "@mui/material";
 import { getBus } from "../../services/dashboard/dashboard.service";
+import { motion } from "framer-motion";
 
 function Bus({ city }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -48,10 +49,12 @@ function Bus({ city }) {
           placeholder="Search Buses"
           onChange={handleQuery}
         />
-
-        <button onClick={handleSearch} className="bus-search-btn">
+       
+         
+        <motion.button  whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.98 }}onClick={handleSearch} className="bus-search-btn">
           Search
-        </button>
+        </motion.button>
       </div>
       <table id="bustable">
         <tbody>

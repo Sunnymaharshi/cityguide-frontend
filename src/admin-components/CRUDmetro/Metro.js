@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FileUploader } from "../FileUploader/FileUploader";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 import {
   postMetro,
   uploadFile,
@@ -99,9 +100,10 @@ function Metro() {
               <FileUploader onFileSelect={(file) => setSelectedFile(file)} />
             </div>
             <div>
-              <button className="delete-btn" onClick={submitForm}>
+              <motion.button className="delete-btn" onClick={submitForm}  whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.98 }}>
                 Upload
-              </button>
+              </motion.button>
             </div>
           </div>
         </div>
@@ -120,26 +122,30 @@ function Metro() {
             </div>
             <div className="btn-main">
               <div className="add-button">
-                <button
+                <motion.button
                   type="submit"
                   className="delete-btn"
                   onClick={geturl}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   Get URL
-                </button>
+                </motion.button>
               </div>
             </div>
           </div>
         </div>
 
         <div className="btn-main">
-          <button
+          <motion.button
             type="submit"
             className="add-btn"
             onClick={sendDataToAPI}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
           >
             Add
-          </button>
+          </motion.button>
         </div>
       </form>
     </div>
