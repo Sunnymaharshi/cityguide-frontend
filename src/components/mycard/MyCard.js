@@ -33,7 +33,7 @@ const MyCard = ({ details }) => {
         component="img"
         height="340"
         image={img_url}
-        alt="restaurant"
+        alt="attraction"
         className="card-image"
       />
       <CardContent>
