@@ -3,6 +3,7 @@ import { getAttractions } from "../../services/dashboard/dashboard.service";
 import MyCard from "../mycard/MyCard";
 import { Box } from "@mui/system";
 import "./attraction.css";
+import { toast } from "react-toastify";
 export default function Attraction({ city }) {
   const [Attractions, setAttractions] = useState([]);
   useEffect(() => {
@@ -11,7 +12,7 @@ export default function Attraction({ city }) {
         setAttractions(res.data);
       })
       .catch((err) => {
-        console.log("error", err);
+        toast.error(err.response.data, { autoClose: 5000 });
       }); // eslint-disable-next-line
   }, [city]);
 

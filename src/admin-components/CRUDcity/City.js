@@ -44,7 +44,7 @@ function City() {
         setCity(res.data);
       })
       .catch((err) => {
-        console.log(err.response);
+        toast.error(err.response.data, { autoClose: 5000 });
       });
   };
 
@@ -62,8 +62,8 @@ function City() {
           getAllCities();
         }
       })
-      .catch((error) => {
-        console.log(error.response);
+      .catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
       });
     }
     else{
@@ -85,8 +85,8 @@ function City() {
           getAllCities();
         }
       })
-      .catch((error) => {
-        console.log(error.response);
+      .catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
       });
     }
     else{
@@ -106,8 +106,8 @@ function City() {
           getAllCities();
         }
       })
-      .catch((error) => {
-        console.log(error.response);
+      .catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
       });
     }
     else{
@@ -122,7 +122,7 @@ function City() {
       .then((res) => {
         if (res.status === 200) toast.success("Successfully Uploaded Image!");
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
     }
     else{
       toast.error("Enter the city name and select a file!")
@@ -137,7 +137,7 @@ function City() {
         setCityImg(res.data);
         setFileName(selectedFile.name);
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
     }
     else{
       toast.error("Enter the city name and select a file!")
@@ -153,7 +153,7 @@ function City() {
       .then((res) => {
         toast.success("Added Image to Database");
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
     }
     else{
       toast.error("Enter the city name and image!");

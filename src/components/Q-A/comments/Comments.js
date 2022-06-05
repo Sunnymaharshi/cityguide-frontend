@@ -29,6 +29,8 @@ function Comments({ ans_id, handleCommentsUpdate }) {
           setComments(new_comments);
           handleCommentsUpdate(new_comments.length);
           setComment("");
+        }).catch((err) => {
+          toast.error(err.response.data, { autoClose: 5000 });
         });
       } else {
         toast.error("Comment can't be empty");

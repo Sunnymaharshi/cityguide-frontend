@@ -49,6 +49,8 @@ const Question = ({ ques, ind, updateQuestions }) => {
       if (res.data.report_type_id === ques_id) {
         toast.success("Reported Successfully!");
       }
+    }).catch((err) => {
+      toast.error(err.response.data, { autoClose: 5000 });
     });
   };
   return (

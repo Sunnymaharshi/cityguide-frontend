@@ -55,7 +55,7 @@ function Login() {
           }
         })
         .catch((err) => {
-          console.log("login error", err);
+          toast.error(err.response.data, { autoClose: 5000 });
         });
     }
 

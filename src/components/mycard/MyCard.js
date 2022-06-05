@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getImages } from "../../services/dashboard/dashboard.service";
 import { IMG_ATTR_TYPE, IMG_RES_TYPE } from "../../common/data";
 import "./MyCard.css";
+import { toast } from "react-toastify";
 const MyCard = ({ details }) => {
   const [img_url, setImg_url] = useState(null);
 
@@ -12,12 +13,16 @@ const MyCard = ({ details }) => {
         if (res.data.length > 0) {
           setImg_url(res.data[0].img_url);
         }
+      }).catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
       });
     } else {
       getImages(IMG_ATTR_TYPE, details.attr_id).then((res) => {
         if (res.data.length > 0) {
           setImg_url(res.data[0].img_url);
         }
+      }).catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
       });
     }
     // eslint-disable-next-line

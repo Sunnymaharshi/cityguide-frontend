@@ -19,7 +19,7 @@ export default function UserQues() {
         setQues(res.data);
       })
       .catch((err) => {
-        console.log("error", err);
+        toast.error(err.response.data, { autoClose: 5000 });
       }); // eslint-disable-next-line
   }, []);
 
@@ -30,6 +30,8 @@ export default function UserQues() {
         const new_ques = Ques.filter((q) => q.ques_id !== ques_id);
         setQues(new_ques);
       }
+    }).catch((err) => {
+      toast.error(err.response.data, { autoClose: 5000 });
     });
   };
 

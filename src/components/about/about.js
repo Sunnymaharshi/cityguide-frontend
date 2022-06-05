@@ -9,6 +9,7 @@ import "react-slideshow-image/dist/styles.css";
 import "./about.css";
 import { IMG_CITY_TYPE } from "../../common/data";
 import { Skeleton } from "@mui/material";
+import { toast } from "react-toastify";
 const properties = {
   duration: 2500,
   transitionDuration: 1000,
@@ -30,7 +31,7 @@ export default function About({ city }) {
           setLoading(false);
         })
         .catch((err) => {
-          console.log("about error", err);
+          toast.error(err.response.data, { autoClose: 5000 });
         });
       getImages(IMG_CITY_TYPE, city).then((res) => {
         setImages(res.data);
@@ -46,10 +47,12 @@ export default function About({ city }) {
           setLoading(false);
         })
         .catch((err) => {
-          console.log("rest error", err);
+          toast.error(err.response.data, { autoClose: 5000 });
         });
       getImages(IMG_CITY_TYPE, city).then((res) => {
         setImages(res.data);
+      }).catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
       });
     }
     // eslint-disable-next-line

@@ -36,7 +36,7 @@ function Bus({ city }) {
         setBus(res.data);
       })
       .catch((err) => {
-        console.log("Error", err);
+        toast.error(err.response.data, { autoClose: 5000 });
       });
   };
   return (

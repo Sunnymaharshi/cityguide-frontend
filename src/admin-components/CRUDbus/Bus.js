@@ -30,7 +30,7 @@ function Bus() {
         setBus(res.data);
       })
       .catch((err) => {
-        console.log("Error", err);
+        toast.error(err.response.data, { autoClose: 5000 });
       });
   };
 
@@ -52,8 +52,8 @@ function Bus() {
           setCityName("");
         }
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
       });
     }
     else{
@@ -70,10 +70,8 @@ function Bus() {
           setBusId("");
         }
       })
-      .catch((error) => {
-        console.log(error.response);
-      });
-    }
+      .catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 })})}
     else{
       toast.error("Enter City Name!");
     }

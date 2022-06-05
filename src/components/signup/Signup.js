@@ -54,6 +54,9 @@ function Signup() {
           if (res.data === USERNAME_TAKEN_RES) {
             toast.error(USERNAME_TAKEN_MSG);
           }
+          else{
+              toast.error(err.response.data, { autoClose: 5000 });
+          }
         });
     }
 

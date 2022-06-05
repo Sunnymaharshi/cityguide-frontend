@@ -40,7 +40,7 @@ function Attraction() {
         setAttractions(res.data);
       })
       .catch((err) => {
-        console.log("Error", err);
+          toast.error(err.response.data, { autoClose: 5000 });
       });
   };
 
@@ -56,11 +56,10 @@ function Attraction() {
         setDesc("");
         setAttrLoc("");
         setAttrImg("");
-        setCityName("");
         getAllAttractions();
       })
-      .catch((error) => {
-        console.log(error.response);
+      .catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
       });
     }
     else{
@@ -84,8 +83,8 @@ function Attraction() {
           getAllAttractions();
         }
       })
-      .catch((error) => {
-        console.log(error.response);
+      .catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
       });
     }
       else{
@@ -105,46 +104,56 @@ function Attraction() {
           getAllAttractions();
         }
       })
-      .catch((error) => {
-        console.log(error.response);
+      .catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
       });
       else
       toast.error("Enter Attraction Id!")
   };
   const submitForm = (e) => {
     e.preventDefault();
-    if(city_name && selectedFile)
+    if(city_name && selectedFile){
     uploadFile(city_name, selectedFile)
       .then((res) => {
-        if (res.status === 200) toast.success("Successfully Uploaded Image!");
+        setSelectedFile(selectedFile);
+        toast.success("Successfully Uploaded Image!");
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
+    }
       else
       toast.error("Enter the city name and select a file!");
   };
 
   const geturl = (e) => {
     e.preventDefault();
-    if(city_name && selectedFile)
+    if(city_name && selectedFile){
     getimgurl(city_name, selectedFile)
       .then((res) => {
+        console.log(res.data);
         setAttrImg(res.data);
         setFileName(selectedFile.name);
+        setTypeId(attr_id.toString());
+        setImgUrl(res.data);
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
+    }
+      else
       toast.error("Enter the city name and select a file!")
   };
 
   const addImg = (e) => {
     e.preventDefault();
-    setTypeId(attr_id.toString());
-    setImgUrl(attr_img);
-    if(attr_id && attr_img && type_id && filename)
+    if(img_url && type_id && filename){
     postImg(type, type_id, filename, img_url)
       .then((res) => {
         toast.success("Added Image to Database");
+        setAttrId("");
+        setSelectedFile("");
+        setFileName("");
+        setAttrImg("");
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
+    }
       else{
         toast.error("Enter the Attraction Id and image!");
       }
@@ -278,8 +287,9 @@ function Attraction() {
                   name="attrimage"
                   placeholder="Attraction Image"
                   id="resimage"
-                  defaultValue={attr_img}
+                  value={attr_img}
                   className="form-control"
+                  onChange={(e) => setAttrImg(e.target.value)}
                 />
                 <button
                   type="submit"

@@ -57,6 +57,8 @@ function Answer({ ans, ind, updateAnswers }) {
       checkLike(answer.ans_id).then((res) => {
         setLiked(res.data.hasupvoted);
         setDisliked(res.data.hasdownvoted);
+      }).catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
       });
     }
   };
@@ -68,6 +70,8 @@ function Answer({ ans, ind, updateAnswers }) {
         toast.success("Successfully Deleted!");
         updateAnswers(answer.ans_id);
       }
+    }).catch((err) => {
+      toast.error(err.response.data, { autoClose: 5000 });
     });
   };
   const handleReportAns = () => {
@@ -76,12 +80,16 @@ function Answer({ ans, ind, updateAnswers }) {
       if (res.data.report_type_id === answer.ans_id) {
         toast.success("Reported Successfully!");
       }
+    }).catch((err) => {
+      toast.error(err.response.data, { autoClose: 5000 });
     });
   };
 
   const updateAnswer = () => {
     getAnswer(answer.ans_id).then((res) => {
       setAnswer({ ...answer, ...res.data });
+    }).catch((err) => {
+      toast.error(err.response.data, { autoClose: 5000 });
     });
   };
   const toggleComments = () => {
@@ -101,7 +109,7 @@ function Answer({ ans, ind, updateAnswers }) {
           updateAnswer();
         })
         .catch((err) => {
-          console.log("lik err", err.response);
+          toast.error(err.response.data, { autoClose: 5000 });
         });
     } else toast.error("Please login");
   };
@@ -115,7 +123,7 @@ function Answer({ ans, ind, updateAnswers }) {
           updateAnswer();
         })
         .catch((err) => {
-          console.log("dislik err", err.response);
+          toast.error(err.response.data, { autoClose: 5000 });
         });
     } else toast.error("Please login");
   };

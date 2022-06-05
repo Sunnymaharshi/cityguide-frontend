@@ -42,6 +42,8 @@ function Questions({ city }) {
         } else {
           toast.info("Cannot find question you are looking for");
         }
+      }).catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
       });
     }
   };
@@ -49,6 +51,8 @@ function Questions({ city }) {
     if (city !== null) {
       getAllQuestions(city).then((res) => {
         setQuestions(res.data);
+      }).catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
       });
     }
   };

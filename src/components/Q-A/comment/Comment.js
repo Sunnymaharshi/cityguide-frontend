@@ -34,6 +34,8 @@ const Comment = ({ comm, updateComments }) => {
         toast.success("Comment deleted Succesfully");
         updateComments(comm.comm_id);
       }
+    }).catch((err) => {
+      toast.error(err.response.data, { autoClose: 5000 });
     });
   };
   const handleReportComm = () => {
@@ -42,6 +44,8 @@ const Comment = ({ comm, updateComments }) => {
       if (res.data.report_type_id === comm.comm_id) {
         toast.success("Reported Successfully!");
       }
+    }).catch((err) => {
+      toast.error(err.response.data, { autoClose: 5000 });
     });
   };
 

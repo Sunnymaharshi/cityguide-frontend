@@ -40,7 +40,7 @@ const validateDelete = (e) =>{
         
       })
       .catch((err) => {
-        console.log(err.response);
+        toast.error(err.response.data, { autoClose: 5000 });
       });
   };
   const onDelete = (e) => {
@@ -54,7 +54,7 @@ const validateDelete = (e) =>{
         getAllReports();
       })
       .catch((err) => {
-        console.log(err.response);
+        toast.error(err.response.data, { autoClose: 5000 });
       });
   };
   const onDeleteReport=(e)=>{
@@ -66,7 +66,7 @@ const validateDelete = (e) =>{
           getAllReports();
       })
       .catch((err)=>{
-           console.log(err.response);
+        toast.error(err.response.data, { autoClose: 5000 });
       });
 
   };

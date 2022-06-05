@@ -27,8 +27,8 @@ function Metro() {
           setMetroImg("");
         }
       })
-      .catch((error) => {
-        console.log(error.response);
+      .catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
       });
     }
     else{
@@ -43,7 +43,7 @@ function Metro() {
       .then((res) => {
         if (res.status === 200) toast.success("Successfully Uploaded Image!");
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
     }
     else{
       toast.error("Enter City Name and select a file!");
@@ -58,7 +58,7 @@ function Metro() {
         setMetroImg(res.data);
         setFileName(selectedFile.name);
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
     }
     else{
       toast.error("Enter City Name and select a file!");

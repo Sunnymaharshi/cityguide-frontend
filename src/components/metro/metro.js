@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Accordion from "../accordion/Accordion";
+import { toast } from "react-toastify";
 import "./metro.css";
 
 import { getMetro } from "../../services/dashboard/dashboard.service";
@@ -68,6 +69,8 @@ export default function Metro({ city }) {
       getMetro(city).then((res) => {
         console.log(res.data);
         setdata(res.data);
+      }).catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
       });
     }
   }, [city]);
