@@ -23,15 +23,17 @@ function Comments({ ans_id, handleCommentsUpdate }) {
   const addComment = () => {
     if (isUserLoggedin()) {
       if (comment.trim().length > 0) {
-        postComment({ description: comment, ans_id }).then((res) => {
-          const new_comments = [res.data, ...comments];
+        postComment({ description: comment, ans_id })
+          .then((res) => {
+            const new_comments = [res.data, ...comments];
 
-          setComments(new_comments);
-          handleCommentsUpdate(new_comments.length);
-          setComment("");
-        }).catch((err) => {
-          toast.error(err.response.data, { autoClose: 5000 });
-        });
+            setComments(new_comments);
+            handleCommentsUpdate(new_comments.length);
+            setComment("");
+          })
+          .catch((err) => {
+            toast.error(err.response.data, { autoClose: 5000 });
+          });
       } else {
         toast.error("Comment can't be empty");
       }
@@ -63,7 +65,9 @@ function Comments({ ans_id, handleCommentsUpdate }) {
       )}
 
       <div className="comments">
-        <div style={{ color: "blue" }}>Comments({comments?.length})</div>
+        <div style={{ color: "blue", marginTop: "10px" }}>
+          Comments({comments?.length})
+        </div>
         {comments?.map((comm) => (
           <Comment
             comm={comm}
