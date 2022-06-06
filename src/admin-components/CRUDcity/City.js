@@ -121,7 +121,7 @@ function City() {
     if(city_name && selectedFile){
     uploadFile(city_name, selectedFile)
       .then((res) => {
-        if (res.status === 200) toast.success("Successfully Uploaded Image!");
+         toast.success("Successfully Uploaded Image!");
       })
       .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
     }
@@ -137,6 +137,8 @@ function City() {
       .then((res) => {
         setCityImg(res.data);
         setFileName(selectedFile.name);
+        setTypeId(city_name);
+        setImgUrl(res.data);
       })
       .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
     }
@@ -147,12 +149,14 @@ function City() {
   const addImg = (e) => {
     e.preventDefault();
 
-    setTypeId(city_name);
-    setImgUrl(city_image);
+    
     if(city_name && city_image && type_id && filename){
     postImg(type, type_id, filename, img_url)
       .then((res) => {
         toast.success("Added Image to Database");
+        setSelectedFile(null);
+        setFileName("");
+        setCityImg("");
       })
       .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
     }
@@ -262,8 +266,9 @@ function City() {
                 name="cityimage"
                 placeholder="City Image"
                 id="cityimage"
-                defaultValue={city_image}
+                value={city_image}
                 className="form-control"
+                onChange={(e)=>e.target.value}
               />
 
               <motion.button

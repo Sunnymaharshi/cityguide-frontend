@@ -9,21 +9,25 @@ const MyCard = ({ details }) => {
 
   useEffect(() => {
     if (details.res_id) {
-      getImages(IMG_RES_TYPE, details.res_id).then((res) => {
-        if (res.data.length > 0) {
-          setImg_url(res.data[0].img_url);
-        }
-      }).catch((err) => {
-        toast.error(err.response.data, { autoClose: 5000 });
-      });
+      getImages(IMG_RES_TYPE, details.res_id)
+        .then((res) => {
+          if (res.data.length > 0) {
+            setImg_url(res.data[0].img_url);
+          }
+        })
+        .catch((err) => {
+          toast.error(err.response.data, { autoClose: 5000 });
+        });
     } else {
-      getImages(IMG_ATTR_TYPE, details.attr_id).then((res) => {
-        if (res.data.length > 0) {
-          setImg_url(res.data[0].img_url);
-        }
-      }).catch((err) => {
-        toast.error(err.response.data, { autoClose: 5000 });
-      });
+      getImages(IMG_ATTR_TYPE, details.attr_id)
+        .then((res) => {
+          if (res.data.length > 0) {
+            setImg_url(res.data[0].img_url);
+          }
+        })
+        .catch((err) => {
+          toast.error(err.response.data, { autoClose: 5000 });
+        });
     }
     // eslint-disable-next-line
   }, []);

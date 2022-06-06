@@ -3,6 +3,7 @@ import UserContext from "./user.context";
 import { auth } from "../../services/auth/auth.service";
 import { USER_DATA } from "../../common/data";
 import { isUserLoggedin } from "../../common/functions";
+import { toast } from "react-toastify";
 
 const UserState = (props) => {
   const userInitials = {
@@ -31,11 +32,7 @@ const UserState = (props) => {
         .catch((err) => {
           localStorage.removeItem(USER_DATA);
           setUser(userInitials);
-          if (err.response.status === 401) {
-            console.log("Token has Expired!");
-          } else {
-            console.log(err.response);
-          }
+          toast.error(err.response.data, { autoClose: 5000 });
         });
     }
   };

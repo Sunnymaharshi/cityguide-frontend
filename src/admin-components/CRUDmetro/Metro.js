@@ -12,27 +12,25 @@ import "./Metro.css";
 function Metro() {
   const [city_name, setCityName] = useState("");
   const [metromap_img, setMetroImg] = useState("");
-  const [filename, setFileName]= useState("");
-  const [description, setDesc]=useState("");
+  const [filename, setFileName] = useState("");
+  const [description, setDesc] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const sendDataToAPI = async (event) => {
     event.preventDefault();
-    if(city_name && metromap_img && description && filename){
-    postMetro(city_name, metromap_img, description, filename)
-      .then((response) => {
-        console.log(response);
-        if (response.data.city_name === city_name) {
-          toast.success("Successfully Added");
-          setDesc("");
-          setCityName("");
-          setMetroImg("");
-        }
-      })
-      .catch((err) => {
-        toast.error(err.response.data, { autoClose: 5000 });
-      });
-    }
-    else{
+    if (city_name && metromap_img && description && filename) {
+      postMetro(city_name, metromap_img, description, filename)
+        .then((response) => {
+          if (response.data.city_name === city_name) {
+            toast.success("Successfully Added");
+            setDesc("");
+            setCityName("");
+            setMetroImg("");
+          }
+        })
+        .catch((err) => {
+          toast.error(err.response.data, { autoClose: 5000 });
+        });
+    } else {
       toast.error("Enter City Name, description and image!");
     }
   };
@@ -42,7 +40,7 @@ function Metro() {
     if(city_name && selectedFile){
     uploadFile(city_name, selectedFile)
       .then((res) => {
-        if (res.status === 200) toast.success("Successfully Uploaded Image!");
+       toast.success("Successfully Uploaded Image!");
       })
       .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
     }
@@ -53,15 +51,14 @@ function Metro() {
 
   const geturl = (e) => {
     e.preventDefault();
-    if(city_name && selectedFile){
-    getimgurl(city_name, selectedFile)
-      .then((res) => {
-        setMetroImg(res.data);
-        setFileName(selectedFile.name);
-      })
-      .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
-    }
-    else{
+    if (city_name && selectedFile) {
+      getimgurl(city_name, selectedFile)
+        .then((res) => {
+          setMetroImg(res.data);
+          setFileName(selectedFile.name);
+        })
+        .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
+    } else {
       toast.error("Enter City Name and select a file!");
     }
   };
@@ -100,8 +97,12 @@ function Metro() {
               <FileUploader onFileSelect={(file) => setSelectedFile(file)} />
             </div>
             <div>
-              <motion.button className="delete-btn" onClick={submitForm}  whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.98 }}>
+              <motion.button
+                className="delete-btn"
+                onClick={submitForm}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
                 Upload
               </motion.button>
             </div>
