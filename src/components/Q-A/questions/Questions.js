@@ -10,11 +10,13 @@ import { isUserLoggedin } from "../../../common/functions";
 
 import "./questions.css";
 import Question from "../question/Question";
+import { Skeleton } from "@mui/material";
 
 function Questions({ city }) {
   const [questions, setQuestions] = useState([]);
   const [newQuestion, setNewQuestion] = useState("");
   const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadQuestions(city);
@@ -36,24 +38,34 @@ function Questions({ city }) {
     if (query.length < 3) {
       toast.error("Query must be atleast 3 characters");
     } else {
-      getSimilarQuestions(city, query).then((res) => {
-        if (res.data.length > 0) {
-          setQuestions(res.data);
-        } else {
-          toast.info("Cannot find question you are looking for");
-        }
-      }).catch((err) => {
-        toast.error(err.response.data, { autoClose: 5000 });
-      });
+      setLoading(true);
+      getSimilarQuestions(city, query)
+        .then((res) => {
+          if (res.data.length > 0) {
+            setQuestions(res.data);
+          } else {
+            toast.info("Cannot find question you are looking for");
+          }
+          setLoading(false);
+        })
+        .catch((err) => {
+          toast.error(err.response.data, { autoClose: 5000 });
+          setLoading(false);
+        });
     }
   };
   const loadQuestions = () => {
+    setLoading(true);
     if (city !== null) {
-      getAllQuestions(city).then((res) => {
-        setQuestions(res.data);
-      }).catch((err) => {
-        toast.error(err.response.data, { autoClose: 5000 });
-      });
+      getAllQuestions(city)
+        .then((res) => {
+          setQuestions(res.data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          toast.error(err.response.data, { autoClose: 5000 });
+          setLoading(false);
+        });
     }
   };
   const addQuestion = () => {
@@ -87,8 +99,12 @@ function Questions({ city }) {
           onChange={handleQuery}
         />
 
-        <motion.button onClick={handleSearch} className="search-btn"  whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.98 }}>
+        <motion.button
+          onClick={handleSearch}
+          className="search-btn"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.98 }}
+        >
           Search
         </motion.button>
       </div>
@@ -98,14 +114,24 @@ function Questions({ city }) {
             Questions({questions.length})
           </div>
           <div className="questions">
-            {questions.map((ques, ind) => (
-              <Question
-                ques={ques}
-                key={ques.ques_id}
-                ind={ind}
-                updateQuestions={updateQuestions}
-              />
-            ))}
+            {loading &&
+              [...Array(7).keys()].map((i) => (
+                <Skeleton
+                  height={45}
+                  style={{ marginBottom: "10px" }}
+                  width="90%"
+                />
+              ))}
+
+            {!loading &&
+              questions.map((ques, ind) => (
+                <Question
+                  ques={ques}
+                  key={ques.ques_id}
+                  ind={ind}
+                  updateQuestions={updateQuestions}
+                />
+              ))}
           </div>
         </div>
         <div className="add-ques">
@@ -121,8 +147,12 @@ function Questions({ city }) {
             rows="10"
             className="add-ans-inp form-control"
           />
-          <motion.button className="add-btn" onClick={addQuestion}  whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.98 }}>
+          <motion.button
+            className="add-btn"
+            onClick={addQuestion}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+          >
             Post
           </motion.button>
         </div>
