@@ -43,14 +43,16 @@ function Bus() {
       .then((response) => {
         console.log(response);
         console.log(response.data);
+        toast.success("Bus Succesfully Added!");
+        setBusCodes("");
+        setBusRoutes("");
+        setSource("");
+        setDestination("");
+        setCityName("");
+        getAllBus();
         if (response.data.body=== "Bus Added") {
           console.log(response);
-          toast.success("Bus Succesfully Added!");
-          setBusCodes("");
-          setBusRoutes("");
-          setSource("");
-          setDestination("");
-          setCityName("");
+         
         }
       })
       .catch((err) => {
@@ -66,10 +68,10 @@ function Bus() {
     if(bus_id){
     deleteBus(bus_id)
       .then((response) => {
-        if (response.data.body === "Bus Removed") {
+      
           toast.success("Bus Successfully Deleted!");
           setBusId("");
-        }
+          getAllBus();
       })
       .catch((err) => {
         toast.error(err.response.data, { autoClose: 5000 })})}

@@ -42,7 +42,7 @@ function Metro() {
     if(city_name && selectedFile){
     uploadFile(city_name, selectedFile)
       .then((res) => {
-        if (res.status === 200) toast.success("Successfully Uploaded Image!");
+       toast.success("Successfully Uploaded Image!");
       })
       .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
     }
