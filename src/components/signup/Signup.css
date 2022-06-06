@@ -13,10 +13,9 @@ h1,
 p {
   text-align: center;
 }
-.signup-logo{
+.signup-logo {
   font-family: "Kalam", cursive;
   font-size: 3.2rem !important;
-
 }
 small {
   color: red;
@@ -47,7 +46,6 @@ form {
 }
 .signup-btn:hover {
   transform: scale(0.95);
-
 }
 
 .login-link1 {
@@ -55,11 +53,10 @@ form {
   margin-top: 10px;
   font-weight: 550;
 }
-.login-link{
+.login-link {
   text-decoration: none;
 }
 .login-link:hover {
-  color:brown;
+  color: var(--accent);
   text-decoration: underline;
-
 }

@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=PT+Sans+Narrow&display=swap");
+
+.attr-heading,
+.attr-tagline {
+  margin-top: 15px;
+  font-family: "PT Sans Narrow", sans-serif;
+}
+.attr-tagline {
+  color: var(--accent);
+}
+.home-cards {
+  width: 100%;
+  text-align: center;
+}
+
+.home-cards > .card {
+  display: inline-block;
+}

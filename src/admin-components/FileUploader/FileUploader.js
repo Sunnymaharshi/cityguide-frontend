@@ -12,9 +12,7 @@ export const FileUploader = ({onFileSelect}) => {
         return (
         
             <div className="file-uploader">
-                {/* <label htmlFor="chooseimage">Choose Image</label> */}
                 <input type="file" name="chooseimage"onChange={handleFileInput}></input>
-                {/* <button onClick={e => fileInput.current && fileInput.current.click()} className="btn btn-primary"></button> */}
             </div>
             
         )

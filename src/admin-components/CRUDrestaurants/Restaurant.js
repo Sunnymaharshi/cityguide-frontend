@@ -12,6 +12,7 @@ import "./Restaurant.css";
 import { toast } from "react-toastify";
 import { FileUploaded } from "../FileUploaded/FileUploaded";
 import { Skeleton } from "@mui/material";
+import { motion } from "framer-motion";
 
 function Restaurant() {
   const [res_name, setResName] = useState("");
@@ -39,7 +40,7 @@ function Restaurant() {
         setRestaurants(res.data);
       })
       .catch((err) => {
-        console.log(err.response);
+        toast.error(err.response.data, { autoClose: 5000 });
       });
   };
 
@@ -54,13 +55,12 @@ function Restaurant() {
           setResName("");
           setDesc("");
           setResLoc("");
-          setCityName("");
           setResImage("");
           getAllRestaurants();
         }
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch((err) =>{
+        toast.error(err.response.data, { autoClose: 5000 });
       });
     }
     else{
@@ -84,8 +84,8 @@ function Restaurant() {
           getAllRestaurants();
         }
       })
-      .catch((error) => {
-        console.log(error.response);
+      .catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
       });
     }
     else{
@@ -104,8 +104,8 @@ function Restaurant() {
           getAllRestaurants();
         }
       })
-      .catch((error) => {
-        console.log(error.response);
+      .catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
       });
     }
     else{
@@ -117,9 +117,10 @@ function Restaurant() {
     if(city_name && selectedFile){
     uploadFile(city_name, selectedFile)
       .then((res) => {
-        if (res.status === 200) toast.success("Successfully Uploaded Image!");
+        setSelectedFile(selectedFile);
+       toast.success("Successfully Uploaded Image!");
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
     }
       else{
         toast.error("Enter the city name and select a file!")
@@ -128,16 +129,19 @@ function Restaurant() {
 
   const geturl = (e) => {
     e.preventDefault();
+    setSelectedFile()
     console.log("not happening!");
     if(city_name && selectedFile){
     getimgurl(city_name, selectedFile)
       .then((res) => {
-        console.log("not happening@!");
-        console.log(res);
+        console.log(res.data);
         setResImage(res.data);
         setFileName(selectedFile.name);
+        setTypeId(res_id.toString());
+        setImgUrl(res.data);
+
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
     }
     else{
       toast.error("Enter the city name and select a file!")
@@ -146,16 +150,19 @@ function Restaurant() {
 
   const addImg = (e) => {
     e.preventDefault();
-
     setTypeId(res_id.toString());
-    setImgUrl(res_image);
-    if(res_id && res_image && type_id && filename){
-
+    if(res_id && type_id && filename){
+    
     postImg(type, type_id, filename, img_url)
       .then((res) => {
+        console.log(res);
         toast.success("Added Image to Database");
+        setResId("");
+        setSelectedFile("");
+        setFileName("");
+        setResImage("");
       })
-      .catch((err) => console.log(err.response));
+      .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
     }
     else{
       toast.error("Enter the restaurant Id and image!");
@@ -223,31 +230,37 @@ function Restaurant() {
 
             <div className="btn-main">
               <div className="update-btn">
-                <button
+                <motion.button
                   type="submit"
                   className="delete-btn"
                   onClick={sendDataToAPI}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   Add
-                </button>
+                </motion.button>
               </div>
               <div className="update-btn">
-                <button
+                <motion.button
                   type="submit"
                   className="delete-btn"
                   onClick={updateDataToAPI}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   Update
-                </button>
+                </motion.button>
               </div>
               <div className="update-btn">
-                <button
+                <motion.button
                   type="submit"
                   className="delete-btn"
                   onClick={onDelete}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   Delete
-                </button>
+                </motion.button>
               </div>
             </div>
 
@@ -263,25 +276,29 @@ function Restaurant() {
                   value={res_id}
                   className="form-control"
                 />
-                <button
+                <motion.button
                   style={{ marginTop: "0.5rem" }}
                   type="submit"
                   className="delete-btn"
                   onClick={addImg}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   Add Image
-                </button>
+                </motion.button>
               </div>
 
               <div className="form-group col-sm-4">
                 <FileUploaded onFileSelect={(file) => setSelectedFile(file)} />
-                <button
+                <motion.button
                   className="delete-btn"
                   style={{ marginTop: "0.5rem" }}
                   onClick={submitForm}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   Upload
-                </button>
+                </motion.button>
               </div>
 
               <div className="form-group col">
@@ -291,17 +308,20 @@ function Restaurant() {
                   name="resimage"
                   placeholder="Restaurant Image"
                   id="resimage"
-                  defaultValue={res_image}
+                  value={res_image}
                   className="form-control"
+                  onChange={(e) => setResImage(e.target.value)}
                 />
-                <button
+                <motion.button
                   type="submit"
                   className="delete-btn"
                   style={{ marginTop: "0.5rem" }}
                   onClick={geturl}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   Get URL
-                </button>
+                </motion.button>
               </div>
             </div>
           </form>

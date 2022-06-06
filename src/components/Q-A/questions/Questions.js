@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import {
   getAllQuestions,
@@ -42,6 +42,8 @@ function Questions({ city }) {
         } else {
           toast.info("Cannot find question you are looking for");
         }
+      }).catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
       });
     }
   };
@@ -49,6 +51,8 @@ function Questions({ city }) {
     if (city !== null) {
       getAllQuestions(city).then((res) => {
         setQuestions(res.data);
+      }).catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
       });
     }
   };
@@ -83,9 +87,10 @@ function Questions({ city }) {
           onChange={handleQuery}
         />
 
-        <button onClick={handleSearch} className="search-btn">
+        <motion.button onClick={handleSearch} className="search-btn"  whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.98 }}>
           Search
-        </button>
+        </motion.button>
       </div>
       <div className="questions-content">
         <div style={{ width: "100%" }}>
@@ -116,9 +121,10 @@ function Questions({ city }) {
             rows="10"
             className="add-ans-inp form-control"
           />
-          <button className="add-btn" onClick={addQuestion}>
+          <motion.button className="add-btn" onClick={addQuestion}  whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.98 }}>
             Post
-          </button>
+          </motion.button>
         </div>
       </div>
     </div>

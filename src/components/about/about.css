@@ -1,6 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
 .tagline {
   margin-top: 30px;
-  color: brown;
+  color: var(--accent);
+  font-family: "Bebas Neue", cursive;
 }
 .ease1 {
   margin: 10px 30px;

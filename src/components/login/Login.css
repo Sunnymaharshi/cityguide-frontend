@@ -8,14 +8,13 @@
   justify-content: center;
   align-items: center;
   background-image: url("https://cdn.wallpapersafari.com/71/35/QXftxG.jpg");
-
 }
 form {
   color: white;
   /* background-color: rgba(30, 185, 225, 0); */
   width: 400px;
 }
-.login-logo{
+.login-logo {
   font-family: "Kalam", cursive;
   font-size: 3.2rem !important;
 }
@@ -47,19 +46,18 @@ p {
 .login-btn:hover {
   transform: scale(0.95);
 }
-.signup-link{
+.signup-link {
   text-decoration: none;
 }
 .signup-link1 {
   color: black;
   margin-top: 15px;
   text-decoration: none;
-
 }
 .signup-link:hover {
-  color:brown;
+  color: var(--accent);
   text-decoration: underline;
 }
-.signup-link-div{
+.signup-link-div {
   margin-top: 100px;
 }

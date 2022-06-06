@@ -8,7 +8,9 @@ import {
   INVALID_PASSWORD_RES,
 } from "../../common/data";
 import { validateLogin } from "./login-validator";
+import { motion } from "framer-motion";
 import "./Login.css";
+
 
 function Login() {
   const initialValues = {
@@ -55,7 +57,7 @@ function Login() {
           }
         })
         .catch((err) => {
-          console.log("login error", err);
+          toast.error(err.response.data, { autoClose: 5000 });
         });
     }
 
@@ -95,9 +97,10 @@ function Login() {
           <small>{formErrors.password}</small>
         </div>
         <div className="login-div">
-          <button type="submit" className="login-btn">
+          <motion.button type="submit" className="login-btn" whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}>
             LOGIN
-          </button>
+          </motion.button>
         </div>
         <div className="signup-link-div">
         <p className="signup-link1">

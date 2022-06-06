@@ -24,6 +24,8 @@ function Answers() {
           setNewAnswer("");
           setAnswers((prev) => [res.data, ...prev]);
           toast.success(POST_ANSWER_SUCCESS_MSG);
+        }).catch((err) => {
+          toast.error(err.response.data, { autoClose: 5000 });
         });
       } else {
         toast.error("Answer can't be empty");

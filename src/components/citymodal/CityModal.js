@@ -31,8 +31,7 @@ function CityModal({ handleClose, setCity }) {
         }
       })
       .catch((err) => {
-        toast.error("Error fetching cities!");
-        // setLoading(false);
+        toast.error(err.response.data, { autoClose: 5000 });
       }); // eslint-disable-next-line
   }, []);
 

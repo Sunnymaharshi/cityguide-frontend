@@ -2,6 +2,7 @@ import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import { getRestaurants } from "../../services/dashboard/dashboard.service";
 import MyCard from "../mycard/MyCard";
+import { toast } from "react-toastify";
 
 export default function Restaurant({ city }) {
   const [Restaurants, setRestaurants] = useState([]);
@@ -12,7 +13,7 @@ export default function Restaurant({ city }) {
           setRestaurants(res.data);
         })
         .catch((err) => {
-          console.log("rest error", err);
+          toast.error(err.response.data, { autoClose: 5000 });
         });
     }
   };

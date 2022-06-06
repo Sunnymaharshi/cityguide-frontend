@@ -20,7 +20,7 @@ export default function UserAns() {
         setAns(res.data);
       })
       .catch((err) => {
-        console.log("error", err);
+        toast.error(err.response.data, { autoClose: 5000 });
       });
   };
   useEffect(() => {
@@ -35,6 +35,8 @@ export default function UserAns() {
         const new_ans = Ans.filter((ans) => ans.ans_id !== ans_id);
         setAns(new_ans);
       }
+    }).catch((err) => {
+      toast.error(err.response.data, { autoClose: 5000 });
     });
   };
   return (
