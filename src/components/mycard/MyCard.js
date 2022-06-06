@@ -32,7 +32,7 @@ const MyCard = ({ details }) => {
     // eslint-disable-next-line
   }, []);
   return (
-    <Card sx={{ maxWidth: 445, height: "460px" }} className="mycard-comp">
+    <Card sx={{ maxWidth: 445 }} className="mycard-comp">
       <CardMedia
         component="img"
         height="340"
@@ -49,9 +49,6 @@ const MyCard = ({ details }) => {
         >
           {details.res_name}
           {details.attr_name}
-          <br />
-          {details.res_location}
-          {details.attr_loc}
         </Typography>
       </CardContent>
     </Card>
