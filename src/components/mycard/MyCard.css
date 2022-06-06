@@ -2,3 +2,6 @@
   transform: scale(1.5);
   transition: 2s;
 }
+.card-image {
+  transition: 2s;
+}
