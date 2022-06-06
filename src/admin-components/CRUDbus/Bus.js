@@ -31,39 +31,44 @@ function Bus() {
 
   const sendDataToAPI = async (event) => {
     event.preventDefault();
-    if (city_name && destination && bus_codes && bus_routes && source) {
-      postBus(bus_codes, bus_routes, source, destination, city_name)
-        .then((response) => {
-          if (response.data.body === "Bus Added") {
-            toast.success("Bus Succesfully Added!");
-            setBusCodes("");
-            setBusRoutes("");
-            setSource("");
-            setDestination("");
-            setCityName("");
-          }
-        })
-        .catch((err) => {
-          toast.error(err.response.data, { autoClose: 5000 });
-        });
-    } else {
-      toast.error("Enter the city name, desc and image field!");
+    if(city_name && destination&& bus_codes && bus_routes && source){
+    postBus(bus_codes,bus_routes,source, destination,city_name)
+      .then((response) => {
+        console.log(response);
+        console.log(response.data);
+        toast.success("Bus Succesfully Added!");
+        setBusCodes("");
+        setBusRoutes("");
+        setSource("");
+        setDestination("");
+        setCityName("");
+        getAllBus();
+        if (response.data.body=== "Bus Added") {
+          console.log(response);
+         
+        }
+      })
+      .catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 });
+      });
+    }
+    else{
+      toast.error("Enter the city name, desc and image field!")
     }
   };
   const onDelete = async (event) => {
     event.preventDefault();
-    if (bus_id) {
-      deleteBus(bus_id)
-        .then((response) => {
-          if (response.data.body === "Bus Removed") {
-            toast.success("Bus Successfully Deleted!");
-            setBusId("");
-          }
-        })
-        .catch((err) => {
-          toast.error(err.response.data, { autoClose: 5000 });
-        });
-    } else {
+    if(bus_id){
+    deleteBus(bus_id)
+      .then((response) => {
+      
+          toast.success("Bus Successfully Deleted!");
+          setBusId("");
+          getAllBus();
+      })
+      .catch((err) => {
+        toast.error(err.response.data, { autoClose: 5000 })})}
+    else{
       toast.error("Enter City Name!");
     }
   };

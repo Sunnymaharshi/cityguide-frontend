@@ -37,13 +37,14 @@ function Metro() {
 
   const submitForm = (e) => {
     e.preventDefault();
-    if (city_name && selectedFile) {
-      uploadFile(city_name, selectedFile)
-        .then((res) => {
-          if (res.status === 200) toast.success("Successfully Uploaded Image!");
-        })
-        .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
-    } else {
+    if(city_name && selectedFile){
+    uploadFile(city_name, selectedFile)
+      .then((res) => {
+       toast.success("Successfully Uploaded Image!");
+      })
+      .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
+    }
+    else{
       toast.error("Enter City Name and select a file!");
     }
   };
