@@ -49,11 +49,13 @@ export default function About({ city }) {
         .catch((err) => {
           toast.error(err.response.data, { autoClose: 5000 });
         });
-      getImages(IMG_CITY_TYPE, city).then((res) => {
-        setImages(res.data);
-      }).catch((err) => {
-        toast.error(err.response.data, { autoClose: 5000 });
-      });
+      getImages(IMG_CITY_TYPE, city)
+        .then((res) => {
+          setImages(res.data);
+        })
+        .catch((err) => {
+          toast.error(err.response.data, { autoClose: 5000 });
+        });
     }
     // eslint-disable-next-line
   }, [city]);
@@ -79,7 +81,11 @@ export default function About({ city }) {
         </div>
         {loading && <Skeleton height={50} />}
         {loading && <Skeleton height={150} />}
-        {!loading && <h1 className="tagline">{About.city_tagline}</h1>}
+        {!loading && (
+          <h1 className="tagline" data-testid="about-tagline">
+            {About.city_tagline}
+          </h1>
+        )}
         {!loading && <span className="city-desc">{About.city_desc}</span>}
       </div>
     </div>

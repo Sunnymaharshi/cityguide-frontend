@@ -66,12 +66,13 @@ export default function Metro({ city }) {
   const [data, setdata] = useState([]);
   useEffect(() => {
     if (city !== null) {
-      getMetro(city).then((res) => {
-        console.log(res.data);
-        setdata(res.data);
-      }).catch((err) => {
-        toast.error(err.response.data, { autoClose: 5000 });
-      });
+      getMetro(city)
+        .then((res) => {
+          setdata(res.data);
+        })
+        .catch((err) => {
+          toast.error(err.response.data, { autoClose: 5000 });
+        });
     }
   }, [city]);
 
