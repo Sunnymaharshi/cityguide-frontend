@@ -27,7 +27,7 @@ function Restaurant() {
   const [filename, setFileName] = useState("");
   const [type] = useState("Restaurant");
   const [img_url, setImgUrl] = useState("");
-  const [isLoading,setIsLoading]=useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getAllRestaurants();
@@ -36,7 +36,7 @@ function Restaurant() {
   const getAllRestaurants = async () => {
     getRestaurants()
       .then((res) => {
-        setTimeout(() => setIsLoading(false), 1200)
+        setTimeout(() => setIsLoading(false), 1200);
         setRestaurants(res.data);
       })
       .catch((err) => {
@@ -46,125 +46,115 @@ function Restaurant() {
 
   const sendDataToAPI = async (event) => {
     event.preventDefault();
-    if(res_name && description && res_location && city_name){
-    postRestaurant(res_name, description, res_location, city_name, res_image)
-      .then(function (response) {
-        if (response.data.res_name === res_name) {
-          toast.success("Successfully Added!");
-          setResId(response.data.res_id);
-          setResName("");
-          setDesc("");
-          setResLoc("");
-          setResImage("");
-          getAllRestaurants();
-        }
-      })
-      .catch((err) =>{
-        toast.error(err.response.data, { autoClose: 5000 });
-      });
-    }
-    else{
-      toast.error("Enter City name, Restaurant Name,description, location!")
+    if (res_name && description && res_location && city_name) {
+      postRestaurant(res_name, description, res_location, city_name, res_image)
+        .then(function (response) {
+          if (response.data.res_name === res_name) {
+            toast.success("Successfully Added!");
+            setResId(response.data.res_id);
+            setResName("");
+            setDesc("");
+            setResLoc("");
+            setResImage("");
+            getAllRestaurants();
+          }
+        })
+        .catch((err) => {
+          toast.error(err.response.data, { autoClose: 5000 });
+        });
+    } else {
+      toast.error("Enter City name, Restaurant Name,description, location!");
     }
   };
 
   const updateDataToAPI = async (event) => {
     event.preventDefault();
-    if(res_id && res_name && description && res_location && city_name){
-    updateRestaurant(res_id, res_name, description, res_location, city_name)
-      .then((response) => {
-        if (response.data.res_name === res_name) {
-          toast.success("Successfully Updated!");
-          setResName("");
-          setDesc("");
-          setResLoc("");
-          setCityName("");
-          setResId("");
-          setResImage("");
-          getAllRestaurants();
-        }
-      })
-      .catch((err) => {
-        toast.error(err.response.data, { autoClose: 5000 });
-      });
-    }
-    else{
-      toast.error("Enter City name, Restaurant Id Name,description, location!")
+    if (res_id && res_name && description && res_location && city_name) {
+      updateRestaurant(res_id, res_name, description, res_location, city_name)
+        .then((response) => {
+          if (response.data.res_name === res_name) {
+            toast.success("Successfully Updated!");
+            setResName("");
+            setDesc("");
+            setResLoc("");
+            setCityName("");
+            setResId("");
+            setResImage("");
+            getAllRestaurants();
+          }
+        })
+        .catch((err) => {
+          toast.error(err.response.data, { autoClose: 5000 });
+        });
+    } else {
+      toast.error("Enter City name, Restaurant Id Name,description, location!");
     }
   };
 
   const onDelete = async (event) => {
     event.preventDefault();
-    if(res_id){
-    deleteRestaurant(res_id)
-      .then(function (response) {
-        if (response.data === "Deleted!") {
-          toast.success("Successfully Deleted!");
-          setResId("");
-          getAllRestaurants();
-        }
-      })
-      .catch((err) => {
-        toast.error(err.response.data, { autoClose: 5000 });
-      });
-    }
-    else{
+    if (res_id) {
+      deleteRestaurant(res_id)
+        .then(function (response) {
+          if (response.data === "Deleted!") {
+            toast.success("Successfully Deleted!");
+            setResId("");
+            getAllRestaurants();
+          }
+        })
+        .catch((err) => {
+          toast.error(err.response.data, { autoClose: 5000 });
+        });
+    } else {
       toast.error("Enter Restaurant Id!");
     }
   };
   const submitForm = (e) => {
     e.preventDefault();
-    if(city_name && selectedFile){
-    uploadFile(city_name, selectedFile)
-      .then((res) => {
-        setSelectedFile(selectedFile);
-       toast.success("Successfully Uploaded Image!");
-      })
-      .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
+    if (city_name && selectedFile) {
+      uploadFile(city_name, selectedFile)
+        .then((res) => {
+          setSelectedFile(selectedFile);
+          toast.success("Successfully Uploaded Image!");
+        })
+        .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
+    } else {
+      toast.error("Enter the city name and select a file!");
     }
-      else{
-        toast.error("Enter the city name and select a file!")
-      }
   };
 
   const geturl = (e) => {
     e.preventDefault();
-    setSelectedFile()
-    console.log("not happening!");
-    if(city_name && selectedFile){
-    getimgurl(city_name, selectedFile)
-      .then((res) => {
-        console.log(res.data);
-        setResImage(res.data);
-        setFileName(selectedFile.name);
-        setTypeId(res_id.toString());
-        setImgUrl(res.data);
+    setSelectedFile();
 
-      })
-      .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
-    }
-    else{
-      toast.error("Enter the city name and select a file!")
+    if (city_name && selectedFile) {
+      getimgurl(city_name, selectedFile)
+        .then((res) => {
+          setResImage(res.data);
+          setFileName(selectedFile.name);
+          setTypeId(res_id.toString());
+          setImgUrl(res.data);
+        })
+        .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
+    } else {
+      toast.error("Enter the city name and select a file!");
     }
   };
 
   const addImg = (e) => {
     e.preventDefault();
     setTypeId(res_id.toString());
-    if(res_id && type_id && filename){
-    
-    postImg(type, type_id, filename, img_url)
-      .then((res) => {
-        console.log(res);
-        toast.success("Added Image to Database");
-        setResId("");
-        setSelectedFile("");
-        setFileName("");
-        setResImage("");
-      })
-      .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
-    }
-    else{
+    if (res_id && type_id && filename) {
+      postImg(type, type_id, filename, img_url)
+        .then((res) => {
+          toast.success("Added Image to Database");
+          setResId("");
+          setSelectedFile("");
+          setFileName("");
+          setResImage("");
+        })
+        .catch((err) => toast.error(err.response.data, { autoClose: 5000 }));
+    } else {
       toast.error("Enter the restaurant Id and image!");
     }
   };
@@ -336,48 +326,90 @@ function Restaurant() {
                 <th>Description</th>
                 <th>City</th>
               </tr>
-              {
-              isLoading && <><tr>
-              <td><Skeleton  height={30}/></td>
-              <td><Skeleton  height={30}/></td>
-              <td><Skeleton  height={30}/></td>
-              <td><Skeleton  height={30}/></td>
-              <td><Skeleton  height={30}/></td>
-              </tr>
-              <tr>
-              <td><Skeleton  height={30}/></td>
-              <td><Skeleton  height={30}/></td>
-              <td><Skeleton  height={30}/></td>
-              <td><Skeleton  height={30}/></td>
-              <td><Skeleton  height={30}/></td>
-              </tr>
-              <tr>
-              <td><Skeleton  height={30}/></td>
-              <td><Skeleton  height={30}/></td>
-              <td><Skeleton  height={30}/></td>
-              <td><Skeleton  height={30}/></td>
-              <td><Skeleton  height={30}/></td>
-              </tr>
-              <tr>
-              <td><Skeleton  height={30}/></td>
-              <td><Skeleton  height={30}/></td>
-              <td><Skeleton  height={30}/></td>
-              <td><Skeleton  height={30}/></td>
-              <td><Skeleton  height={30}/></td>
-              </tr>
-              </>
-            }
-              {!isLoading && restaurant.map((rest) => {
-                return (
-                  <tr key={rest.res_id}>
-                    <td>{rest.res_id}</td>
-                    <td>{rest.res_name}</td>
-                    <td>{rest.res_location}</td>
-                    <td>{rest.description}</td>
-                    <td>{rest.city_name}</td>
+              {isLoading && (
+                <>
+                  <tr>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
                   </tr>
-                );
-              })}
+                  <tr>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
+                    <td>
+                      <Skeleton height={30} />
+                    </td>
+                  </tr>
+                </>
+              )}
+              {!isLoading &&
+                restaurant.map((rest) => {
+                  return (
+                    <tr key={rest.res_id}>
+                      <td>{rest.res_id}</td>
+                      <td>{rest.res_name}</td>
+                      <td>{rest.res_location}</td>
+                      <td>{rest.description}</td>
+                      <td>{rest.city_name}</td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>

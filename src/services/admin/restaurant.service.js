@@ -51,7 +51,6 @@ export const deleteRestaurant = async (res_id) => {
 };
 
 export const uploadFile = (city_name, selectedFile) => {
-  console.log(selectedFile);
   const formData = new FormData();
   formData.append("image", selectedFile);
   return axios.post(

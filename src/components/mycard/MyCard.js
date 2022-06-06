@@ -9,26 +9,30 @@ const MyCard = ({ details }) => {
 
   useEffect(() => {
     if (details.res_id) {
-      getImages(IMG_RES_TYPE, details.res_id).then((res) => {
-        if (res.data.length > 0) {
-          setImg_url(res.data[0].img_url);
-        }
-      }).catch((err) => {
-        toast.error(err.response.data, { autoClose: 5000 });
-      });
+      getImages(IMG_RES_TYPE, details.res_id)
+        .then((res) => {
+          if (res.data.length > 0) {
+            setImg_url(res.data[0].img_url);
+          }
+        })
+        .catch((err) => {
+          toast.error(err.response.data, { autoClose: 5000 });
+        });
     } else {
-      getImages(IMG_ATTR_TYPE, details.attr_id).then((res) => {
-        if (res.data.length > 0) {
-          setImg_url(res.data[0].img_url);
-        }
-      }).catch((err) => {
-        toast.error(err.response.data, { autoClose: 5000 });
-      });
+      getImages(IMG_ATTR_TYPE, details.attr_id)
+        .then((res) => {
+          if (res.data.length > 0) {
+            setImg_url(res.data[0].img_url);
+          }
+        })
+        .catch((err) => {
+          toast.error(err.response.data, { autoClose: 5000 });
+        });
     }
     // eslint-disable-next-line
   }, []);
   return (
-    <Card sx={{ maxWidth: 445 }} className="mycard-comp">
+    <Card sx={{ maxWidth: 445, height: "460px" }} className="mycard-comp">
       <CardMedia
         component="img"
         height="340"
@@ -45,6 +49,9 @@ const MyCard = ({ details }) => {
         >
           {details.res_name}
           {details.attr_name}
+          <br />
+          {details.res_location}
+          {details.attr_loc}
         </Typography>
       </CardContent>
     </Card>
