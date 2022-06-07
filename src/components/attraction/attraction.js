@@ -6,14 +6,26 @@ import "./attraction.css";
 import { toast } from "react-toastify";
 export default function Attraction({ city }) {
   const [Attractions, setAttractions] = useState([]);
+  const loadAttractions = () => {
+    if (city !== null) {
+      getAttractions(city)
+        .then((res) => {
+          setAttractions(res.data);
+        })
+        .catch((err) => {
+          toast.error(err.response.data, { autoClose: 5000 });
+        });
+    }
+  };
+
   useEffect(() => {
-    getAttractions(city)
-      .then((res) => {
-        setAttractions(res.data);
-      })
-      .catch((err) => {
-        toast.error(err.response.data, { autoClose: 5000 });
-      }); // eslint-disable-next-line
+    loadAttractions();
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    loadAttractions();
+    // eslint-disable-next-line
   }, [city]);
 
   return (
