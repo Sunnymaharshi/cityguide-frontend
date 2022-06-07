@@ -31,14 +31,16 @@ function Bus({ city }) {
     } else toast.error("Query can't be empty!");
   };
   const getAllBus = async (event) => {
-    getBus(city)
-      .then((res) => {
-        setTimeout(() => setIsLoading(false), 1200);
-        setBus(res.data);
-      })
-      .catch((err) => {
-        toast.error(err.response.data, { autoClose: 5000 });
-      });
+    if (city !== null) {
+      getBus(city)
+        .then((res) => {
+          setTimeout(() => setIsLoading(false), 1200);
+          setBus(res.data);
+        })
+        .catch((err) => {
+          toast.error(err.response.data, { autoClose: 5000 });
+        });
+    }
   };
   return (
     <div className="bus-table">
@@ -49,10 +51,13 @@ function Bus({ city }) {
           placeholder="Search Buses"
           onChange={handleQuery}
         />
-       
-         
-        <motion.button  whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.98 }}onClick={handleSearch} className="bus-search-btn">
+
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.98 }}
+          onClick={handleSearch}
+          className="bus-search-btn"
+        >
           Search
         </motion.button>
       </div>
