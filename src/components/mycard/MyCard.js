@@ -3,6 +3,7 @@ import {
   CardContent,
   CardMedia,
   Skeleton,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -15,6 +16,7 @@ const MyCard = ({ details }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log(details);
     if (details.res_id) {
       getImages(IMG_RES_TYPE, details.res_id)
         .then((res) => {
@@ -55,15 +57,33 @@ const MyCard = ({ details }) => {
       )}
       {loading && <Skeleton height={300} />}
       <CardContent>
+      <Tooltip
+            title={ details.res_location ? "location: "+details.res_location : "location: "+details.attr_loc}
+            placement="bottom"
+            arrow
+            componentsProps={{
+              tooltip: {
+                sx: {
+                  bgcolor: "var(--accent)",
+                  "& .MuiTooltip-arrow": {
+                    color: "var(--accent)",
+                  },
+                  color: "white",
+                  fontSize: "0.9rem"
+                },
+              },
+            }}
+          >
         <Typography
           gutterBottom
           variant="h5"
           component="div"
-          style={{ fontFamily: "PT Sans Narrow, sans-serif" }}
+          style={{ fontFamily: "PT Sans Narrow, sans-serif"}}
         >
           {details.res_name}
           {details.attr_name}
         </Typography>
+        </Tooltip>
       </CardContent>
     </Card>
   );
