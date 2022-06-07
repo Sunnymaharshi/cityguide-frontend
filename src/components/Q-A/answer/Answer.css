@@ -34,6 +34,7 @@
 .answer-text {
   word-wrap: break-word;
   white-space: pre-wrap;
+  line-height: 2rem;
   padding-left: 10px;
   width: 100%;
 }
